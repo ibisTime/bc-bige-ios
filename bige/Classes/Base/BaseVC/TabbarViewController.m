@@ -38,6 +38,8 @@
 
 - (void)initTabBar {
     
+    self.delegate = self;
+
     // 设置tabbar样式
     [UITabBar appearance].tintColor = kAppCustomMainColor;
     
@@ -48,13 +50,13 @@
 
 - (void)createSubControllers {
     
-    NSArray *titles = @[@"首页", @"行情", @"币吧", @"我的"];
+    NSArray *titles = @[@"首页", @"行情", @"模拟交易", @"资讯", @"我的"];
     
-    NSArray *normalImages = @[@"home", @"quotes", @"forum", @"mine"];
+    NSArray *normalImages = @[@"home", @"quotes", @"trade", @"news", @"mine"];
     
-    NSArray *selectImages = @[@"home_select", @"quotes_select", @"forum_select", @"mine_select"];
+    NSArray *selectImages = @[@"home_select", @"quotes_select", @"trade_select", @"news_select", @"mine_select"];
     
-    NSArray *vcNames = @[@"HomeVC", @"QuotesVC", @"ForumVC", @"MineVC"];
+    NSArray *vcNames = @[@"HomeVC", @"QuotesVC", @"TradeVC", @"NewsVC", @"MineVC"];
     
     for (int i = 0; i < normalImages.count; i++) {
         
@@ -111,10 +113,22 @@
     BaseWeakSelf;
     
     NSInteger idx = tabBarController.selectedIndex;
+    NSLog(@"idx = %ld", idx);
     
     //判断点击的Controller是不是需要登录，如果是，那就登录
-    
-    
+    if((idx == 2) && ![TLUser user].isLogin) {
+        
+        TLUserLoginVC *loginVC = [TLUserLoginVC new];
+        
+        loginVC.loginSuccess = ^{
+            
+            weakSelf.selectedIndex = idx;
+        };
+        
+        NavigationController *nav = [[NavigationController alloc] initWithRootViewController:loginVC];
+        [self presentViewController:nav animated:YES completion:nil];
+        self.selectedIndex = _currentIndex;
+    }
 }
 
 @end

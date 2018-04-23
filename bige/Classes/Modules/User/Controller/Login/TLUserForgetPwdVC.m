@@ -38,41 +38,42 @@
 
 - (void)initSubviews {
 
-    self.view.backgroundColor = kBackgroundColor;
+    self.view.backgroundColor = kWhiteColor;
     
-    CGFloat margin = ACCOUNT_MARGIN;
+    CGFloat margin = 15;
     CGFloat w = kScreenWidth - 2*margin;
     CGFloat h = ACCOUNT_HEIGHT;
+    CGFloat leftW = 0;
     
     CGFloat btnMargin = 15;
     
     //账号
-    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 10, w, h) leftTitle:@"手机号" titleWidth:100 placeholder:@"请输入手机号"];
+    TLTextField *phoneTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, 0, w, h) leftTitle:@"" titleWidth:leftW placeholder:@"请输入手机号"];
     phoneTf.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTf];
     self.phoneTf = phoneTf;
     
     //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(margin, phoneTf.yy + 1, w, h)];
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, w, h)];
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:captchaView];
     
     self.captchaView = captchaView;
     
     //密码
-    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 10, w, h) leftTitle:@"新密码" titleWidth:100 placeholder:@"请输入密码"];
+    TLTextField *pwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, captchaView.yy + 1, w, h) leftTitle:@"" titleWidth:leftW placeholder:@"请输入密码"];
     pwdTf.secureTextEntry = YES;
     
     [self.view addSubview:pwdTf];
     self.pwdTf = pwdTf;
     
     //re密码
-    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:@"确认密码" titleWidth:100 placeholder:@"确认密码"];
+    TLTextField *rePwdTf = [[TLTextField alloc] initWithFrame:CGRectMake(margin, pwdTf.yy + 1, w, h) leftTitle:@"" titleWidth:leftW placeholder:@"确认密码"];
     rePwdTf.secureTextEntry = YES;
     [self.view addSubview:rePwdTf];
     self.rePwdTf = rePwdTf;
     
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 4; i++) {
         
         UIView *line = [[UIView alloc] init];
         
@@ -82,10 +83,10 @@
         [line mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.left.mas_equalTo(margin);
-            make.right.mas_equalTo(0);
+            make.right.mas_equalTo(-margin);
             make.height.mas_equalTo(0.5);
-            make.top.mas_equalTo(10 + h + i*(2*h + 10 + 1));
-            
+            make.top.mas_equalTo(h + (1 + h)*i);
+
         }];
     }
     

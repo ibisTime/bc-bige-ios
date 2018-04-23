@@ -19,7 +19,6 @@ target ‘bige’ do
     pod 'PYPhotoBrowser',           '1.1.5'
     pod 'TZImagePickerController',  '1.8.0'
     pod 'FDFullscreenPopGesture',   '1.1'
-
     #七牛云
     pod 'Qiniu',                    '7.1.5'
     pod 'Realm',                    '2.8.0'
@@ -27,5 +26,4 @@ target ‘bige’ do
     pod 'JPush',                    '3.0.8'
     #公共库
     pod 'CDCommon', '1.0.3'
-
 end

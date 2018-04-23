@@ -9,5 +9,7 @@
 #import "TLAccountBaseVC.h"
 
 @interface TLUserRegisterVC : TLAccountBaseVC
+//
+@property (nonatomic,copy) void(^registerSuccess)();
 
 @end

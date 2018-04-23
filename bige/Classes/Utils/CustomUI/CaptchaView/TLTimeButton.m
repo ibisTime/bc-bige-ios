@@ -24,7 +24,7 @@
         
         _time = total;
         _totalTime = total;
-        [self setTitle:@"验证码" forState:UIControlStateNormal];
+        [self setTitle:@"获取验证码" forState:UIControlStateNormal];
         
         [self setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
 
