@@ -8,15 +8,16 @@
 
 #import "QuotesPlatformVC.h"
 
+//Category
+#import "NSString+CGSize.h"
 //M
 #import "PlatformModel.h"
-#import "OptionalModel.h"
 //V
 #import "BaseView.h"
 //C
 #import "ForumDetailVC.h"
 
-@interface QuotesPlatformVC ()
+@interface QuotesPlatformVC ()<RefreshDelegate>
 //
 @property (nonatomic, strong) NSArray <PlatformModel *>*platforms;
 //平台
@@ -31,6 +32,10 @@
 @property (nonatomic, strong) NSTimer *timer;
 //
 @property (nonatomic, strong) TLPageDataHelper *helper;
+//涨跌幅时长
+@property (nonatomic, copy) NSString *percentPeriod;
+//计价币种
+@property (nonatomic, copy) NSString *toSymbol;
 
 @end
 
@@ -46,8 +51,6 @@
     [self requestPlatformList];
     //刷新平台列表
     [self.tableView beginRefreshing];
-    //获取贴吧信息
-    [self requestForumInfo];
     //添加通知
     [self addNotification];
 }
@@ -67,8 +70,6 @@
     if (labelIndex == self.currentIndex && segmentIndex == 2) {
         //刷新列表
         [self.tableView beginRefreshing];
-        //刷新贴吧信息
-        [self requestForumInfo];
         //定时器刷起来
         [self startTimer];
         return ;
@@ -121,83 +122,168 @@
 #pragma mark - Init
 - (void)initHeaderView {
     
-    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 85)];
+    self.toSymbol = @"usdt";
+    self.percentPeriod = @"24h";
+    
+    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 70)];
     
     self.headerView.backgroundColor = kWhiteColor;
-    
-    //平台名称
-    self.platformNameLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                   textColor:kTextColor
-                                                        font:17.0];
-    self.platformNameLbl.text = self.titleModel.cname;
-    [self.headerView addSubview:self.platformNameLbl];
-    [self.platformNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    //单位
+    UILabel *unitLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kTextColor4
+                                                    font:11.0];
+    unitLbl.text = @"单位:";
+    [self.headerView addSubview:unitLbl];
+    [unitLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@10);
-        make.top.equalTo(@10);
-    }];
-    //阴影
-    UIView *shadowView = [[UIView alloc] init];
-    
-    shadowView.backgroundColor = kWhiteColor;
-    shadowView.layer.shadowColor = kAppCustomMainColor.CGColor;
-    shadowView.layer.shadowOpacity = 0.8;
-    shadowView.layer.shadowRadius = 2;
-    shadowView.layer.shadowOffset = CGSizeMake(0, 0);
-    shadowView.layer.cornerRadius = 4;
-    
-    [self.headerView addSubview:shadowView];
-    [shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(@0);
-        make.right.equalTo(@(-kWidth(25)));
-        make.width.equalTo(@87);
-        make.height.equalTo(@40);
-    }];
-    //进吧
-    UIButton *forumBtn = [UIButton buttonWithTitle:@"进吧"
-                                        titleColor:kWhiteColor
-                                   backgroundColor:kAppCustomMainColor
-                                         titleFont:15.0
-                                      cornerRadius:4];
-    
-    [forumBtn addTarget:self action:@selector(clickForum) forControlEvents:UIControlEventTouchUpInside];
-    [self.headerView addSubview:forumBtn];
-    [forumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(@0);
-        make.right.equalTo(@(-kWidth(25)));
-        make.width.equalTo(@87);
-        make.height.equalTo(@40);
-    }];
-    //帖子数
-    self.postNumLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                              textColor:kTextColor
-                                                   font:14.0];
-    self.postNumLbl.numberOfLines = 0;
-    
-    [self.headerView addSubview:self.postNumLbl];
-    [self.postNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.platformNameLbl.mas_left);
-        make.top.equalTo(self.platformNameLbl.mas_bottom).offset(10);
-        make.right.equalTo(forumBtn.mas_left).offset(-15);
+        make.left.equalTo(@15);
+        make.top.equalTo(@15);
     }];
     
+    NSArray *textArr = @[@"USDT", @"BTC", @"ETH"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        CGFloat btnW = [NSString getWidthWithString:textArr[i] font:11.0];
+        
+        UIButton *symbolBtn = [UIButton buttonWithTitle:textArr[i]
+                                             titleColor:kTextColor4
+                                        backgroundColor:kClearColor
+                                              titleFont:11.0];
+        
+        [symbolBtn setTitleColor:kAppCustomMainColor forState:UIControlStateSelected];
+        [symbolBtn addTarget:self action:@selector(selectSymbol:) forControlEvents:UIControlEventTouchUpInside];
+        symbolBtn.tag = 1800 + i;
+        symbolBtn.selected = i == 0 ? YES: NO;
+
+        [self.headerView addSubview:symbolBtn];
+        [symbolBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(unitLbl.mas_right).offset(5+i*(btnW+20));
+            make.width.equalTo(@(btnW));
+            make.centerY.equalTo(unitLbl.mas_centerY);
+        }];
+    }
+    //时长
+    UILabel *timeLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kTextColor4
+                                                    font:11.0];
+    timeLbl.text = @"时长:";
+
+    [self.headerView addSubview:timeLbl];
+    [timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(@(-125));
+        make.top.equalTo(@15);
+    }];
+    
+    NSArray *percentArr = @[@"24h", @"1W", @"1M"];
+    
+    for (int i = 0; i < 3; i++) {
+        
+        CGFloat btnW = [NSString getWidthWithString:percentArr[i] font:11.0];
+        
+        UIButton *percentBtn = [UIButton buttonWithTitle:percentArr[i]
+                                             titleColor:kTextColor4
+                                        backgroundColor:kClearColor
+                                              titleFont:11.0];
+        
+        [percentBtn setTitleColor:kAppCustomMainColor forState:UIControlStateSelected];
+        [percentBtn addTarget:self action:@selector(selectPercent:) forControlEvents:UIControlEventTouchUpInside];
+        percentBtn.tag = 1810 + i;
+        percentBtn.selected = i == 0 ? YES: NO;
+        
+        [self.headerView addSubview:percentBtn];
+        [percentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            
+            make.left.equalTo(timeLbl.mas_right).offset(5+i*(btnW+20));
+            make.width.equalTo(@(btnW));
+            make.centerY.equalTo(timeLbl.mas_centerY);
+        }];
+    }
+    
+    //排行
+    UILabel *rankLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kTextColor4
+                                                    font:11.0];
+    rankLbl.text = @"#";
+    [self.headerView addSubview:rankLbl];
+    [rankLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(unitLbl.mas_left);
+        make.top.equalTo(unitLbl.mas_bottom).offset(20);
+    }];
+    //币种
+    UILabel *symbolLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kTextColor4
+                                                    font:11.0];
+    symbolLbl.text = @"币种";
+    [self.headerView addSubview:symbolLbl];
+    [symbolLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@45);
+        make.centerY.equalTo(rankLbl.mas_centerY);
+    }];
+    //关注
+    UILabel *followLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                 textColor:kTextColor4
+                                                      font:11.0];
+    followLbl.text = @"关注";
+    [self.headerView addSubview:followLbl];
+    [followLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(@(-15));
+        make.centerY.equalTo(rankLbl.mas_centerY);
+    }];
+    //涨跌幅24h
+    UILabel *percentLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                 textColor:kTextColor4
+                                                      font:11.0];
+    percentLbl.text = @"涨跌幅24h";
+    [self.headerView addSubview:percentLbl];
+    [percentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(followLbl.mas_left).offset(-25);
+        make.centerY.equalTo(rankLbl.mas_centerY);
+    }];
+    //价格:￥
+    UILabel *priceLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                  textColor:kTextColor4
+                                                       font:11.0];
+    priceLbl.text = @"价格:￥";
+    [self.headerView addSubview:priceLbl];
+    [priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(percentLbl.mas_left).offset(-20);
+        make.centerY.equalTo(rankLbl.mas_centerY);
+    }];
+    //bottomLine
+    UIView *bottomLine = [[UIView alloc] init];
+    
+    bottomLine.backgroundColor = kLineColor;
+    
+    [self.headerView addSubview:bottomLine];
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.bottom.equalTo(@0);
+        make.height.equalTo(@0.5);
+        
+    }];
 }
 
 - (void)initTableView {
     
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
-    self.tableView.type = self.type;
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@"暂无平台"];
-
+    self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.edges.mas_equalTo(0);
     }];
+    
+    self.tableView.tableHeaderView = self.headerView;
     
 }
 
@@ -227,6 +313,81 @@
     [self stopTimer];
 }
 
+- (void)selectSymbol:(UIButton *)sender {
+    
+    NSInteger index = sender.tag - 1800;
+    
+    for (int i = 0; i < 3; i++) {
+        
+        UIButton *btn = [self.headerView viewWithTag:1800 + i];
+        
+        btn.selected = sender.tag == btn.tag ? YES: NO;
+    }
+    
+    NSArray *symbolArr = @[@"usdt", @"btc", @"eth"];
+    
+    self.toSymbol = symbolArr[index];
+    //刷新列表
+    [self.tableView beginRefreshing];
+}
+
+- (void)selectPercent:(UIButton *)sender {
+    
+    NSInteger index = sender.tag - 1810;
+
+    for (int i = 0; i < 3; i++) {
+        
+        UIButton *btn = [self.headerView viewWithTag:1810 + i];
+        
+        btn.selected = sender.tag == btn.tag ? YES: NO;
+    }
+    
+    NSArray *percentArr = @[@"24h", @"7d", @"1m"];
+    
+    self.percentPeriod = percentArr[index];
+    //刷新列表
+    [self.tableView beginRefreshing];
+}
+
+/**
+ 关注
+ */
+- (void)followCurrency:(NSInteger)index {
+    
+    PlatformModel *platformModel = self.platforms[index];
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"628330";
+    http.showView = self.view;
+    http.parameters[@"exchangeEname"] = platformModel.exchangeEname;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"symbol"] = platformModel.symbol;
+    http.parameters[@"toSymbol"] = platformModel.toSymbol;
+
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSString *promptStr = [platformModel.isChoice isEqualToString:@"1"] ? @"添加自选成功": @"删除自选成功";
+        [TLAlert alertWithSucces:promptStr];
+        
+        if ([platformModel.isChoice isEqualToString:@"1"]) {
+            
+            platformModel.isChoice = @"0";
+            
+        } else {
+            
+            platformModel.isChoice = @"1";
+        }
+        
+        [self.tableView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FollowOrCancelFollow" object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - Data
 /**
  获取平台列表
@@ -237,19 +398,24 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"628340";
+    helper.code = @"628350";
     
     helper.parameters[@"exchangeEname"] = self.titleModel.ename;
 
-    helper.parameters[@"userId"] = [TLUser user].userId;
-    
     helper.tableView = self.tableView;
     
-    [helper modelClass:[OptionalModel class]];
+    [helper modelClass:[PlatformModel class]];
     
     self.helper = helper;
     
     [self.tableView addRefreshAction:^{
+        
+        if ([TLUser user].isLogin) {
+            
+            helper.parameters[@"userId"] = [TLUser user].userId;
+        }
+        helper.parameters[@"percentPeriod"] = weakSelf.percentPeriod;
+        helper.parameters[@"toSymbol"] = weakSelf.toSymbol;
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
@@ -282,31 +448,19 @@
     [self.tableView endRefreshingWithNoMoreData_tl];
 }
 
-- (void)requestForumInfo {
+- (void)refreshTableViewEventClick:(TLTableView *)refreshTableview selectRowAtIndex:(NSInteger)index {
     
-    TLNetworking *http = [TLNetworking new];
-    
-    http.code = @"628850";
-    http.parameters[@"toCoin"] = self.titleModel.ename;
-    
-    [http postWithSuccess:^(id responseObject) {
+    BaseWeakSelf;
+    [self checkLogin:^{
         
-        self.postNumLbl.text = [NSString stringWithFormat:@"现在有%@个贴在讨论,你也一起来吧!", responseObject[@"data"][@"totalCount"]];
-        //判断贴吧是否存在并且是具体平台
-        NSString *isExist = responseObject[@"data"][@"isExistPlate"];
+        //刷新关注状态
+        [weakSelf.tableView beginRefreshing];
         
-        if ([isExist isEqualToString:@"1"] && (self.type == PlatformTypePlatform)) {
-            
-            self.tableView.tableHeaderView = self.headerView;
-            return ;
-        }
-        self.tableView.tableHeaderView = nil;
+    } event:^{
         
-    } failure:^(NSError *error) {
-        
+        [weakSelf followCurrency:index];
     }];
 }
-
 /**
  VC被释放时移除通知
  */

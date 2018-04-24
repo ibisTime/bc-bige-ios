@@ -28,7 +28,7 @@
 //24小时某币种数
 @property (nonatomic, copy) NSString *one_day_volume_usd;
 //涨幅
-@property (nonatomic, copy) NSString *changeRate;
+@property (nonatomic, copy) NSString *percentChange;
 //涨跌颜色
 @property (nonatomic, strong) UIColor *bgColor;
 //是否选择(1是 0否)

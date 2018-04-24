@@ -15,8 +15,6 @@
  平台
  */
 @interface QuotesPlatformVC : BaseViewController
-//
-@property (nonatomic, assign) PlatformType type;
 //类型
 @property (nonatomic, copy) NSString *kind;
 //平台编号

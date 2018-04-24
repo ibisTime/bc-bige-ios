@@ -127,7 +127,7 @@
     //对应币种价格
     self.opppsitePriceLbl.text = [NSString stringWithFormat:@"￥%@", currency.lastCnyPrice];
     //涨跌情况
-    NSString *priceFluctStr = currency.changeRate;
+    NSString *priceFluctStr = currency.percentChange;
     CGFloat fluct = [priceFluctStr doubleValue];
 
     if (fluct > 0) {

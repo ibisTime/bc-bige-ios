@@ -180,8 +180,9 @@
     //昵称
     self.nickNameLbl.text = infoModel.user.nickname;
     //成绩
-    NSString *rank = [infoModel.rank stringValue];
-    self.achieveLbl.text = [NSString stringWithFormat:@"战胜了%@%%的用户", rank];
+    CGFloat rank = [infoModel.rank doubleValue]*100;
+    
+    self.achieveLbl.text = [NSString stringWithFormat:@"战胜了%lf%%的用户", rank];
     //总资产
     NSString *cnyAmount = [infoModel.cnyAmount stringValue];
     //浮动盈亏

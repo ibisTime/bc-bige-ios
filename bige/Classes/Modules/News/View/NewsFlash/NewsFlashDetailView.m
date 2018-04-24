@@ -56,7 +56,7 @@
     self.backgroundColor = kWhiteColor;
     
     //icon
-    UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"消息分享")];
+    UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"快讯分析")];
     
     iconIV.frame = CGRectMake(0, 0, kScreenWidth, kWidth(170));
     iconIV.contentMode = UIViewContentModeScaleAspectFill;
@@ -98,7 +98,7 @@
                                                 textColor:kTextColor2
                                                      font:14.0];
     
-    textLbl.text = @"更多资讯请下载\n链接社APP";
+    textLbl.text = @"更多资讯请下载\n币格财经APP";
     textLbl.numberOfLines = 0;
     textLbl.textAlignment = NSTextAlignmentCenter;
     

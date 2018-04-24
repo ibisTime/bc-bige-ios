@@ -18,5 +18,7 @@
 @property (nonatomic, strong) PlatformModel *platform;
 //
 @property (nonatomic, strong) CurrencyModel *currency;
+//关注情况
+@property (nonatomic, strong) UIButton *followBtn;
 
 @end

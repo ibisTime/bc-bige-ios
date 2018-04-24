@@ -21,14 +21,14 @@
 @property (nonatomic, copy) NSString *exchangeCname;
 //rmb价格
 @property (nonatomic, copy) NSString *lastCnyPrice;
-///24小时RMB数
+//币的交易量
 @property (nonatomic, copy) NSString *volume;
 //相对于某币种的价格
 @property (nonatomic, copy) NSString *lastPrice;
 //24小时某币种数
 @property (nonatomic, copy) NSString *one_day_volume_usd;
 //涨幅
-@property (nonatomic, copy) NSString *changeRate;
+@property (nonatomic, copy) NSString *percentChange;
 //涨跌颜色
 @property (nonatomic, strong) UIColor *bgColor;
 //是否选择(1是 0否)

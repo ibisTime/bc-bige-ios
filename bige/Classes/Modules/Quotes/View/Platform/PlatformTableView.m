@@ -8,8 +8,6 @@
 
 #import "PlatformTableView.h"
 //V
-#import "PlatformAllCell.h"
-#import "PlatformPriceCell.h"
 #import "PlatformCell.h"
 
 @interface PlatformTableView()<UITableViewDelegate, UITableViewDataSource>
@@ -18,8 +16,6 @@
 
 @implementation PlatformTableView
 
-static NSString *platformAllCell = @"PlatformAllCell";
-static NSString *platformPriceCell = @"PlatformPriceCell";
 static NSString *platformCell = @"PlatformCell";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
@@ -28,10 +24,6 @@ static NSString *platformCell = @"PlatformCell";
         
         self.dataSource = self;
         self.delegate = self;
-        //全部平台
-        [self registerClass:[PlatformAllCell class] forCellReuseIdentifier:platformAllCell];
-        //资金
-        [self registerClass:[PlatformPriceCell class] forCellReuseIdentifier:platformPriceCell];
         //具体平台
         [self registerClass:[PlatformCell class] forCellReuseIdentifier:platformCell];
     }
@@ -50,31 +42,24 @@ static NSString *platformCell = @"PlatformCell";
     
     PlatformModel *platform = self.platforms[indexPath.row];
     
-    if (self.type == PlatformTypeAll) {
-        
-        PlatformAllCell *cell = [tableView dequeueReusableCellWithIdentifier:platformAllCell forIndexPath:indexPath];
-        
-        cell.platform = platform;
-        cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
-
-        return cell;
-        
-    } else if (self.type == PlatformTypeMoney) {
-        
-        PlatformPriceCell *cell = [tableView dequeueReusableCellWithIdentifier:platformPriceCell forIndexPath:indexPath];
-        
-        cell.platform = platform;
-        cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
-
-        return cell;
-    }
+    platform.rank = indexPath.row+1;
     
     PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
     
     cell.platform = platform;
-    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
-
+    cell.followBtn.tag = 2000 + indexPath.row;
+    [cell.followBtn addTarget:self action:@selector(selectFollow:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
+}
+
+- (void)selectFollow:(UIButton *)sender {
+    
+    NSInteger index = sender.tag - 2000;
+    
+    if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshTableViewEventClick:selectRowAtIndex:)]) {
+        
+        [self.refreshDelegate refreshTableViewEventClick:self selectRowAtIndex:index];
+    }
 }
 
 #pragma mark - UITableViewDelegate

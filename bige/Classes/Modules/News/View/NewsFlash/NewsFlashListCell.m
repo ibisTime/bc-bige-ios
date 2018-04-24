@@ -16,16 +16,16 @@
 
 //时间
 @property (nonatomic, strong) UILabel *timeLbl;
-//日期
-@property (nonatomic, strong) UIButton *dateBtn;
 //内容
 @property (nonatomic, strong) UILabel *contentLbl;
+//日期
+//@property (nonatomic, strong) UIButton *dateBtn;
 //点
-@property (nonatomic, strong) UIImageView *dotIV;
+//@property (nonatomic, strong) UIImageView *dotIV;
 //横线
-@property (nonatomic, strong) UIView *wLine;
-//竖线
-@property (nonatomic, strong) UIView *hLine;
+//@property (nonatomic, strong) UIView *wLine;
+////竖线
+//@property (nonatomic, strong) UIView *hLine;
 
 @end
 
@@ -46,31 +46,31 @@
 - (void)initSubviews {
     
     //点
-    self.dotIV = [[UIImageView alloc] initWithImage:kImage(@"圆")];
-    
-    [self addSubview:self.dotIV];
-    //横线
-    self.wLine = [[UIView alloc] init];
-    
-    self.wLine.backgroundColor = kAppCustomMainColor;
-    
-    [self addSubview:self.wLine];
-    //竖线
-    self.hLine = [[UIView alloc] init];
-    
-    self.hLine.backgroundColor = kTextColor2;
-    
-    [self addSubview:self.hLine];
+//    self.dotIV = [[UIImageView alloc] initWithImage:kImage(@"圆")];
+//
+//    [self addSubview:self.dotIV];
+//    //横线
+//    self.wLine = [[UIView alloc] init];
+//
+//    self.wLine.backgroundColor = kAppCustomMainColor;
+//
+//    [self addSubview:self.wLine];
+//    //竖线
+//    self.hLine = [[UIView alloc] init];
+//
+//    self.hLine.backgroundColor = kTextColor2;
+//
+//    [self addSubview:self.hLine];
     //日期
-    self.dateBtn = [UIButton buttonWithTitle:@""
-                                  titleColor:kAppCustomMainColor
-                             backgroundColor:kWhiteColor
-                                   titleFont:10.0];
-    [self.dateBtn setBackgroundImage:kImage(@"日历") forState:UIControlStateNormal];
-    self.dateBtn.titleLabel.numberOfLines = 2;
-    self.dateBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
-    [self addSubview:self.dateBtn];
+//    self.dateBtn = [UIButton buttonWithTitle:@""
+//                                  titleColor:kAppCustomMainColor
+//                             backgroundColor:kWhiteColor
+//                                   titleFont:10.0];
+//    [self.dateBtn setBackgroundImage:kImage(@"日历") forState:UIControlStateNormal];
+//    self.dateBtn.titleLabel.numberOfLines = 2;
+//    self.dateBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
+//
+//    [self addSubview:self.dateBtn];
     //时间
     self.timeLbl = [UILabel labelWithBackgroundColor:[UIColor colorWithHexString:@"#e8f5ff"]
                                              textColor:kAppCustomMainColor
@@ -95,6 +95,17 @@
     [self.shareBtn setImage:kImage(@"分享") forState:UIControlStateNormal];
     
     [self addSubview:self.shareBtn];
+    //bottomLine
+    UIView *bottomLine = [[UIView alloc] init];
+    
+    bottomLine.backgroundColor = kLineColor;
+    
+    [self addSubview:bottomLine];
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.bottom.equalTo(@0);
+        make.height.equalTo(@0.5);
+    }];
     //布局
     [self setSubviewLayout];
 }
@@ -102,45 +113,46 @@
 - (void)setSubviewLayout {
     
     CGFloat x = 15;
-    CGFloat dotW = 15;
-    //点
-    [self.dotIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@(kWidth(x)));
-        make.top.equalTo(@(kWidth(x)));
-        make.width.height.equalTo(@(dotW));
-    }];
-    //竖线
-    [self.hLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(self.dotIV.mas_centerX);
-        make.width.equalTo(@(0.5));
-        make.top.bottom.equalTo(@0);
-    }];
-    //横线
-    [self.wLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerY.equalTo(self.dotIV.mas_centerY);
-        make.left.equalTo(self.dotIV.mas_right);
-        make.height.equalTo(@0.5);
-        make.width.equalTo(@(kWidth(14)));
-    }];
-    CGFloat scale = 1.2;
+//    CGFloat dotW = 15;
+//    //点
+//    [self.dotIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(@(kWidth(x)));
+//        make.top.equalTo(@(kWidth(x)));
+//        make.width.height.equalTo(@(dotW));
+//    }];
+//    //竖线
+//    [self.hLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(self.dotIV.mas_centerX);
+//        make.width.equalTo(@(0.5));
+//        make.top.bottom.equalTo(@0);
+//    }];
+//    //横线
+//    [self.wLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerY.equalTo(self.dotIV.mas_centerY);
+//        make.left.equalTo(self.dotIV.mas_right);
+//        make.height.equalTo(@0.5);
+//        make.width.equalTo(@(kWidth(14)));
+//    }];
+//    CGFloat scale = 1.2;
     //日期
-    [self.dateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(self.dotIV.mas_centerX);
-        make.top.equalTo(@0);
-        make.width.equalTo(@(25*scale));
-        make.height.equalTo(@(30*scale));
-    }];
+//    [self.dateBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(self.dotIV.mas_centerX);
+//        make.top.equalTo(@0);
+//        make.width.equalTo(@(25*scale));
+//        make.height.equalTo(@(30*scale));
+//    }];
     //时间
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@10);
-        make.left.equalTo(self.wLine.mas_right);
+        make.left.equalTo(@15);
+//        make.left.equalTo(self.wLine.mas_right);
         make.height.equalTo(@20);
-        make.width.equalTo(@(80));
+        make.width.equalTo(@(160));
     }];
     //内容
     [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -166,14 +178,14 @@
     
     _flashModel = flashModel;
     
-    NSString *month = [flashModel.showDatetime convertDateWithFormat:@"M月"];
-    NSString *day = [flashModel.showDatetime convertDateWithFormat:@"dd"];
-    
-    [self.dateBtn setTitle:[NSString stringWithFormat:@"%@\n%@", month, day] forState:UIControlStateNormal];
-    self.dateBtn.hidden = flashModel.isShowDate;
-    
-    [self.dateBtn setTitleEdgeInsets:UIEdgeInsetsMake(5, 0, 0, 0)];
-    self.timeLbl.text = [flashModel.showDatetime convertDateWithFormat:@"HH:mm:ss"];
+//    NSString *month = [flashModel.showDatetime convertDateWithFormat:@"M月"];
+//    NSString *day = [flashModel.showDatetime convertDateWithFormat:@"dd"];
+//
+//    [self.dateBtn setTitle:[NSString stringWithFormat:@"%@\n%@", month, day] forState:UIControlStateNormal];
+//    self.dateBtn.hidden = flashModel.isShowDate;
+//
+//    [self.dateBtn setTitleEdgeInsets:UIEdgeInsetsMake(5, 0, 0, 0)];
+    self.timeLbl.text = [flashModel.showDatetime convertDateWithFormat:@"yyyy.MM.dd HH:mm:ss"];
     
     //过滤特殊字符串
     NSString *content = [NSString filterHTML:flashModel.content];

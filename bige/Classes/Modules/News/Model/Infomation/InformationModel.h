@@ -17,6 +17,10 @@
 @property (nonatomic, copy) NSString *showDatetime;
 //收藏数
 @property (nonatomic, assign) NSInteger collectCount;
+//阅读数
+@property (nonatomic, assign) NSInteger readCount;
+//评论数
+@property (nonatomic, assign) NSInteger commentCount;
 //缩略图
 @property (nonatomic, copy) NSString *advPic;
 //

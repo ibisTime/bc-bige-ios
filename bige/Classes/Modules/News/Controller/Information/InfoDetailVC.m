@@ -79,6 +79,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.title = @"资讯详情";
+
     //评论
     [self initCommentTableView];
     //详情查资讯
@@ -746,7 +748,7 @@
         InfoDetailVC *detailVC = [InfoDetailVC new];
         
         detailVC.code = infoModel.code;
-        detailVC.title = self.titleStr;
+//        detailVC.title = self.titleStr;
         
         [self.navigationController pushViewController:detailVC animated:YES];
         return ;

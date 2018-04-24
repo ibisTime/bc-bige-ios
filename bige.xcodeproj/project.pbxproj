@@ -65,15 +65,8 @@
 		2124BE802061FFDF00CB79E8 /* PlatformModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE7F2061FFDF00CB79E8 /* PlatformModel.m */; };
 		2124BE832061FFF500CB79E8 /* CurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE822061FFF500CB79E8 /* CurrencyModel.m */; };
 		2124BE872062393B00CB79E8 /* QuotesPlatformVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE862062393B00CB79E8 /* QuotesPlatformVC.m */; };
-		2124BE8B2062395F00CB79E8 /* QuotesCurrencyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE8A2062395F00CB79E8 /* QuotesCurrencyVC.m */; };
 		2124BE8E20623EAA00CB79E8 /* PlatformTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE8D20623EAA00CB79E8 /* PlatformTableView.m */; };
-		2124BE942062406900CB79E8 /* PlatformAllCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE932062406900CB79E8 /* PlatformAllCell.m */; };
-		2124BE972062407C00CB79E8 /* PlatformPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE962062407C00CB79E8 /* PlatformPriceCell.m */; };
 		2124BE9A206240AC00CB79E8 /* PlatformCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE99206240AC00CB79E8 /* PlatformCell.m */; };
-		2124BEA020625FB400CB79E8 /* CurrencyTableVIew.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BE9F20625FB400CB79E8 /* CurrencyTableVIew.m */; };
-		2124BEA320625FE300CB79E8 /* CurrencyPriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEA220625FE300CB79E8 /* CurrencyPriceCell.m */; };
-		2124BEA620625FF700CB79E8 /* NewCurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEA520625FF700CB79E8 /* NewCurrencyCell.m */; };
-		2124BEA92062600700CB79E8 /* CurrencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEA82062600700CB79E8 /* CurrencyCell.m */; };
 		2124BEB020627FC400CB79E8 /* QuotesOptionalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEAF20627FC400CB79E8 /* QuotesOptionalVC.m */; };
 		2124BEB3206285CE00CB79E8 /* QuotesOptionalChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEB2206285CE00CB79E8 /* QuotesOptionalChildVC.m */; };
 		2124BEB62062885A00CB79E8 /* AddOptionalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEB52062885A00CB79E8 /* AddOptionalTableView.m */; };
@@ -96,6 +89,10 @@
 		21268FDB208DD3A9005B6B46 /* TradeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FDA208DD3A9005B6B46 /* TradeManager.m */; };
 		21268FDE208DD6EA005B6B46 /* SimulationTradeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FDD208DD6EA005B6B46 /* SimulationTradeView.m */; };
 		21268FE2208DE833005B6B46 /* SimulationTradeInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FE1208DE833005B6B46 /* SimulationTradeInfoModel.m */; };
+		21268FE5208EC8B9005B6B46 /* SimulationTradeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FE4208EC8B9005B6B46 /* SimulationTradeDetailVC.m */; };
+		21268FE8208ED13E005B6B46 /* NewsListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FE7208ED13E005B6B46 /* NewsListVC.m */; };
+		21268FEB208ED14D005B6B46 /* InfoListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FEA208ED14D005B6B46 /* InfoListVC.m */; };
+		21268FF0208EFFEA005B6B46 /* ImageLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FEF208EFFEA005B6B46 /* ImageLabel.m */; };
 		21288241205771EB00A57A5A /* QuotesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21288240205771EB00A57A5A /* QuotesManager.m */; };
 		21288247205776F000A57A5A /* OptionalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21288246205776F000A57A5A /* OptionalTableView.m */; };
 		2128824A2057774900A57A5A /* OptionalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882492057774900A57A5A /* OptionalCell.m */; };
@@ -218,7 +215,6 @@
 		21CFFB0320565DB900D245ED /* QuotesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB0220565DB900D245ED /* QuotesVC.m */; };
 		21CFFB0620565DCC00D245ED /* ForumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB0520565DCC00D245ED /* ForumVC.m */; };
 		21CFFB0920565DDD00D245ED /* MineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB0820565DDD00D245ED /* MineVC.m */; };
-		21CFFB0C205663A600D245ED /* HomeChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB0B205663A600D245ED /* HomeChildVC.m */; };
 		21CFFB0F205666A200D245ED /* InfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB0E205666A200D245ED /* InfoManager.m */; };
 		21CFFB1720566B7800D245ED /* InformationListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB1620566B7800D245ED /* InformationListCell.m */; };
 		21CFFB1A20566BA700D245ED /* NewsFlashListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21CFFB1920566BA700D245ED /* NewsFlashListTableView.m */; };
@@ -401,24 +397,10 @@
 		2124BE822061FFF500CB79E8 /* CurrencyModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyModel.m; sourceTree = "<group>"; };
 		2124BE852062393B00CB79E8 /* QuotesPlatformVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesPlatformVC.h; sourceTree = "<group>"; };
 		2124BE862062393B00CB79E8 /* QuotesPlatformVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesPlatformVC.m; sourceTree = "<group>"; };
-		2124BE892062395F00CB79E8 /* QuotesCurrencyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesCurrencyVC.h; sourceTree = "<group>"; };
-		2124BE8A2062395F00CB79E8 /* QuotesCurrencyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesCurrencyVC.m; sourceTree = "<group>"; };
 		2124BE8C20623EAA00CB79E8 /* PlatformTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformTableView.h; sourceTree = "<group>"; };
 		2124BE8D20623EAA00CB79E8 /* PlatformTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformTableView.m; sourceTree = "<group>"; };
-		2124BE922062406900CB79E8 /* PlatformAllCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformAllCell.h; sourceTree = "<group>"; };
-		2124BE932062406900CB79E8 /* PlatformAllCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformAllCell.m; sourceTree = "<group>"; };
-		2124BE952062407B00CB79E8 /* PlatformPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformPriceCell.h; sourceTree = "<group>"; };
-		2124BE962062407C00CB79E8 /* PlatformPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformPriceCell.m; sourceTree = "<group>"; };
 		2124BE98206240AC00CB79E8 /* PlatformCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformCell.h; sourceTree = "<group>"; };
 		2124BE99206240AC00CB79E8 /* PlatformCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformCell.m; sourceTree = "<group>"; };
-		2124BE9E20625FB400CB79E8 /* CurrencyTableVIew.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyTableVIew.h; sourceTree = "<group>"; };
-		2124BE9F20625FB400CB79E8 /* CurrencyTableVIew.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyTableVIew.m; sourceTree = "<group>"; };
-		2124BEA120625FE300CB79E8 /* CurrencyPriceCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyPriceCell.h; sourceTree = "<group>"; };
-		2124BEA220625FE300CB79E8 /* CurrencyPriceCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyPriceCell.m; sourceTree = "<group>"; };
-		2124BEA420625FF700CB79E8 /* NewCurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewCurrencyCell.h; sourceTree = "<group>"; };
-		2124BEA520625FF700CB79E8 /* NewCurrencyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewCurrencyCell.m; sourceTree = "<group>"; };
-		2124BEA72062600700CB79E8 /* CurrencyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyCell.h; sourceTree = "<group>"; };
-		2124BEA82062600700CB79E8 /* CurrencyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyCell.m; sourceTree = "<group>"; };
 		2124BEAE20627FC400CB79E8 /* QuotesOptionalVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesOptionalVC.h; sourceTree = "<group>"; };
 		2124BEAF20627FC400CB79E8 /* QuotesOptionalVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesOptionalVC.m; sourceTree = "<group>"; };
 		2124BEB1206285CE00CB79E8 /* QuotesOptionalChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesOptionalChildVC.h; sourceTree = "<group>"; };
@@ -463,6 +445,14 @@
 		21268FDD208DD6EA005B6B46 /* SimulationTradeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationTradeView.m; sourceTree = "<group>"; };
 		21268FE0208DE833005B6B46 /* SimulationTradeInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationTradeInfoModel.h; sourceTree = "<group>"; };
 		21268FE1208DE833005B6B46 /* SimulationTradeInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationTradeInfoModel.m; sourceTree = "<group>"; };
+		21268FE3208EC8B9005B6B46 /* SimulationTradeDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationTradeDetailVC.h; sourceTree = "<group>"; };
+		21268FE4208EC8B9005B6B46 /* SimulationTradeDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationTradeDetailVC.m; sourceTree = "<group>"; };
+		21268FE6208ED13E005B6B46 /* NewsListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewsListVC.h; sourceTree = "<group>"; };
+		21268FE7208ED13E005B6B46 /* NewsListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewsListVC.m; sourceTree = "<group>"; };
+		21268FE9208ED14D005B6B46 /* InfoListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoListVC.h; sourceTree = "<group>"; };
+		21268FEA208ED14D005B6B46 /* InfoListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoListVC.m; sourceTree = "<group>"; };
+		21268FEE208EFFEA005B6B46 /* ImageLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageLabel.h; sourceTree = "<group>"; };
+		21268FEF208EFFEA005B6B46 /* ImageLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageLabel.m; sourceTree = "<group>"; };
 		2128823F205771EB00A57A5A /* QuotesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesManager.h; sourceTree = "<group>"; };
 		21288240205771EB00A57A5A /* QuotesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesManager.m; sourceTree = "<group>"; };
 		21288245205776F000A57A5A /* OptionalTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionalTableView.h; sourceTree = "<group>"; };
@@ -701,8 +691,6 @@
 		21CFFB0520565DCC00D245ED /* ForumVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForumVC.m; sourceTree = "<group>"; };
 		21CFFB0720565DDD00D245ED /* MineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MineVC.h; sourceTree = "<group>"; };
 		21CFFB0820565DDD00D245ED /* MineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MineVC.m; sourceTree = "<group>"; };
-		21CFFB0A205663A600D245ED /* HomeChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeChildVC.h; sourceTree = "<group>"; };
-		21CFFB0B205663A600D245ED /* HomeChildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeChildVC.m; sourceTree = "<group>"; };
 		21CFFB0D205666A200D245ED /* InfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfoManager.h; sourceTree = "<group>"; };
 		21CFFB0E205666A200D245ED /* InfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfoManager.m; sourceTree = "<group>"; };
 		21CFFB1520566B7800D245ED /* InformationListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationListCell.h; sourceTree = "<group>"; };
@@ -926,6 +914,8 @@
 				210DE82B208DB22400F6F366 /* TradeVC.m */,
 				21268FD6208DD309005B6B46 /* SimulationTradeVC.h */,
 				21268FD7208DD309005B6B46 /* SimulationTradeVC.m */,
+				21268FE3208EC8B9005B6B46 /* SimulationTradeDetailVC.h */,
+				21268FE4208EC8B9005B6B46 /* SimulationTradeDetailVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -965,6 +955,8 @@
 			children = (
 				210DE831208DB2C800F6F366 /* NewsVC.h */,
 				210DE832208DB2C800F6F366 /* NewsVC.m */,
+				2124BE592060B2C200CB79E8 /* NewsFlash */,
+				2124BE582060B2B200CB79E8 /* Information */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -972,6 +964,8 @@
 		210DE82F208DB2B400F6F366 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				21CFFB1120566B1500D245ED /* NewsFlash */,
+				21CFFB1020566B0700D245ED /* Information */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -979,6 +973,8 @@
 		210DE830208DB2B800F6F366 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				21268FED208EDC7A005B6B46 /* Infomation */,
+				21268FEC208EDC71005B6B46 /* NewsFlash */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1319,6 +1315,8 @@
 		2124BE582060B2B200CB79E8 /* Information */ = {
 			isa = PBXGroup;
 			children = (
+				21268FE9208ED14D005B6B46 /* InfoListVC.h */,
+				21268FEA208ED14D005B6B46 /* InfoListVC.m */,
 				21CFFB27205673C000D245ED /* InfoDetailVC.h */,
 				21CFFB28205673C000D245ED /* InfoDetailVC.m */,
 				2124BE6E20613E5900CB79E8 /* InfoCommentDetailVC.h */,
@@ -1332,6 +1330,8 @@
 		2124BE592060B2C200CB79E8 /* NewsFlash */ = {
 			isa = PBXGroup;
 			children = (
+				21268FE6208ED13E005B6B46 /* NewsListVC.h */,
+				21268FE7208ED13E005B6B46 /* NewsListVC.m */,
 				21CFFB2A205673D100D245ED /* NewsFlashDetailVC.h */,
 				21CFFB2B205673D100D245ED /* NewsFlashDetailVC.m */,
 			);
@@ -1343,8 +1343,6 @@
 			children = (
 				21CFFAFE20565D8100D245ED /* HomeVC.h */,
 				21CFFAFF20565D8100D245ED /* HomeVC.m */,
-				21CFFB0A205663A600D245ED /* HomeChildVC.h */,
-				21CFFB0B205663A600D245ED /* HomeChildVC.m */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1411,15 +1409,6 @@
 				2124BE862062393B00CB79E8 /* QuotesPlatformVC.m */,
 			);
 			path = Platform;
-			sourceTree = "<group>";
-		};
-		2124BE882062394500CB79E8 /* Currency */ = {
-			isa = PBXGroup;
-			children = (
-				2124BE892062395F00CB79E8 /* QuotesCurrencyVC.h */,
-				2124BE8A2062395F00CB79E8 /* QuotesCurrencyVC.m */,
-			);
-			path = Currency;
 			sourceTree = "<group>";
 		};
 		2124BEAA20627E6D00CB79E8 /* Optional */ = {
@@ -1505,6 +1494,32 @@
 			path = Edit;
 			sourceTree = "<group>";
 		};
+		21268FEC208EDC71005B6B46 /* NewsFlash */ = {
+			isa = PBXGroup;
+			children = (
+				21CFFB1E20566C1C00D245ED /* NewsFlashModel.h */,
+				21CFFB1F20566C1C00D245ED /* NewsFlashModel.m */,
+			);
+			path = NewsFlash;
+			sourceTree = "<group>";
+		};
+		21268FED208EDC7A005B6B46 /* Infomation */ = {
+			isa = PBXGroup;
+			children = (
+				21CFFB0D205666A200D245ED /* InfoManager.h */,
+				21CFFB0E205666A200D245ED /* InfoManager.m */,
+				21CFFB2120566C2E00D245ED /* InformationModel.h */,
+				21CFFB2220566C2E00D245ED /* InformationModel.m */,
+				21EF0B5C2065078B008EA865 /* InfoDetailModel.h */,
+				21EF0B5D2065078B008EA865 /* InfoDetailModel.m */,
+				21EF0B372064A7DB008EA865 /* InfoTypeModel.h */,
+				21EF0B382064A7DB008EA865 /* InfoTypeModel.m */,
+				2124BE612060B4DC00CB79E8 /* InfoCommentModel.h */,
+				2124BE622060B4DC00CB79E8 /* InfoCommentModel.m */,
+			);
+			path = Infomation;
+			sourceTree = "<group>";
+		};
 		21288242205776C300A57A5A /* Optional */ = {
 			isa = PBXGroup;
 			children = (
@@ -1525,29 +1540,10 @@
 			children = (
 				2124BE8C20623EAA00CB79E8 /* PlatformTableView.h */,
 				2124BE8D20623EAA00CB79E8 /* PlatformTableView.m */,
-				2124BE922062406900CB79E8 /* PlatformAllCell.h */,
-				2124BE932062406900CB79E8 /* PlatformAllCell.m */,
-				2124BE952062407B00CB79E8 /* PlatformPriceCell.h */,
-				2124BE962062407C00CB79E8 /* PlatformPriceCell.m */,
 				2124BE98206240AC00CB79E8 /* PlatformCell.h */,
 				2124BE99206240AC00CB79E8 /* PlatformCell.m */,
 			);
 			path = Platform;
-			sourceTree = "<group>";
-		};
-		21288244205776D800A57A5A /* Currency */ = {
-			isa = PBXGroup;
-			children = (
-				2124BE9E20625FB400CB79E8 /* CurrencyTableVIew.h */,
-				2124BE9F20625FB400CB79E8 /* CurrencyTableVIew.m */,
-				2124BEA120625FE300CB79E8 /* CurrencyPriceCell.h */,
-				2124BEA220625FE300CB79E8 /* CurrencyPriceCell.m */,
-				2124BEA420625FF700CB79E8 /* NewCurrencyCell.h */,
-				2124BEA520625FF700CB79E8 /* NewCurrencyCell.m */,
-				2124BEA72062600700CB79E8 /* CurrencyCell.h */,
-				2124BEA82062600700CB79E8 /* CurrencyCell.m */,
-			);
-			path = Currency;
 			sourceTree = "<group>";
 		};
 		2128825C2057A11100A57A5A /* Mine */ = {
@@ -1948,7 +1944,6 @@
 				21CFFB0220565DB900D245ED /* QuotesVC.m */,
 				2124BEBA2062904100CB79E8 /* Search */,
 				2124BEAA20627E6D00CB79E8 /* Optional */,
-				2124BE882062394500CB79E8 /* Currency */,
 				2124BE842062391400CB79E8 /* Platform */,
 			);
 			path = Controller;
@@ -1970,7 +1965,6 @@
 			isa = PBXGroup;
 			children = (
 				2124BEBE206296D500CB79E8 /* Search */,
-				21288244205776D800A57A5A /* Currency */,
 				21288243205776CD00A57A5A /* Platform */,
 				21288242205776C300A57A5A /* Optional */,
 			);
@@ -2071,18 +2065,6 @@
 		21CFFAFB20565D6F00D245ED /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				21CFFB0D205666A200D245ED /* InfoManager.h */,
-				21CFFB0E205666A200D245ED /* InfoManager.m */,
-				21CFFB1E20566C1C00D245ED /* NewsFlashModel.h */,
-				21CFFB1F20566C1C00D245ED /* NewsFlashModel.m */,
-				21CFFB2120566C2E00D245ED /* InformationModel.h */,
-				21CFFB2220566C2E00D245ED /* InformationModel.m */,
-				21EF0B5C2065078B008EA865 /* InfoDetailModel.h */,
-				21EF0B5D2065078B008EA865 /* InfoDetailModel.m */,
-				21EF0B372064A7DB008EA865 /* InfoTypeModel.h */,
-				21EF0B382064A7DB008EA865 /* InfoTypeModel.m */,
-				2124BE612060B4DC00CB79E8 /* InfoCommentModel.h */,
-				2124BE622060B4DC00CB79E8 /* InfoCommentModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2090,8 +2072,6 @@
 		21CFFAFC20565D6F00D245ED /* View */ = {
 			isa = PBXGroup;
 			children = (
-				21CFFB1120566B1500D245ED /* NewsFlash */,
-				21CFFB1020566B0700D245ED /* Information */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2100,8 +2080,6 @@
 			isa = PBXGroup;
 			children = (
 				2124BE5A2060B2D600CB79E8 /* Home */,
-				2124BE592060B2C200CB79E8 /* NewsFlash */,
-				2124BE582060B2B200CB79E8 /* Information */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2240,6 +2218,8 @@
 				21CFFB1620566B7800D245ED /* InformationListCell.m */,
 				2124BE08205FB57E00CB79E8 /* InformationListCell2.h */,
 				2124BE09205FB57E00CB79E8 /* InformationListCell2.m */,
+				21268FEE208EFFEA005B6B46 /* ImageLabel.h */,
+				21268FEF208EFFEA005B6B46 /* ImageLabel.m */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -2789,6 +2769,7 @@
 				21EF0B5E2065078B008EA865 /* InfoDetailModel.m in Sources */,
 				21CFFB1A20566BA700D245ED /* NewsFlashListTableView.m in Sources */,
 				21111B9F1F8B5F2C0021B3FE /* City.m in Sources */,
+				21268FF0208EFFEA005B6B46 /* ImageLabel.m in Sources */,
 				214593E2206A50200006E238 /* InfoDetailShareView.m in Sources */,
 				2128826F2057A13D00A57A5A /* MineGroup.m in Sources */,
 				21EB9C7120562D3E00394C3C /* BaseView.m in Sources */,
@@ -2858,7 +2839,6 @@
 				2124BE29205FE40F00CB79E8 /* NewsFlashDetailView.m in Sources */,
 				21111BBD1F8B5F2C0021B3FE /* TLPhotoCell.m in Sources */,
 				212882632057A11100A57A5A /* MineCell.m in Sources */,
-				2124BE972062407C00CB79E8 /* PlatformPriceCell.m in Sources */,
 				21AC588F1FDE73FE00F19DE8 /* TLUserExt.m in Sources */,
 				21AC595B1FDE804500F19DE8 /* UILable+convience.m in Sources */,
 				2128825220577D3900A57A5A /* ForumModel.m in Sources */,
@@ -2875,7 +2855,6 @@
 				21AC59441FDE7A1B00F19DE8 /* TLPickerTextField.m in Sources */,
 				21AC594D1FDE7A1B00F19DE8 /* TLNetworking.m in Sources */,
 				21111BCD1F8B5F2C0021B3FE /* CustomTextView.m in Sources */,
-				2124BE8B2062395F00CB79E8 /* QuotesCurrencyVC.m in Sources */,
 				21F0F17C2073C97200E39A55 /* InfoAllCommentListVC.m in Sources */,
 				21AC595A1FDE804500F19DE8 /* UILabel+Extension.m in Sources */,
 				2124BE572060A91500CB79E8 /* InformationDetailTableView.m in Sources */,
@@ -2901,7 +2880,6 @@
 				21EF0B642065F839008EA865 /* ReplyCommentView.m in Sources */,
 				2124BE802061FFDF00CB79E8 /* PlatformModel.m in Sources */,
 				21AC594E1FDE7A1B00F19DE8 /* TLPageDataHelper.m in Sources */,
-				2124BE942062406900CB79E8 /* PlatformAllCell.m in Sources */,
 				21111BE31F8B5F2C0021B3FE /* LKViewAttribute.m in Sources */,
 				21AC59481FDE7A1B00F19DE8 /* TLTimeButton.m in Sources */,
 				21111BE51F8B5F2C0021B3FE /* UIControl+Block.m in Sources */,
@@ -2911,13 +2889,11 @@
 				21EF0B3C2064AC5A008EA865 /* ForumDetailVC.m in Sources */,
 				2124BEDF2063940400CB79E8 /* UserDetailEditVC.m in Sources */,
 				21AC59411FDE7A1B00F19DE8 /* TLProgressHUD.m in Sources */,
-				2124BEA320625FE300CB79E8 /* CurrencyPriceCell.m in Sources */,
 				2124BE602060B3C800CB79E8 /* InfoCommentCell.m in Sources */,
 				21459408206B35290006E238 /* HomePageCircleModel.m in Sources */,
 				21AC593D1FDE7A1B00F19DE8 /* TLTextView.m in Sources */,
 				21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */,
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
-				21CFFB0C205663A600D245ED /* HomeChildVC.m in Sources */,
 				21EF0B7A20666BF7008EA865 /* MyCommentModel.m in Sources */,
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				214593F5206B2B270006E238 /* HomePageInfoCell.m in Sources */,
@@ -2930,6 +2906,7 @@
 				21EB9C7020562D3E00394C3C /* BaseTableViewCell.m in Sources */,
 				219CF52A2072550300012F68 /* SGScanningQRCodeView.m in Sources */,
 				21EF0B7620664D73008EA865 /* MyCommentCell.m in Sources */,
+				21268FE5208EC8B9005B6B46 /* SimulationTradeDetailVC.m in Sources */,
 				210DE833208DB2C800F6F366 /* NewsVC.m in Sources */,
 				2124BE732061451C00CB79E8 /* InfoCommentDetailTableView.m in Sources */,
 				21AC59461FDE7A1B00F19DE8 /* TLImagePicker.m in Sources */,
@@ -2949,7 +2926,6 @@
 				21EF0B9520669035008EA865 /* MyCollectionModel.m in Sources */,
 				2124BEEB2063960900CB79E8 /* UserEditCell.m in Sources */,
 				21158E461F1C4F9E00A07266 /* TabBarModel.m in Sources */,
-				2124BEA020625FB400CB79E8 /* CurrencyTableVIew.m in Sources */,
 				21AC59671FDE80FB00F19DE8 /* UIColor+theme.m in Sources */,
 				21EB9C6520561AF700394C3C /* UIViewController+Extension.m in Sources */,
 				2124BEB3206285CE00CB79E8 /* QuotesOptionalChildVC.m in Sources */,
@@ -2962,6 +2938,7 @@
 				2128824E20577CAB00A57A5A /* ForumChildVC.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				21EF0B4F2064D2A5008EA865 /* ForumInfoTableView.m in Sources */,
+				21268FEB208ED14D005B6B46 /* InfoListVC.m in Sources */,
 				21CFFB0020565D8100D245ED /* HomeVC.m in Sources */,
 				217BDAFF2069487A00E17DEE /* CircleCommentDetailCell.m in Sources */,
 				21CFFB0920565DDD00D245ED /* MineVC.m in Sources */,
@@ -2988,7 +2965,6 @@
 				21FB30CB1F26E9EF0028ADEE /* UINavigationController+MethodSwizzling.m in Sources */,
 				21AC596C1FDE814C00F19DE8 /* UIView+Extension.m in Sources */,
 				217BDAF92069484D00E17DEE /* CircleCommentCell.m in Sources */,
-				2124BEA620625FF700CB79E8 /* NewCurrencyCell.m in Sources */,
 				2124BEC72063493600CB79E8 /* SearchCurrencyCell.m in Sources */,
 				2124BE8E20623EAA00CB79E8 /* PlatformTableView.m in Sources */,
 				21AC594F1FDE7A1B00F19DE8 /* TLUploadManager.m in Sources */,
@@ -3018,8 +2994,8 @@
 				21268FD4208DB60C005B6B46 /* TLUserForgetPwdVC.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
+				21268FE8208ED13E005B6B46 /* NewsListVC.m in Sources */,
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
-				2124BEA92062600700CB79E8 /* CurrencyCell.m in Sources */,
 				21268FDE208DD6EA005B6B46 /* SimulationTradeView.m in Sources */,
 				2128826D2057A13D00A57A5A /* MineModel.m in Sources */,
 				21CFFB2020566C1C00D245ED /* NewsFlashModel.m in Sources */,

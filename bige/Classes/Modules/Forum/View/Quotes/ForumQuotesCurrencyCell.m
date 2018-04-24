@@ -131,7 +131,7 @@
     self.rmbPriceLbl.textColor = currency.bgColor;
     
     //涨跌情况
-    NSString *priceFluctStr = currency.changeRate;
+    NSString *priceFluctStr = currency.percentChange;
     CGFloat fluct = [priceFluctStr doubleValue];
     
     if (fluct > 0) {

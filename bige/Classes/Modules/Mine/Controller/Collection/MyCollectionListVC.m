@@ -113,7 +113,7 @@
     InfoDetailVC *detailVC = [InfoDetailVC new];
     
     detailVC.code = collectionModel.code;
-    detailVC.title = collectionModel.typeName;
+//    detailVC.title = collectionModel.typeName;
     detailVC.collectionBlock = ^{
         //
         [weakSelf.tableView beginRefreshing];

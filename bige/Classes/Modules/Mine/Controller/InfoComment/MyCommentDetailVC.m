@@ -172,7 +172,7 @@
     InfoDetailVC *detailVC = [InfoDetailVC new];
     
     detailVC.code = self.articleCode;
-    detailVC.title = self.typeName;
+//    detailVC.title = self.typeName;
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }

@@ -13,6 +13,8 @@
 #import "NSString+Extension.h"
 #import <UIImageView+WebCache.h>
 #import "UILabel+Extension.h"
+//V
+#import "ImageLabel.h"
 
 @interface InformationListCell()
 //缩略图
@@ -21,8 +23,10 @@
 @property (nonatomic, strong) UILabel *titleLbl;
 //时间
 @property (nonatomic, strong) UILabel *timeLbl;
-//收藏数
-@property (nonatomic, strong) UILabel *collectNumLbl;
+//阅读量
+@property (nonatomic, strong) ImageLabel *readLbl;
+//评论量
+@property (nonatomic, strong) ImageLabel *commentLbl;
 
 @end
 
@@ -33,9 +37,7 @@
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
         [self initSubviews];
-        
     }
-    
     return self;
 }
 
@@ -47,7 +49,7 @@
     
     self.infoIV.contentMode = UIViewContentModeScaleAspectFill;
     self.infoIV.clipsToBounds = YES;
-    self.infoIV.layer.cornerRadius = 4;
+//    self.infoIV.layer.cornerRadius = 4;
     
     [self addSubview:self.infoIV];
     //标题
@@ -62,14 +64,23 @@
                                            textColor:kTextColor2
                                                 font:13.0];
     [self addSubview:self.timeLbl];
-    //收藏数
-    self.collectNumLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                 textColor:kTextColor2
-                                                      font:13.0];
+    //阅读数
+    self.readLbl = [[ImageLabel alloc] initWithFrame:CGRectZero];
+    [self.readLbl.iconIV setImage:kImage(@"浏览")];
+    self.readLbl.textLbl.textColor = kTextColor2;
+    self.readLbl.textLbl.font = Font(12.0);
+    self.readLbl.margin = 5;
+
+    [self addSubview:self.readLbl];
+    //评论数
+    self.commentLbl = [[ImageLabel alloc] initWithFrame:CGRectZero];
+    [self.commentLbl.iconIV setImage:kImage(@"留言小图")];
+    self.commentLbl.textLbl.textColor = kTextColor2;
+    self.commentLbl.textLbl.font = Font(12.0);
     
-    self.collectNumLbl.textAlignment = NSTextAlignmentRight;
-    
-    [self addSubview:self.collectNumLbl];
+    self.commentLbl.margin = 5;
+
+    [self addSubview:self.commentLbl];
     
     //bottomLine
     UIView *bottomLine = [[UIView alloc] init];
@@ -82,6 +93,7 @@
         make.left.right.bottom.equalTo(@0);
         make.height.equalTo(@0.5);
     }];
+    
     //布局
     [self setSubviewLayout];
 }
@@ -103,7 +115,7 @@
         
         make.top.equalTo(self.infoIV.mas_top);
         make.left.equalTo(@(x));
-        make.right.equalTo(self.infoIV.mas_left).offset(-10);
+        make.right.equalTo(self.infoIV.mas_left).offset(-x);
         make.height.lessThanOrEqualTo(@60);
     }];
     //时间
@@ -112,12 +124,20 @@
         make.left.equalTo(@(x));
         make.bottom.equalTo(self.infoIV.mas_bottom).offset(0);
     }];
-    //收藏数
-    [self.collectNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    //评论数
+    [self.commentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.infoIV.mas_left).offset(-x);
+        make.right.equalTo(self.titleLbl.mas_right);
         make.centerY.equalTo(self.timeLbl.mas_centerY);
     }];
+
+    //阅读数
+    [self.readLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(self.commentLbl.mas_left).offset(-x);
+        make.centerY.equalTo(self.timeLbl.mas_centerY);
+    }];
+
 }
 
 #pragma mark - Setting
@@ -128,7 +148,9 @@
     [self.titleLbl labelWithTextString:infoModel.title lineSpace:5];
     [self.infoIV sd_setImageWithURL:[NSURL URLWithString:[infoModel.advPic convertImageUrl]] placeholderImage:kImage(PLACEHOLDER_SMALL)];
     self.timeLbl.text = [infoModel.showDatetime convertToDetailDate];
-    self.collectNumLbl.text = [NSString stringWithFormat:@"%ld 收藏", infoModel.collectCount];
+    self.readLbl.textLbl.text = [NSString stringWithFormat:@"%ld", infoModel.readCount];
+    self.commentLbl.textLbl.text = [NSString stringWithFormat:@"%ld", infoModel.commentCount];
+    
 }
 
 @end

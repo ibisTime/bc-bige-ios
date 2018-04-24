@@ -39,7 +39,7 @@
 #define kTextColor              [UIColor colorWithHexString:@"#333333"]   //一级文字
 #define kTextColor2             [UIColor colorWithHexString:@"#999999"]   //二级文字
 #define kTextColor3             [UIColor colorWithHexString:@"#666666"]   //三级文字
-#define kTextColor4             [UIColor colorWithHexString:@"#b3b3b3"]   //四级文字
+#define kTextColor4             [UIColor colorWithHexString:@"#9a9a9a"]   //四级文字
 #define kThemeColor             [UIColor colorWithHexString:@"#f15353"]  //红色文字
 #define kPaleBlueColor          [UIColor colorWithHexString:@"#48b0fb"]    //蓝色文字
 #define kRiseColor              [UIColor colorWithHexString:@"#1FC07D"]  //涨

@@ -38,7 +38,7 @@
 ///24小时RMB数
 @property (nonatomic, copy) NSString *volume;
 //涨幅
-@property (nonatomic, copy) NSString *changeRate;
+@property (nonatomic, copy) NSString *percentChange;
 //涨跌颜色
 @property (nonatomic, strong) UIColor *bgColor;
 //交易所英文

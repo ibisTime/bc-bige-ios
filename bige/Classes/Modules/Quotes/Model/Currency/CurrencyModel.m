@@ -13,7 +13,7 @@
 
 - (UIColor *)bgColor {
     
-    CGFloat fluct = [self.changeRate doubleValue];
+    CGFloat fluct = [self.percentChange doubleValue];
     
     if (fluct > 0) {
         
