@@ -12,6 +12,7 @@
 #import "NSString+CGSize.h"
 #import "NSString+Extension.h"
 #import <UIImageView+WebCache.h>
+#import "NSNumber+Extension.h"
 
 @interface PlatformCell()
 //排行
@@ -68,8 +69,8 @@
     [self addSubview:self.currencyNameLbl];
     //24H交易量
     self.tradeVolumeLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                  textColor:kTextColor2
-                                                       font:15.0];
+                                                  textColor:kTextColor4
+                                                       font:12.0];
     
     [self addSubview:self.tradeVolumeLbl];
     //涨跌情况
@@ -86,7 +87,7 @@
     [self addSubview:self.followBtn];
     //当前对应币种价格
     self.opppsitePriceLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                    textColor:kHexColor(@"#595A6E")
+                                                    textColor:kTextColor4
                                                          font:12.0];
     
     [self addSubview:self.opppsitePriceLbl];
@@ -189,12 +190,13 @@
     [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.photo convertImageUrl]]
                    placeholderImage:kImage(@"")];
     //币种名称
-    self.currencyNameLbl.text = platform.symbol;
+    self.currencyNameLbl.text = [platform.symbol uppercaseString];
     //一日交易量
     NSString *volumeStr = platform.tradeVolume;
     self.tradeVolumeLbl.text = [NSString stringWithFormat:@"交易量:%@", volumeStr];
+    
     //对应币种价格
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%.2lf", [platform.lastPrice doubleValue]];
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%@", [platform.lastPrice convertToRealMoneyWithNum:8]];
     //人民币价格
     self.rmbPriceLbl.text = [NSString stringWithFormat:@"￥%.2lf", [platform.lastCnyPrice doubleValue]];
     self.rmbPriceLbl.textColor = platform.bgColor;

@@ -17,7 +17,9 @@ typedef void(^WebviewBlock)(CGFloat height);
 @property (nonatomic, strong) WKWebView *webView;
 
 @property (nonatomic, copy) WebviewBlock webViewBlock;
-
+//富文本
 - (void)loadWebWithString:(NSString *)string;
+//加载网页
+- (void)loadRequestWithString:(NSString *)string;
 
 @end

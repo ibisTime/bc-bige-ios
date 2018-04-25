@@ -32,7 +32,11 @@
 //相对于某币种的价格
 @property (nonatomic, strong) NSNumber *lastPrice;
 //涨幅
+@property (nonatomic, strong) NSNumber *percentChange1m;
+@property (nonatomic, strong) NSNumber *percentChange24h;
+@property (nonatomic, strong) NSNumber *percentChange7d;
 @property (nonatomic, strong) NSNumber *percentChange;
+
 @property (nonatomic, copy) NSString *changeRate;
 //涨跌颜色
 @property (nonatomic, strong) UIColor *bgColor;
@@ -42,7 +46,18 @@
 @property (nonatomic, copy) NSString *isChoice;
 //类型
 @property (nonatomic, copy) NSString *type;
-
+//最高价
+@property (nonatomic, strong) NSNumber *high;
+//最低价
+@property (nonatomic, strong) NSNumber *low;
+//开盘价
+@property (nonatomic, strong) NSNumber *open;
+//收盘价
+@property (nonatomic, strong) NSNumber *close;
+//市值
+@property (nonatomic, strong) NSNumber *maxMarketCapCny;
+//关注人数
+@property (nonatomic, assign) NSInteger choiceCount;
 
 //流入
 @property (nonatomic, copy) NSString *in_flow_volume_cny;
@@ -54,5 +69,16 @@
 @property (nonatomic, copy) NSString *flow_percent_change_24h;
 //涨跌颜色
 @property (nonatomic, strong) UIColor *flowBgColor;
+
+
+/**
+ 获取涨跌颜色
+ */
+- (UIColor *)getPercentColorWithPercent:(NSNumber *)percent;
+
+/**
+ 获取涨跌幅
+ */
+- (NSString *)getResultWithPercent:(NSNumber *)percent;
 
 @end

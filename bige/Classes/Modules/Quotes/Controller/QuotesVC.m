@@ -193,6 +193,8 @@
     
     helper.code = @"628317";
     helper.isList = YES;
+    helper.showView = self.view;
+    
     if ([TLUser user].isLogin) {
         
         helper.parameters[@"userId"] = [TLUser user].userId;

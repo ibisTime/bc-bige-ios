@@ -15,7 +15,7 @@
 //V
 #import "BaseView.h"
 //C
-#import "ForumDetailVC.h"
+#import "CurrencyDetailVC.h"
 
 @interface QuotesPlatformVC ()<RefreshDelegate>
 //
@@ -275,7 +275,7 @@
     
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@"暂无平台"];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@"暂无行情"];
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -288,15 +288,6 @@
 }
 
 #pragma mark - Events
-- (void)clickForum {
-    
-    ForumDetailVC *detailVC = [ForumDetailVC new];
-    
-    detailVC.toCoin = self.titleModel.ename;
-    detailVC.type = ForumEntrancetypeQuotes;
-    
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
 
 - (void)clickPlatformWithIndex:(NSInteger)index {
 
@@ -446,6 +437,21 @@
     }];
     
     [self.tableView endRefreshingWithNoMoreData_tl];
+}
+
+#pragma mark - RefreshDelegate
+- (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_currentIndex != 0) {
+        
+        PlatformModel *platform = self.platforms[indexPath.row];
+        
+        CurrencyDetailVC *detailVC = [CurrencyDetailVC new];
+        
+        detailVC.symbolID = platform.ID;
+        
+        [self.navigationController pushViewController:detailVC animated:YES];
+    }
 }
 
 - (void)refreshTableViewEventClick:(TLTableView *)refreshTableview selectRowAtIndex:(NSInteger)index {

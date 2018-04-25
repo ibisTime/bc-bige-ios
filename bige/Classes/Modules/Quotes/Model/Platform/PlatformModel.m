@@ -12,28 +12,18 @@
 
 @implementation PlatformModel
 
-/**
- 小写转大写
- */
-- (NSString *)symbol {
++ (NSString *)mj_replacedKeyFromPropertyName121:(NSString *)propertyName {
     
-    return [_symbol uppercaseString];
+    if ([propertyName isEqualToString:@"ID"]) {
+        return @"id";
+    }
+    
+    return propertyName;
 }
 
 - (UIColor *)bgColor {
     
-    CGFloat fluct = [self.percentChange doubleValue];
-    
-    if (fluct > 0) {
-        
-        return kRiseColor;
-        
-    } else if (fluct == 0) {
-        
-        return kHexColor(@"#979797");
-    }
-    
-    return kThemeColor;
+    return [self getPercentColorWithPercent:self.percentChange];
 }
 
 /**
@@ -59,18 +49,7 @@
 
 - (UIColor *)flowBgColor {
     
-    CGFloat fluct = [self.flow_percent_change_24h doubleValue];
-    
-    if (fluct > 0) {
-        
-        return kRiseColor;
-        
-    } else if (fluct == 0) {
-        
-        return kHexColor(@"#979797");
-    }
-    
-    return kThemeColor;
+    return [self getPercentColorWithPercent:self.flow_percent_change_24h];
 }
 
 - (NSString *)tradeVolume {
@@ -107,6 +86,46 @@
 - (NSString *)changeRate {
     
     return [NSNumber mult1:[self.percentChange stringValue] mult2:@"100" scale:2];
+}
+
+/**
+ 获取涨跌颜色
+ */
+- (UIColor *)getPercentColorWithPercent:(NSNumber *)percent {
+    
+    CGFloat fluct = [percent doubleValue];
+    
+    if (fluct > 0) {
+        
+        return kRiseColor;
+        
+    } else if (fluct == 0) {
+        
+        return kHexColor(@"#979797");
+    }
+    
+    return kThemeColor;
+}
+
+/**
+ 获取涨跌幅
+ */
+- (NSString *)getResultWithPercent:(NSNumber *)percent {
+    
+    NSString *priceFluctStr;
+    
+    CGFloat fluct = [percent doubleValue]*100;
+    
+    if (fluct > 0) {
+        
+        priceFluctStr = [NSString stringWithFormat:@"+%.2lf%%", fluct];
+        
+    } else  {
+        
+        priceFluctStr = [NSString stringWithFormat:@"%.2lf%%", fluct];
+    }
+    
+    return priceFluctStr;
 }
 
 @end
