@@ -187,7 +187,7 @@
     //图标
     self.iconIV.backgroundColor = kAppCustomMainColor;
     
-    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.photo convertImageUrl]]
+    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.pic convertImageUrl]]
                    placeholderImage:kImage(@"")];
     //币种名称
     self.currencyNameLbl.text = [platform.symbol uppercaseString];

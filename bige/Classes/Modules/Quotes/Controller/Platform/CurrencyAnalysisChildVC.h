@@ -13,5 +13,9 @@
 @interface CurrencyAnalysisChildVC : BaseViewController
 //
 @property (nonatomic, strong) PlatformModel *platform;
+//索引
+@property (nonatomic, assign) NSInteger index;
+//是否滚动
+@property (nonatomic, assign) BOOL vcCanScroll;
 
 @end

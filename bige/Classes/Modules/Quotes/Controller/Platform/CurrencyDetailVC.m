@@ -23,6 +23,7 @@
 #import "CurrencyTrendMapView.h"
 #import "SelectScrollView.h"
 #import "CurrencyBottomView.h"
+#import "CurrencyInfoTableView.h"
 //C
 #import "CurrencyAnalysisChildVC.h"
 #import "CurrencyExchangeChildVC.h"
@@ -100,6 +101,14 @@
     [self addSubViewController];
     //底部按钮
     [self initBottomView];
+    //添加通知
+    [self addNotification];
+}
+
+#pragma mark - 通知
+- (void)addNotification {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subVCLeaveTop) name:@"SubVCLeaveTop" object:nil];
 }
 
 - (void)initTitleView {
@@ -178,8 +187,26 @@
     
     self.selectSV.selectBlock = ^(NSInteger index) {
         
+        [weakSelf didSelectWithIndex:index];
+
     };
     [self.bgSV addSubview:self.selectSV];
+}
+
+/**
+ 切换标签
+ */
+- (void)didSelectWithIndex:(NSInteger)index {
+    
+    //圈子
+    if (index == 0) {
+        
+        self.selectSV.height = 230;
+        
+    } else {
+        
+        self.selectSV.height = kSuperViewHeight - kBottomInsetHeight;
+    }
 }
 
 - (void)addSubViewController {
@@ -197,7 +224,7 @@
 //
 //                [weakSelf.tableView endRefreshHeader];
 //            };
-//            childVC.index = i;
+            childVC.index = i;
 //            childVC.detailModel = self.detailModel;
             
             childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, self.selectSV.height - 40);
@@ -214,10 +241,10 @@
 //
 //                [weakSelf.tableView endRefreshHeader];
 //            };
-//            childVC.index = i;
+            childVC.index = i;
 //            childVC.toCoin = self.detailModel.code;
-            
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40 - kBottomInsetHeight);
+            childVC.platform = self.platform;
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40 - kBottomInsetHeight - kBottomHeight);
             
             [self addChildViewController:childVC];
             
@@ -231,9 +258,10 @@
 //
 //                [weakSelf.tableView endRefreshHeader];
 //            };
-//            childVC.index = i;
+            childVC.index = i;
 //            //detailModel不为空则是币种
 //            childVC.toCoin = self.detailModel.toCoin;
+            childVC.platform = self.platform;
             childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40 - kBottomInsetHeight);
             
             [self addChildViewController:childVC];
@@ -243,14 +271,14 @@
     }
     
     //转移手势
-//    ForumCircleTableView *tableView = (ForumCircleTableView *)[self.view viewWithTag:1800];
+    CurrencyInfoTableView *tableView = (CurrencyInfoTableView *)[self.view viewWithTag:1802];
+
+    UIPanGestureRecognizer *panGR = tableView.panGestureRecognizer;
+
+    [self.bgSV addGestureRecognizer:panGR];
+
+    self.bgSV.contentSize = CGSizeMake(kScreenWidth, self.selectSV.yy+10000);
 //
-//    UIPanGestureRecognizer *panGR = tableView.panGestureRecognizer;
-//
-//    [self.tableView addGestureRecognizer:panGR];
-//
-//    self.tableView.contentSize = CGSizeMake(kScreenWidth, self.selectScrollView.yy+10000);
-    
     //已加载子控制器
     _isLoad = YES;
 }
@@ -447,6 +475,64 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+#pragma mark - UIScrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat bottomOffset = self.selectSV.y;
+    
+    CGFloat scrollOffset = scrollView.contentOffset.y;
+    
+    //子视图已经到顶部
+    if (
+        scrollOffset >= bottomOffset) {
+        
+        //当视图到达顶部时，使视图悬停
+        scrollView.contentOffset = CGPointMake(0, bottomOffset);
+        
+        if (self.canScroll) {
+            
+            self.canScroll = NO;
+            self.vcCanScroll = YES;
+        }
+        //转移手势
+        TLTableView *tableView = (TLTableView *)[self.view viewWithTag:1800+self.selectSV.selectIndex];
+        
+        UIPanGestureRecognizer *panGR = tableView.panGestureRecognizer;
+        
+        [scrollView addGestureRecognizer:panGR];
+        
+    } else {
+        
+        //处理tableview和scrollView同时滚的问题（当vc不能滚动时，设置scrollView悬停）
+        
+        if (!self.canScroll) {
+            
+            scrollView.contentOffset = CGPointMake(0, bottomOffset);
+        }
+    }
+    
+    self.bgSV.showsVerticalScrollIndicator = _canScroll ? YES: NO;
+    
+}
+
+- (void)setVcCanScroll:(BOOL)vcCanScroll {
+    
+    for (CurrencyAnalysisChildVC *vc in self.childViewControllers) {
+        
+        vc.vcCanScroll = vcCanScroll;
+    }
+    
+    for (CurrencyExchangeChildVC *vc in self.childViewControllers) {
+        
+        vc.vcCanScroll = vcCanScroll;
+    }
+    
+    for (CurrencyInfoChildVC *vc in self.childViewControllers) {
+        
+        vc.vcCanScroll = vcCanScroll;
+    }
 }
 
 - (void)didReceiveMemoryWarning {

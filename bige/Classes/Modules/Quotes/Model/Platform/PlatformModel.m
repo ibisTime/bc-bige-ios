@@ -18,6 +18,9 @@
         return @"id";
     }
     
+    if ([propertyName isEqualToString:@"cpCount"]) {
+        return @"copyCount";
+    }
     return propertyName;
 }
 
@@ -54,31 +57,9 @@
 
 - (NSString *)tradeVolume {
     
-    CGFloat volume = [self.volume doubleValue];
-    NSString *result;
-    
-    if (volume > 1000000000000) {
-        
-        result = [NSString stringWithFormat:@"%.0lft", volume/1000000000000];
-        return result;
-    }
-    
-    if (volume > 1000000000) {
-        
-        result = [NSString stringWithFormat:@"%.0lfb", volume/1000000000];
-        return result;
-    }
-    
-    if (volume > 1000000) {
-        
-        result = [NSString stringWithFormat:@"%.0lfm", volume/1000000];
-        return result;
-    }
-    
-    result = [NSString stringWithFormat:@"%.0lf", volume];
-
-    return result;
+    return [self getNumWithVolume:self.volume];
 }
+
 
 /**
  转换百分比
@@ -127,5 +108,46 @@
     
     return priceFluctStr;
 }
+
+/**
+ 获取币种数量
+ */
+- (NSString *)getNumWithVolume:(NSNumber *)volumeNum {
+    
+    CGFloat volume = [volumeNum doubleValue];
+    
+    if (volumeNum == 0) {
+        
+        return @"-";
+    }
+    
+    NSString *result;
+    
+    if (volume > 1000000000000) {
+        
+        result = [NSString stringWithFormat:@"%.0lft", volume/1000000000000];
+        return result;
+    }
+    
+    if (volume > 1000000000) {
+        
+        result = [NSString stringWithFormat:@"%.0lfb", volume/1000000000];
+        return result;
+    }
+    
+    if (volume > 1000000) {
+        
+        result = [NSString stringWithFormat:@"%.0lfm", volume/1000000];
+        return result;
+    }
+    
+    result = [NSString stringWithFormat:@"%.0lf", volume];
+    
+    return result;
+}
+
+@end
+
+@implementation CoinInfo
 
 @end

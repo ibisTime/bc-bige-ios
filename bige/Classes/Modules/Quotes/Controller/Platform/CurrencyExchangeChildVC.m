@@ -8,7 +8,18 @@
 
 #import "CurrencyExchangeChildVC.h"
 
+//M
+#import "PlatformModel.h"
+//V
+#import "PlatformInfoTableView.h"
+//C
+
 @interface CurrencyExchangeChildVC ()
+//
+@property (nonatomic, strong) PlatformInfoTableView *tableView;
+//
+@property (nonatomic, strong) NSMutableArray <PlatformModel *>*platforms;
+
 
 @end
 
@@ -16,7 +27,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //
+    [self initTableView];
+    //获取当前币种相关的平台列表
+    [self requestPlatformList];
+    
+}
+
+#pragma mark - Init
+- (void)initTableView {
+    
+    self.tableView = [[PlatformInfoTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    self.tableView.tag = 1800 + self.index;
+    [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.edges.mas_equalTo(0);
+    }];
+}
+
+#pragma mark - Data
+- (void)requestPlatformList {
+    
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"628353";
+    helper.parameters[@"symbol"] = self.platform.symbol;
+    helper.parameters[@"toSymbol"] = self.platform.toSymbol;
+    helper.isList = YES;
+    
+    helper.tableView = self.tableView;
+    
+    [helper modelClass:[PlatformModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        weakSelf.platforms = objs;
+        
+        weakSelf.tableView.platforms = objs;
+        
+        [weakSelf.tableView reloadData_tl];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -102,6 +102,13 @@
 		2126900820906E6C005B6B46 /* CurrencyTrendMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126900720906E6C005B6B46 /* CurrencyTrendMapView.m */; };
 		2126900B20908440005B6B46 /* CurrencyTradeMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126900A20908440005B6B46 /* CurrencyTradeMapView.m */; };
 		2126900E2090A8A1005B6B46 /* QuotesChangeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126900D2090A8A1005B6B46 /* QuotesChangeView.m */; };
+		2126901320916FB3005B6B46 /* PlatformInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126901220916FB3005B6B46 /* PlatformInfoTableView.m */; };
+		21269017209170E1005B6B46 /* PlatformInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 21269016209170E1005B6B46 /* PlatformInfoCell.m */; };
+		2126901A20917934005B6B46 /* PlatformInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126901920917934005B6B46 /* PlatformInfoHeaderView.m */; };
+		2126901E2091B485005B6B46 /* CurrencyInfoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126901D2091B485005B6B46 /* CurrencyInfoHeaderView.m */; };
+		212690212091C867005B6B46 /* CurrencyInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690202091C867005B6B46 /* CurrencyInfoTableView.m */; };
+		212690242091C896005B6B46 /* CurrencyInfoCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690232091C896005B6B46 /* CurrencyInfoCell1.m */; };
+		212690272091C8AD005B6B46 /* CurrencyInfoCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690262091C8AD005B6B46 /* CurrencyInfoCell2.m */; };
 		21288241205771EB00A57A5A /* QuotesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21288240205771EB00A57A5A /* QuotesManager.m */; };
 		21288247205776F000A57A5A /* OptionalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21288246205776F000A57A5A /* OptionalTableView.m */; };
 		2128824A2057774900A57A5A /* OptionalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882492057774900A57A5A /* OptionalCell.m */; };
@@ -480,6 +487,20 @@
 		2126900A20908440005B6B46 /* CurrencyTradeMapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyTradeMapView.m; sourceTree = "<group>"; };
 		2126900C2090A8A1005B6B46 /* QuotesChangeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesChangeView.h; sourceTree = "<group>"; };
 		2126900D2090A8A1005B6B46 /* QuotesChangeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesChangeView.m; sourceTree = "<group>"; };
+		2126901120916FB3005B6B46 /* PlatformInfoTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformInfoTableView.h; sourceTree = "<group>"; };
+		2126901220916FB3005B6B46 /* PlatformInfoTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformInfoTableView.m; sourceTree = "<group>"; };
+		21269015209170E1005B6B46 /* PlatformInfoCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformInfoCell.h; sourceTree = "<group>"; };
+		21269016209170E1005B6B46 /* PlatformInfoCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformInfoCell.m; sourceTree = "<group>"; };
+		2126901820917934005B6B46 /* PlatformInfoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlatformInfoHeaderView.h; sourceTree = "<group>"; };
+		2126901920917934005B6B46 /* PlatformInfoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlatformInfoHeaderView.m; sourceTree = "<group>"; };
+		2126901C2091B485005B6B46 /* CurrencyInfoHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyInfoHeaderView.h; sourceTree = "<group>"; };
+		2126901D2091B485005B6B46 /* CurrencyInfoHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyInfoHeaderView.m; sourceTree = "<group>"; };
+		2126901F2091C867005B6B46 /* CurrencyInfoTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyInfoTableView.h; sourceTree = "<group>"; };
+		212690202091C867005B6B46 /* CurrencyInfoTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyInfoTableView.m; sourceTree = "<group>"; };
+		212690222091C896005B6B46 /* CurrencyInfoCell1.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyInfoCell1.h; sourceTree = "<group>"; };
+		212690232091C896005B6B46 /* CurrencyInfoCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyInfoCell1.m; sourceTree = "<group>"; };
+		212690252091C8AD005B6B46 /* CurrencyInfoCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyInfoCell2.h; sourceTree = "<group>"; };
+		212690262091C8AD005B6B46 /* CurrencyInfoCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyInfoCell2.m; sourceTree = "<group>"; };
 		2128823F205771EB00A57A5A /* QuotesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesManager.h; sourceTree = "<group>"; };
 		21288240205771EB00A57A5A /* QuotesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesManager.m; sourceTree = "<group>"; };
 		21288245205776F000A57A5A /* OptionalTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionalTableView.h; sourceTree = "<group>"; };
@@ -1555,6 +1576,62 @@
 			path = Infomation;
 			sourceTree = "<group>";
 		};
+		2126900F20916F4D005B6B46 /* List */ = {
+			isa = PBXGroup;
+			children = (
+				2124BE8C20623EAA00CB79E8 /* PlatformTableView.h */,
+				2124BE8D20623EAA00CB79E8 /* PlatformTableView.m */,
+				2124BE98206240AC00CB79E8 /* PlatformCell.h */,
+				2124BE99206240AC00CB79E8 /* PlatformCell.m */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		2126901020916F5D005B6B46 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				21268FF120901956005B6B46 /* CurrencyInfoView.h */,
+				21268FF220901956005B6B46 /* CurrencyInfoView.m */,
+				21268FF72090202C005B6B46 /* CurrencyBottomView.h */,
+				21268FF82090202C005B6B46 /* CurrencyBottomView.m */,
+				2126900620906E6C005B6B46 /* CurrencyTrendMapView.h */,
+				2126900720906E6C005B6B46 /* CurrencyTrendMapView.m */,
+				2126900920908440005B6B46 /* CurrencyTradeMapView.h */,
+				2126900A20908440005B6B46 /* CurrencyTradeMapView.m */,
+				2126900C2090A8A1005B6B46 /* QuotesChangeView.h */,
+				2126900D2090A8A1005B6B46 /* QuotesChangeView.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		2126901420917082005B6B46 /* PlatformInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2126901120916FB3005B6B46 /* PlatformInfoTableView.h */,
+				2126901220916FB3005B6B46 /* PlatformInfoTableView.m */,
+				21269015209170E1005B6B46 /* PlatformInfoCell.h */,
+				21269016209170E1005B6B46 /* PlatformInfoCell.m */,
+				2126901820917934005B6B46 /* PlatformInfoHeaderView.h */,
+				2126901920917934005B6B46 /* PlatformInfoHeaderView.m */,
+			);
+			path = PlatformInfo;
+			sourceTree = "<group>";
+		};
+		2126901B2091B45C005B6B46 /* CurrencyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2126901C2091B485005B6B46 /* CurrencyInfoHeaderView.h */,
+				2126901D2091B485005B6B46 /* CurrencyInfoHeaderView.m */,
+				2126901F2091C867005B6B46 /* CurrencyInfoTableView.h */,
+				212690202091C867005B6B46 /* CurrencyInfoTableView.m */,
+				212690222091C896005B6B46 /* CurrencyInfoCell1.h */,
+				212690232091C896005B6B46 /* CurrencyInfoCell1.m */,
+				212690252091C8AD005B6B46 /* CurrencyInfoCell2.h */,
+				212690262091C8AD005B6B46 /* CurrencyInfoCell2.m */,
+			);
+			path = CurrencyInfo;
+			sourceTree = "<group>";
+		};
 		21288242205776C300A57A5A /* Optional */ = {
 			isa = PBXGroup;
 			children = (
@@ -1573,20 +1650,10 @@
 		21288243205776CD00A57A5A /* Platform */ = {
 			isa = PBXGroup;
 			children = (
-				2124BE8C20623EAA00CB79E8 /* PlatformTableView.h */,
-				2124BE8D20623EAA00CB79E8 /* PlatformTableView.m */,
-				2124BE98206240AC00CB79E8 /* PlatformCell.h */,
-				2124BE99206240AC00CB79E8 /* PlatformCell.m */,
-				21268FF120901956005B6B46 /* CurrencyInfoView.h */,
-				21268FF220901956005B6B46 /* CurrencyInfoView.m */,
-				21268FF72090202C005B6B46 /* CurrencyBottomView.h */,
-				21268FF82090202C005B6B46 /* CurrencyBottomView.m */,
-				2126900620906E6C005B6B46 /* CurrencyTrendMapView.h */,
-				2126900720906E6C005B6B46 /* CurrencyTrendMapView.m */,
-				2126900920908440005B6B46 /* CurrencyTradeMapView.h */,
-				2126900A20908440005B6B46 /* CurrencyTradeMapView.m */,
-				2126900C2090A8A1005B6B46 /* QuotesChangeView.h */,
-				2126900D2090A8A1005B6B46 /* QuotesChangeView.m */,
+				2126901B2091B45C005B6B46 /* CurrencyInfo */,
+				2126901420917082005B6B46 /* PlatformInfo */,
+				2126901020916F5D005B6B46 /* Detail */,
+				2126900F20916F4D005B6B46 /* List */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -2858,6 +2925,7 @@
 				212882652057A11100A57A5A /* MineTableView.m in Sources */,
 				21AC59881FDE891B00F19DE8 /* SegmentUnil.m in Sources */,
 				21111BB71F8B5F2C0021B3FE /* WTReTextField.m in Sources */,
+				212690242091C896005B6B46 /* CurrencyInfoCell1.m in Sources */,
 				21111BB81F8B5F2C0021B3FE /* WTReParser.m in Sources */,
 				217BDAE62068C64000E17DEE /* ForumCommentModel.m in Sources */,
 				21EF0B3F2064CEB2008EA865 /* ForumCircleChildVC.m in Sources */,
@@ -2906,6 +2974,7 @@
 				21AC595A1FDE804500F19DE8 /* UILabel+Extension.m in Sources */,
 				2124BE572060A91500CB79E8 /* InformationDetailTableView.m in Sources */,
 				21CFFB2620566D9A00D245ED /* InformationListTableView.m in Sources */,
+				2126901A20917934005B6B46 /* PlatformInfoHeaderView.m in Sources */,
 				2124BE9A206240AC00CB79E8 /* PlatformCell.m in Sources */,
 				21288247205776F000A57A5A /* OptionalTableView.m in Sources */,
 				21111BCF1F8B5F2C0021B3FE /* DetailWebView.m in Sources */,
@@ -2941,6 +3010,7 @@
 				21AC593D1FDE7A1B00F19DE8 /* TLTextView.m in Sources */,
 				21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */,
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
+				2126901320916FB3005B6B46 /* PlatformInfoTableView.m in Sources */,
 				21EF0B7A20666BF7008EA865 /* MyCommentModel.m in Sources */,
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				214593F5206B2B270006E238 /* HomePageInfoCell.m in Sources */,
@@ -2980,6 +3050,7 @@
 				212FEEAB20688FF90002F293 /* ForumDetailCell.m in Sources */,
 				217BDAF62069483A00E17DEE /* CircleCommentTableView.m in Sources */,
 				21268FD5208DB60C005B6B46 /* TLUserRegisterVC.m in Sources */,
+				212690212091C867005B6B46 /* CurrencyInfoTableView.m in Sources */,
 				21268FF320901956005B6B46 /* CurrencyInfoView.m in Sources */,
 				21CFFB1720566B7800D245ED /* InformationListCell.m in Sources */,
 				21EF0B86206682D6008EA865 /* MyCommentDetailCell.m in Sources */,
@@ -2988,6 +3059,7 @@
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				21EF0B4F2064D2A5008EA865 /* ForumInfoTableView.m in Sources */,
 				2126900B20908440005B6B46 /* CurrencyTradeMapView.m in Sources */,
+				212690272091C8AD005B6B46 /* CurrencyInfoCell2.m in Sources */,
 				21268FEB208ED14D005B6B46 /* InfoListVC.m in Sources */,
 				2126900E2090A8A1005B6B46 /* QuotesChangeView.m in Sources */,
 				21268FFC209061B6005B6B46 /* CurrencyAnalysisChildVC.m in Sources */,
@@ -3001,10 +3073,12 @@
 				21AC58901FDE73FE00F19DE8 /* TLUser.m in Sources */,
 				2121E18B2067DA9C005D6868 /* SearchForumVC.m in Sources */,
 				21AC597D1FDE823C00F19DE8 /* NSString+CGSize.m in Sources */,
+				21269017209170E1005B6B46 /* PlatformInfoCell.m in Sources */,
 				21CFFB1D20566BC500D245ED /* NewsFlashListCell.m in Sources */,
 				219CF5302072550300012F68 /* SGQRCodeTool.m in Sources */,
 				219CF5272072550300012F68 /* ScanSuccessJumpVC.m in Sources */,
 				2124BEE5206394B900CB79E8 /* UserEditModel.m in Sources */,
+				2126901E2091B485005B6B46 /* CurrencyInfoHeaderView.m in Sources */,
 				21F82C9D1F17719D0019B176 /* BaseWKWebViewController.m in Sources */,
 				21AC597F1FDE823C00F19DE8 /* NSString+Check.m in Sources */,
 				2128825B20579D8600A57A5A /* ForumListTableView.m in Sources */,

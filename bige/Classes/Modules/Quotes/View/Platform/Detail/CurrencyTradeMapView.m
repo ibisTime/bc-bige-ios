@@ -73,6 +73,7 @@
             
             [weakSelf setSubViewLayoutWithHeight:height];
         };
+        
         [self addSubview:_tradeView];
     }
     return _tradeView;
