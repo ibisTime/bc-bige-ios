@@ -119,7 +119,7 @@
         
     }];
     //点击评论
-    UIButton *commentBtn = [UIButton buttonWithTitle:@"说出你的看法"
+    UIButton *commentBtn = [UIButton buttonWithTitle:@"写评论..."
                                           titleColor:kHexColor(@"#9E9E9E")
                                      backgroundColor:kHexColor(@"E5E5E5")
                                            titleFont:12.0
@@ -149,7 +149,7 @@
     
     self.tableView.scrollEnabled = NO;
     
-    self.inputTV.commentTV.placholder = @"说出你的看法";
+    self.inputTV.commentTV.placholder = @"写评论...";
     
     [self.inputTV show];
 }

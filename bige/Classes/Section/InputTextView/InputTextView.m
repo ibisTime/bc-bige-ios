@@ -106,7 +106,7 @@
     self.commentTV.placeholderLbl.origin = CGPointMake(15, 15);
     self.commentTV.placeholderLbl.font = Font(14.0);
     self.commentTV.textContainerInset = UIEdgeInsetsMake(17, 10, 0, 0);
-    self.commentTV.placholder = @"说出你的看法";
+    self.commentTV.placholder = @"写评论...";
     
     [self.bgView addSubview:self.commentTV];
     

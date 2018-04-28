@@ -98,7 +98,7 @@
                                                 textColor:kTextColor2
                                                      font:14.0];
     
-    textLbl.text = @"更多资讯请下载\n币格财经APP";
+    textLbl.text = @"更多资讯下载币格财经";
     textLbl.numberOfLines = 0;
     textLbl.textAlignment = NSTextAlignmentCenter;
     
@@ -110,36 +110,38 @@
 
 - (void)setSubviewLayout {
     
-    //内容
-    [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.timeIconIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@(15));
-        make.top.equalTo(self.iconIV.mas_bottom).offset(25);
-        make.width.equalTo(@(kScreenWidth - 30));
+        make.left.equalTo(@25);
+        make.centerY.equalTo(self.timeLbl.mas_centerY);
     }];
     //时间
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.contentLbl.mas_right);
-        make.top.equalTo(self.contentLbl.mas_bottom).offset(25);
+        make.left.equalTo(self.timeIconIV.mas_right).offset(10);
+        make.top.equalTo(self.iconIV.mas_bottom).offset(20);
     }];
-    [self.timeIconIV mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+    //内容
+    [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.timeLbl.mas_left).offset(-10);
-        make.centerY.equalTo(self.timeLbl.mas_centerY);
+        make.left.equalTo(@25);
+        make.top.equalTo(self.timeLbl.mas_bottom).offset(20);
+        make.width.equalTo(@(kScreenWidth - 50));
     }];
+    
     //二维码
     [self.qrCodeIV mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@15);
+        make.right.equalTo(self.contentLbl.mas_right).offset(-10);
         make.top.equalTo(self.contentLbl.mas_bottom).offset(135);
-        make.width.height.equalTo(@70);
+        make.width.height.equalTo(@75);
     }];
     //text
     [self.textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.centerY.equalTo(self.qrCodeIV.mas_centerY);
-        make.left.equalTo(self.qrCodeIV.mas_right).offset(10);
+        make.top.equalTo(self.qrCodeIV.mas_bottom).offset(10);
+        make.right.equalTo(self.contentLbl.mas_right);
     }];
 }
 

@@ -107,10 +107,10 @@ static NSString *informationListCellID = @"InformationListCell";
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
-        
-        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
-    }
+//    if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshTableView:didSelectRowAtIndexPath:)]) {
+//
+//        [self.refreshDelegate refreshTableView:self didSelectRowAtIndexPath:indexPath];
+//    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,7 +154,7 @@ static NSString *informationListCellID = @"InformationListCell";
         
         if (self.newestComments.count == 0) {
             
-            return 0.1;
+            return 175;
         }
     }
     
@@ -176,15 +176,9 @@ static NSString *informationListCellID = @"InformationListCell";
             
             return [UIView new];
         }
-    } else if (section == 2) {
-        
-        if (self.newestComments.count == 0) {
-            
-            return [UIView new];
-        }
     }
     
-    NSArray *titleArr = @[@"相关文章", @"热门评论", @"最新评论"];
+    NSArray *titleArr = @[@"相关文章", @"热门评论", @"全部评论"];
 
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 55)];
 
@@ -213,6 +207,32 @@ static NSString *informationListCellID = @"InformationListCell";
         make.left.equalTo(@15);
         make.centerY.equalTo(@0);
     }];
+    
+    if (section == 2) {
+        
+        if (self.newestComments.count == 0) {
+            
+            headerView.height = 175;
+            
+            UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 55, kScreenWidth, 120)];
+            
+            whiteView.backgroundColor = kWhiteColor;
+            
+            [headerView addSubview:whiteView];
+            UILabel *textLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                       textColor:kTextColor
+                                                            font:13.0];
+            
+            textLbl.text = @"你对这条资讯，有什么看法?";
+            
+            [whiteView addSubview:textLbl];
+            [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.center.equalTo(@0);
+            }];
+            
+        }
+    }
     
     return headerView;
 }

@@ -17,12 +17,14 @@
 #import "NSString+Date.h"
 #import "UIView+Responder.h"
 #import "NSString+Check.h"
-//Extension
-//M
+#import "NSString+Extension.h"
+#import <UIImageView+WebCache.h>
 //V
 #import "DetailWebView.h"
 //C
 #import "BaseViewController.h"
+
+#define kHeadIconW 35
 
 @interface InformationDetailHeaderView()
 //标题
@@ -33,7 +35,8 @@
 @property (nonatomic, strong) BaseView *sourceView;
 //作者
 @property (nonatomic, strong) UILabel *authorLbl;
-@property (nonatomic, strong) UILabel *sourceLbl;
+//头像
+@property (nonatomic, strong) UIImageView *photoIV;
 //时间
 @property (nonatomic, strong) UILabel *timeLbl;
 //点赞
@@ -54,9 +57,9 @@
         
         [self initSubviews];
         //来源
-        [self initSourceView];
+//        [self initSourceView];
         //分享
-        [self initShareView];
+//        [self initShareView];
     }
     return self;
 }
@@ -91,16 +94,16 @@
     [self initSourceView];
     [self addSubview:self.detailView];
     //点赞
-    self.zanBtn = [UIButton buttonWithImageName:@"圆未点赞"];
-    
-    [self.zanBtn addTarget:self action:@selector(clickZan:) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:self.zanBtn];
-    //点赞数
-    self.zanNumLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                             textColor:kTextColor
-                                                  font:17.0];
-    
-    [self addSubview:self.zanNumLbl];
+//    self.zanBtn = [UIButton buttonWithImageName:@"圆未点赞"];
+//
+//    [self.zanBtn addTarget:self action:@selector(clickZan:) forControlEvents:UIControlEventTouchUpInside];
+//    [self addSubview:self.zanBtn];
+//    //点赞数
+//    self.zanNumLbl = [UILabel labelWithBackgroundColor:kClearColor
+//                                             textColor:kTextColor
+//                                                  font:17.0];
+//
+//    [self addSubview:self.zanNumLbl];
 }
 
 - (void)initSourceView {
@@ -108,9 +111,23 @@
     //来源
     self.sourceView = [[BaseView alloc] initWithFrame:CGRectZero];
     
-    self.sourceView.backgroundColor = kHexColor(@"#F7F7F7");
+//    self.sourceView.backgroundColor = kHexColor(@"#F7F7F7");
     
     [self addSubview:self.sourceView];
+    //头像
+    self.photoIV = [[UIImageView alloc] init];
+    
+    self.photoIV.layer.cornerRadius = kHeadIconW/2.0;
+    self.photoIV.layer.masksToBounds = YES;
+    self.photoIV.backgroundColor = kClearColor;
+    self.photoIV.contentMode = UIViewContentModeScaleAspectFill;
+    [self addSubview:self.photoIV];;
+    [self.photoIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@15);
+        make.top.equalTo(self.titleLbl.mas_bottom).offset(20);
+        make.width.height.equalTo(@35);
+    }];
     //作者
     self.authorLbl = [UILabel labelWithBackgroundColor:kClearColor
                                              textColor:kTextColor2
@@ -119,19 +136,8 @@
     [self.sourceView addSubview:self.authorLbl];
     [self.authorLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(@10);
-        make.top.equalTo(@13);
-    }];
-    //来源
-    self.sourceLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                             textColor:kTextColor2
-                                                  font:15.0];
-    
-    [self.sourceView addSubview:self.sourceLbl];
-    [self.sourceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(self.authorLbl.mas_left);
-        make.top.equalTo(self.authorLbl.mas_bottom).offset(10);
+        make.left.equalTo(self.photoIV.mas_right).offset(15);
+        make.centerY.equalTo(self.photoIV.mas_centerY);
     }];
     //时间
     self.timeLbl = [UILabel labelWithBackgroundColor:kClearColor
@@ -141,8 +147,8 @@
     [self.sourceView addSubview:self.timeLbl];
     [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(@(-10));
-        make.top.equalTo(self.authorLbl.mas_top);
+        make.right.equalTo(@(-15));
+        make.centerY.equalTo(self.photoIV.mas_centerY);
     }];
 }
 
@@ -240,7 +246,7 @@
         make.left.equalTo(@10);
         make.top.equalTo(self.titleLbl.mas_bottom).offset(20);
         make.width.equalTo(@(kScreenWidth - 20));
-        make.height.equalTo(@70);
+        make.height.equalTo(@40);
     }];
     //内容
     [self.detailView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -251,31 +257,31 @@
         make.height.equalTo(@(height));
     }];
     //点赞
-    [self.zanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(self.detailView.mas_bottom).offset(55);
-        make.width.height.equalTo(@45);
-    }];
-    //点赞数
-    [self.zanNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.centerX.equalTo(@0);
-        make.top.equalTo(self.zanBtn.mas_bottom).offset(5);
-    }];
-    //分享
-    [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@0);
-        make.top.equalTo(self.zanNumLbl.mas_bottom).offset(50);
-        make.height.equalTo(@40);
-        make.width.equalTo(@(kScreenWidth));
-    }];
+//    [self.zanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(@0);
+//        make.top.equalTo(self.detailView.mas_bottom).offset(55);
+//        make.width.height.equalTo(@45);
+//    }];
+//    //点赞数
+//    [self.zanNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.centerX.equalTo(@0);
+//        make.top.equalTo(self.zanBtn.mas_bottom).offset(5);
+//    }];
+//    //分享
+//    [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.equalTo(@0);
+//        make.top.equalTo(self.zanNumLbl.mas_bottom).offset(50);
+//        make.height.equalTo(@40);
+//        make.width.equalTo(@(kScreenWidth));
+//    }];
     
     //
     [self layoutIfNeeded];
     
-    self.height = self.shareView.yy + 10;
+    self.height = self.detailView.yy + 10;
     self.contentSize = CGSizeMake(kScreenWidth, self.height);
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"HeaderViewDidLayout" object:nil];
@@ -360,8 +366,9 @@
     
     [self.titleLbl labelWithTextString:detailModel.title lineSpace:5];
     NSString *auther = [detailModel.auther valid] ? detailModel.auther: @"- -";
+    [self.photoIV sd_setImageWithURL:[NSURL URLWithString:[detailModel.autherPic convertImageUrl]]
+                    placeholderImage:USER_PLACEHOLDER_SMALL];
     self.authorLbl.text = [NSString stringWithFormat:@"作者: %@", auther];
-    self.sourceLbl.text = [NSString stringWithFormat:@"来自: %@", detailModel.source];
     self.timeLbl.text = [detailModel.showDatetime convertToDetailDate];
     NSString *image = [detailModel.isPoint isEqualToString:@"0"] ? @"圆未点赞": @"圆点赞";
     [self.zanBtn setImage:kImage(image) forState:UIControlStateNormal];

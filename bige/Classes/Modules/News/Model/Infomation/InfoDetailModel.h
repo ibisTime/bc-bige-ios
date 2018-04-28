@@ -38,6 +38,8 @@
 @property (nonatomic, copy) NSString *auther;
 //来源
 @property (nonatomic, copy) NSString *source;
+//头像
+@property (nonatomic, copy) NSString *autherPic;
 //内容
 @property (nonatomic, copy) NSString *content;
 //toCoin

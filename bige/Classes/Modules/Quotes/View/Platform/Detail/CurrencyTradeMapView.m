@@ -7,6 +7,9 @@
 //
 
 #import "CurrencyTradeMapView.h"
+//Macro
+#import "TLUIHeader.h"
+#import "AppColorMacro.h"
 //Manager
 #import "AppConfig.h"
 //Category
@@ -14,7 +17,7 @@
 //V
 #import "DetailWebView.h"
 
-@interface CurrencyTradeMapView()
+@interface CurrencyTradeMapView()<UIScrollViewDelegate>
 
 //买卖实图
 @property (nonatomic, strong) DetailWebView *tradeView;
@@ -36,6 +39,7 @@
 - (void)initSubviews {
     
     self.backgroundColor = kWhiteColor;
+    self.delegate = self;
     //买
     UILabel *buyLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                     textColor:kTextColor4
@@ -101,4 +105,30 @@
     [self.tradeView loadRequestWithString:html];
 }
 
+#pragma mark - UIScrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    CGFloat scrollOffset = scrollView.contentOffset.y;
+    
+    if (!self.vcCanScroll) {
+        //处理tableview和scrollView同时滚的问题（当vc不能滚动时，设置scrollView偏移量为0）
+        scrollView.contentOffset = CGPointZero;
+    }
+    
+    if (scrollOffset < 0) {
+        
+        //偏移量小于等于零说明tableview到顶了
+        self.vcCanScroll = NO;
+        
+        scrollView.contentOffset = CGPointZero;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SubVCLeaveTop" object:nil];
+    }
+}
+
+//tableview和scrollView可以同时滚动,解决手势冲突问题
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    
+    return YES;
+}
 @end

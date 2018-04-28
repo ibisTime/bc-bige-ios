@@ -75,6 +75,32 @@
         make.top.equalTo(@15);
     }];
     
+    //底部
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, 190, kScreenWidth, 30)];
+    
+    [self addSubview:bottomView];
+    //topLine
+    UIView *topLine = [[UIView alloc] init];
+    
+    topLine.backgroundColor = kLineColor;
+    
+    [bottomView addSubview:topLine];
+    [topLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.top.equalTo(@0);
+        make.height.equalTo(@0.5);
+        
+    }];
+    //箭头
+    UIButton *arrowBtn = [UIButton buttonWithImageName:@"更多-灰色"];
+    [arrowBtn addTarget:self action:@selector(clickArrow) forControlEvents:UIControlEventTouchUpInside];
+    [bottomView addSubview:arrowBtn];
+    [arrowBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(@0);
+        make.width.height.equalTo(@30);
+        make.centerY.equalTo(@0);
+    }];
 }
 
 - (DetailWebView *)trendView {
@@ -100,6 +126,15 @@
 - (void)setSubViewLayoutWithHeight:(CGFloat)height {
     
     
+}
+
+#pragma mark - Events
+- (void)clickArrow {
+    
+    if (self.arrowEventBlock) {
+        
+        self.arrowEventBlock();
+    }
 }
 
 #pragma mark - Setting

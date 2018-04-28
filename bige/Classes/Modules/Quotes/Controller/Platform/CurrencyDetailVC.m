@@ -8,15 +8,11 @@
 
 #import "CurrencyDetailVC.h"
 
-//Macro
-//Framework
 //Category
 #import "UILabel+Extension.h"
-//Extension
 //M
 #import "PlatformModel.h"
 #import "PlatformTitleModel.h"
-
 //V
 #import "QuotesChangeView.h"
 #import "CurrencyInfoView.h"
@@ -24,10 +20,12 @@
 #import "SelectScrollView.h"
 #import "CurrencyBottomView.h"
 #import "CurrencyInfoTableView.h"
+#import "SetWarningView.h"
 //C
 #import "CurrencyAnalysisChildVC.h"
 #import "CurrencyExchangeChildVC.h"
 #import "CurrencyInfoChildVC.h"
+#import "CurrencyKLineVC.h"
 
 #define kBottomHeight 50
 
@@ -44,6 +42,8 @@
 @property (nonatomic, strong) CurrencyTrendMapView *trendView;
 //底部按钮
 @property (nonatomic, strong) CurrencyBottomView *bottomView;
+//设置预警
+@property (nonatomic, strong) SetWarningView *warningView;
 //币种信息
 @property (nonatomic, strong) PlatformModel *platform;
 //平台
@@ -83,6 +83,16 @@
         [self.view addSubview:_changeView];
     }
     return _changeView;
+}
+
+- (SetWarningView *)warningView {
+    
+    if (!_warningView) {
+        
+        _warningView = [[SetWarningView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+        
+    }
+    return _warningView;
 }
 
 - (void)initSubviews {
@@ -160,6 +170,7 @@
 - (void)initScrollView {
     
     self.canScroll = YES;
+    self.bgSV.delegate = self;
     self.bgSV.height = kSuperViewHeight - kBottomHeight - kBottomInsetHeight;
 }
 
@@ -172,7 +183,18 @@
 
 - (void)initTrendView {
     
-    self.trendView = [[CurrencyTrendMapView alloc] initWithFrame:CGRectMake(0, self.infoView.yy + 10, kScreenWidth, 190)];
+    BaseWeakSelf;
+    
+    self.trendView = [[CurrencyTrendMapView alloc] initWithFrame:CGRectMake(0, self.infoView.yy + 10, kScreenWidth, 220)];
+    
+    self.trendView.arrowEventBlock = ^{
+        
+        CurrencyKLineVC *kLineVC = [CurrencyKLineVC new];
+        
+        kLineVC.symbolID = weakSelf.symbolID;
+        
+        [weakSelf.navigationController pushViewController:kLineVC animated:YES];
+    };
     
     [self.bgSV addSubview:self.trendView];
 }
@@ -191,6 +213,7 @@
 
     };
     [self.bgSV addSubview:self.selectSV];
+    
 }
 
 /**
@@ -205,8 +228,10 @@
         
     } else {
         
-        self.selectSV.height = kSuperViewHeight - kBottomInsetHeight;
+        self.selectSV.height = kSuperViewHeight - kBottomInsetHeight - kBottomHeight;
     }
+    
+    self.bgSV.contentSize = CGSizeMake(kScreenWidth, self.selectSV.yy);
 }
 
 - (void)addSubViewController {
@@ -225,9 +250,7 @@
 //                [weakSelf.tableView endRefreshHeader];
 //            };
             childVC.index = i;
-//            childVC.detailModel = self.detailModel;
-            
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, self.selectSV.height - 40);
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, 230);
             
             [self addChildViewController:childVC];
             
@@ -242,7 +265,6 @@
 //                [weakSelf.tableView endRefreshHeader];
 //            };
             childVC.index = i;
-//            childVC.toCoin = self.detailModel.code;
             childVC.platform = self.platform;
             childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40 - kBottomInsetHeight - kBottomHeight);
             
@@ -259,10 +281,8 @@
 //                [weakSelf.tableView endRefreshHeader];
 //            };
             childVC.index = i;
-//            //detailModel不为空则是币种
-//            childVC.toCoin = self.detailModel.toCoin;
             childVC.platform = self.platform;
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40 - kBottomInsetHeight);
+            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40 - kBottomInsetHeight - kBottomHeight);
             
             [self addChildViewController:childVC];
             
@@ -270,6 +290,9 @@
         }
     }
     
+    _selectSV.height = 230;
+    self.bgSV.contentSize = CGSizeMake(kScreenWidth, self.selectSV.yy);
+
     //转移手势
     CurrencyInfoTableView *tableView = (CurrencyInfoTableView *)[self.view viewWithTag:1802];
 
@@ -277,7 +300,6 @@
 
     [self.bgSV addGestureRecognizer:panGR];
 
-    self.bgSV.contentSize = CGSizeMake(kScreenWidth, self.selectSV.yy+10000);
 //
     //已加载子控制器
     _isLoad = YES;
@@ -306,7 +328,9 @@
         case BottomEventTypeEarlyWarning:
         {
             
-            
+            self.warningView.platform = self.platform;
+
+            [self.warningView show];
         }break;
             
         case BottomEventTypeFollow:
@@ -496,12 +520,16 @@
             self.canScroll = NO;
             self.vcCanScroll = YES;
         }
-        //转移手势
-        TLTableView *tableView = (TLTableView *)[self.view viewWithTag:1800+self.selectSV.selectIndex];
         
-        UIPanGestureRecognizer *panGR = tableView.panGestureRecognizer;
-        
-        [scrollView addGestureRecognizer:panGR];
+        if (self.selectSV.selectIndex != 0) {
+            
+            //转移手势
+            TLTableView *tableView = (TLTableView *)[self.view viewWithTag:1800+self.selectSV.selectIndex];
+            
+            UIPanGestureRecognizer *panGR = tableView.panGestureRecognizer;
+            
+            [scrollView addGestureRecognizer:panGR];
+        }
         
     } else {
         

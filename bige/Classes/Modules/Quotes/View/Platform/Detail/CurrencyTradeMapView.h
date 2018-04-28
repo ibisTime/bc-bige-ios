@@ -6,15 +6,17 @@
 //  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
-#import "BaseView.h"
+#import <UIKit/UIKit.h>
 //M
 #import "PlatformModel.h"
 
 /**
  买卖实图
  */
-@interface CurrencyTradeMapView : BaseView
+@interface CurrencyTradeMapView : UIScrollView
 //币种信息
 @property (nonatomic, strong) PlatformModel *platform;
+//vc是否可滚动
+@property (nonatomic, assign) BOOL vcCanScroll;
 
 @end

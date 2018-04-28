@@ -1,8 +1,8 @@
 //
-//  CurrencyTrendMapView.h
+//  CurrencyKLineMapView.h
 //  bige
 //
-//  Created by 蔡卓越 on 2018/4/25.
+//  Created by 蔡卓越 on 2018/4/27.
 //  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
@@ -10,13 +10,13 @@
 
 //M
 #import "PlatformModel.h"
-
 /**
- 趋势图
+ K线图
  */
-@interface CurrencyTrendMapView : BaseView
+@interface CurrencyKLineMapView : BaseView
 //币种信息
 @property (nonatomic, strong) PlatformModel *platform;
-@property (nonatomic, copy) void(^arrowEventBlock)(void);
+//屏幕横屏
+@property (nonatomic, copy) void(^horizontalScreenBlock)(void);
 
 @end

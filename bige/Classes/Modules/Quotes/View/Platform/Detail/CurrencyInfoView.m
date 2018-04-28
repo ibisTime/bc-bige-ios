@@ -7,14 +7,10 @@
 //
 
 #import "CurrencyInfoView.h"
-//Macro
-//Framework
 //Category
 #import "NSNumber+Extension.h"
-//Extension
-//M
 //V
-//C
+#import "QuotesDataView.h"
 
 @interface CurrencyInfoView()
 //币种名称
@@ -37,6 +33,8 @@
 @property (nonatomic, strong) UILabel *marketVolumeLbl;
 //关注量
 @property (nonatomic, strong) UILabel *followNumLbl;
+//行情数据
+@property (nonatomic, strong) QuotesDataView *dataView;
 
 @end
 
@@ -52,6 +50,15 @@
 }
 
 #pragma mark - Init
+- (QuotesDataView *)dataView {
+    
+    if (!_dataView) {
+        
+        _dataView = [[QuotesDataView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    }
+    return _dataView;
+}
+
 - (void)initSubviews {
     
     self.backgroundColor = kWhiteColor;
@@ -110,6 +117,20 @@
                                                     font:11.0];
     
     [self addSubview:self.marketVolumeLbl];
+    //行情数据
+    CGFloat btnW = kScreenWidth/2.0;
+    
+    UIButton *quotesDataBtn = [UIButton buttonWithImageName:@""];
+    
+    [quotesDataBtn addTarget:self action:@selector(lookQuotesData) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:quotesDataBtn];
+    [quotesDataBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@(btnW));
+        make.top.equalTo(@0);
+        make.width.equalTo(@(btnW));
+        make.height.equalTo(@(self.height));
+    }];
     //布局
     [self setSubviewLayout];
 }
@@ -210,6 +231,17 @@
     self.endPriceLbl.text = [NSString stringWithFormat:@"收:%@", [platform.close convertToRealMoneyWithNum:8]];
     //市值
     self.marketVolumeLbl.text = [NSString stringWithFormat:@"市值:%@", [platform.maxMarketCapCny convertToRealMoneyWithNum:8]];
+}
+
+#pragma mark - Events
+
+/**
+ 查看行情数据
+ */
+- (void)lookQuotesData {
+    
+    self.dataView.platform = self.platform;
+    [self.dataView show];
 }
 
 @end

@@ -47,6 +47,16 @@
     }];
 }
 
+#pragma mark - Setting
+- (void)setVcCanScroll:(BOOL)vcCanScroll {
+    
+    _vcCanScroll = vcCanScroll;
+    
+    self.tableView.vcCanScroll = vcCanScroll;
+    
+    self.tableView.contentOffset = CGPointZero;
+}
+
 #pragma mark - Data
 - (void)requestPlatformList {
     

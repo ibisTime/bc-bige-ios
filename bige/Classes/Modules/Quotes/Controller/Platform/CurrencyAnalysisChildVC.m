@@ -35,6 +35,16 @@
     [self.bgSV addSubview:self.tradeView];
 }
 
+#pragma mark - Setting
+- (void)setVcCanScroll:(BOOL)vcCanScroll {
+    
+    _vcCanScroll = vcCanScroll;
+    
+    self.tradeView.vcCanScroll = vcCanScroll;
+    
+    self.tradeView.contentOffset = CGPointZero;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

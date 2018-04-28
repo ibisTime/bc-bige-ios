@@ -109,6 +109,9 @@
 		212690212091C867005B6B46 /* CurrencyInfoTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690202091C867005B6B46 /* CurrencyInfoTableView.m */; };
 		212690242091C896005B6B46 /* CurrencyInfoCell1.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690232091C896005B6B46 /* CurrencyInfoCell1.m */; };
 		212690272091C8AD005B6B46 /* CurrencyInfoCell2.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690262091C8AD005B6B46 /* CurrencyInfoCell2.m */; };
+		2126902A2092BC48005B6B46 /* CurrencyKLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690292092BC48005B6B46 /* CurrencyKLineVC.m */; };
+		2126902D2092BF08005B6B46 /* CurrencyKLineMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126902C2092BF08005B6B46 /* CurrencyKLineMapView.m */; };
+		212690302092CED8005B6B46 /* CurrencyKLineHScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126902F2092CED8005B6B46 /* CurrencyKLineHScreenVC.m */; };
 		21288241205771EB00A57A5A /* QuotesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 21288240205771EB00A57A5A /* QuotesManager.m */; };
 		21288247205776F000A57A5A /* OptionalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21288246205776F000A57A5A /* OptionalTableView.m */; };
 		2128824A2057774900A57A5A /* OptionalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882492057774900A57A5A /* OptionalCell.m */; };
@@ -171,6 +174,8 @@
 		219CF5302072550300012F68 /* SGQRCodeTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 219CF5232072550300012F68 /* SGQRCodeTool.m */; };
 		219CF5372073559600012F68 /* AppDelegate+JPush.m in Sources */ = {isa = PBXBuildFile; fileRef = 219CF5332073559200012F68 /* AppDelegate+JPush.m */; };
 		219CF5382073559600012F68 /* JPushModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 219CF5362073559400012F68 /* JPushModel.m */; };
+		21A8A03120932FC3005A203B /* QuotesDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A8A03020932FC3005A203B /* QuotesDataView.m */; };
+		21A8A034209355C6005A203B /* SetWarningView.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A8A033209355C6005A203B /* SetWarningView.m */; };
 		21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC58701FDE734D00F19DE8 /* TLAccountBaseVC.m */; };
 		21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC58741FDE736C00F19DE8 /* TLUserLoginVC.m */; };
 		21AC58841FDE73B200F19DE8 /* BindMobileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21AC587C1FDE73A700F19DE8 /* BindMobileVC.m */; };
@@ -501,6 +506,12 @@
 		212690232091C896005B6B46 /* CurrencyInfoCell1.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyInfoCell1.m; sourceTree = "<group>"; };
 		212690252091C8AD005B6B46 /* CurrencyInfoCell2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyInfoCell2.h; sourceTree = "<group>"; };
 		212690262091C8AD005B6B46 /* CurrencyInfoCell2.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyInfoCell2.m; sourceTree = "<group>"; };
+		212690282092BC48005B6B46 /* CurrencyKLineVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyKLineVC.h; sourceTree = "<group>"; };
+		212690292092BC48005B6B46 /* CurrencyKLineVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyKLineVC.m; sourceTree = "<group>"; };
+		2126902B2092BF08005B6B46 /* CurrencyKLineMapView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyKLineMapView.h; sourceTree = "<group>"; };
+		2126902C2092BF08005B6B46 /* CurrencyKLineMapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyKLineMapView.m; sourceTree = "<group>"; };
+		2126902E2092CED8005B6B46 /* CurrencyKLineHScreenVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyKLineHScreenVC.h; sourceTree = "<group>"; };
+		2126902F2092CED8005B6B46 /* CurrencyKLineHScreenVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyKLineHScreenVC.m; sourceTree = "<group>"; };
 		2128823F205771EB00A57A5A /* QuotesManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesManager.h; sourceTree = "<group>"; };
 		21288240205771EB00A57A5A /* QuotesManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesManager.m; sourceTree = "<group>"; };
 		21288245205776F000A57A5A /* OptionalTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionalTableView.h; sourceTree = "<group>"; };
@@ -612,6 +623,10 @@
 		219CF5352073559300012F68 /* JPushModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPushModel.h; sourceTree = "<group>"; };
 		219CF5362073559400012F68 /* JPushModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPushModel.m; sourceTree = "<group>"; };
 		219CF539207356B100012F68 /* bige.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bige.entitlements; sourceTree = "<group>"; };
+		21A8A02F20932FC3005A203B /* QuotesDataView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuotesDataView.h; sourceTree = "<group>"; };
+		21A8A03020932FC3005A203B /* QuotesDataView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuotesDataView.m; sourceTree = "<group>"; };
+		21A8A032209355C6005A203B /* SetWarningView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetWarningView.h; sourceTree = "<group>"; };
+		21A8A033209355C6005A203B /* SetWarningView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetWarningView.m; sourceTree = "<group>"; };
 		21AC586D1FDE72B800F19DE8 /* AppMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppMacro.h; sourceTree = "<group>"; };
 		21AC586E1FDE72B900F19DE8 /* APICodeMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICodeMacro.h; sourceTree = "<group>"; };
 		21AC586F1FDE72BA00F19DE8 /* AppColorMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppColorMacro.h; sourceTree = "<group>"; };
@@ -1463,6 +1478,10 @@
 				21268FFE209061E3005B6B46 /* CurrencyExchangeChildVC.m */,
 				2126900020906200005B6B46 /* CurrencyInfoChildVC.h */,
 				2126900120906200005B6B46 /* CurrencyInfoChildVC.m */,
+				212690282092BC48005B6B46 /* CurrencyKLineVC.h */,
+				212690292092BC48005B6B46 /* CurrencyKLineVC.m */,
+				2126902E2092CED8005B6B46 /* CurrencyKLineHScreenVC.h */,
+				2126902F2092CED8005B6B46 /* CurrencyKLineHScreenVC.m */,
 			);
 			path = Platform;
 			sourceTree = "<group>";
@@ -1600,6 +1619,12 @@
 				2126900A20908440005B6B46 /* CurrencyTradeMapView.m */,
 				2126900C2090A8A1005B6B46 /* QuotesChangeView.h */,
 				2126900D2090A8A1005B6B46 /* QuotesChangeView.m */,
+				2126902B2092BF08005B6B46 /* CurrencyKLineMapView.h */,
+				2126902C2092BF08005B6B46 /* CurrencyKLineMapView.m */,
+				21A8A02F20932FC3005A203B /* QuotesDataView.h */,
+				21A8A03020932FC3005A203B /* QuotesDataView.m */,
+				21A8A032209355C6005A203B /* SetWarningView.h */,
+				21A8A033209355C6005A203B /* SetWarningView.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -2752,7 +2777,8 @@
 				TargetAttributes = {
 					21F827CE1F1742E80019B176 = {
 						CreatedOnToolsVersion = 8.3.2;
-						ProvisioningStyle = Automatic;
+						DevelopmentTeam = SNU3HUYLFC;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2969,6 +2995,7 @@
 				21AC59451FDE7A1B00F19DE8 /* CustomPickerView.m in Sources */,
 				21AC59441FDE7A1B00F19DE8 /* TLPickerTextField.m in Sources */,
 				21AC594D1FDE7A1B00F19DE8 /* TLNetworking.m in Sources */,
+				21A8A03120932FC3005A203B /* QuotesDataView.m in Sources */,
 				21111BCD1F8B5F2C0021B3FE /* CustomTextView.m in Sources */,
 				21F0F17C2073C97200E39A55 /* InfoAllCommentListVC.m in Sources */,
 				21AC595A1FDE804500F19DE8 /* UILabel+Extension.m in Sources */,
@@ -2976,6 +3003,7 @@
 				21CFFB2620566D9A00D245ED /* InformationListTableView.m in Sources */,
 				2126901A20917934005B6B46 /* PlatformInfoHeaderView.m in Sources */,
 				2124BE9A206240AC00CB79E8 /* PlatformCell.m in Sources */,
+				21A8A034209355C6005A203B /* SetWarningView.m in Sources */,
 				21288247205776F000A57A5A /* OptionalTableView.m in Sources */,
 				21111BCF1F8B5F2C0021B3FE /* DetailWebView.m in Sources */,
 				21111BD01F8B5F2C0021B3FE /* ZipImg.m in Sources */,
@@ -3002,6 +3030,7 @@
 				21AC59821FDE825700F19DE8 /* NSNumber+Extension.m in Sources */,
 				212FEEA520688CBF0002F293 /* ForumDetailModel.m in Sources */,
 				21EB9C6B20562C9700394C3C /* DataDictionaryModel.m in Sources */,
+				2126902A2092BC48005B6B46 /* CurrencyKLineVC.m in Sources */,
 				21EF0B3C2064AC5A008EA865 /* ForumDetailVC.m in Sources */,
 				2124BEDF2063940400CB79E8 /* UserDetailEditVC.m in Sources */,
 				21AC59411FDE7A1B00F19DE8 /* TLProgressHUD.m in Sources */,
@@ -3028,6 +3057,7 @@
 				2124BE732061451C00CB79E8 /* InfoCommentDetailTableView.m in Sources */,
 				21AC59461FDE7A1B00F19DE8 /* TLImagePicker.m in Sources */,
 				21288241205771EB00A57A5A /* QuotesManager.m in Sources */,
+				212690302092CED8005B6B46 /* CurrencyKLineHScreenVC.m in Sources */,
 				2124BE782061FF6700CB79E8 /* OptionalModel.m in Sources */,
 				217BDAEC20691FC300E17DEE /* ForumCircleCommentVC.m in Sources */,
 				219CF5262072550300012F68 /* SGScanningQRCodeVC.m in Sources */,
@@ -3053,6 +3083,7 @@
 				212690212091C867005B6B46 /* CurrencyInfoTableView.m in Sources */,
 				21268FF320901956005B6B46 /* CurrencyInfoView.m in Sources */,
 				21CFFB1720566B7800D245ED /* InformationListCell.m in Sources */,
+				2126902D2092BF08005B6B46 /* CurrencyKLineMapView.m in Sources */,
 				21EF0B86206682D6008EA865 /* MyCommentDetailCell.m in Sources */,
 				21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */,
 				2128824E20577CAB00A57A5A /* ForumChildVC.m in Sources */,
@@ -3234,8 +3265,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = bige/bige.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = SNU3HUYLFC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3254,10 +3285,10 @@
 					"$(PROJECT_DIR)/Extension/WeChat",
 					"$(PROJECT_DIR)/bige/Extension/WeChat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.bige;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.bgcj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1d585311-b48e-40bc-aa70-17187c3be044";
+				PROVISIONING_PROFILE_SPECIFIER = dev_czybgcj;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3271,7 +3302,7 @@
 				CODE_SIGN_ENTITLEMENTS = bige/bige.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -3291,7 +3322,7 @@
 					"$(PROJECT_DIR)/Extension/WeChat",
 					"$(PROJECT_DIR)/bige/Extension/WeChat",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.bige;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cdkj.bgcj;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";

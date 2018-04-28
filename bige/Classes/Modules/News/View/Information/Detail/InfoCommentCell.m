@@ -126,12 +126,6 @@
         make.top.equalTo(self.photoIV.mas_top).offset(6);
         make.left.equalTo(self.photoIV.mas_right).offset(leftMargin);
     }];
-    //时间
-    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(self.nameLbl.mas_bottom).offset(6);
-        make.left.equalTo(self.nameLbl.mas_left);
-    }];
     //点赞按钮
     [self.zanBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -151,9 +145,15 @@
         make.left.equalTo(self.nameLbl.mas_left);
         make.height.lessThanOrEqualTo(@(MAXFLOAT));
         make.width.equalTo(@(kScreenWidth - 3*15 - kHeadIconW));
-        make.top.equalTo(self.timeLbl.mas_bottom).offset(10);
+        make.top.equalTo(self.nameLbl.mas_bottom).offset(10);
     }];
     
+    //时间
+    [self.timeLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.contentLbl.mas_bottom).offset(12);
+        make.left.equalTo(self.nameLbl.mas_left);
+    }];
     //移除所有回复
     [self.replyArr enumerateObjectsUsingBlock:^(ReplyCommentView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         
@@ -162,7 +162,7 @@
     
     [self layoutSubviews];
 
-    _commentModel.cellHeight = self.contentLbl.yy + 10;
+    _commentModel.cellHeight = self.timeLbl.yy + 10;
     
     if (_commentModel.commentList.count == 0) {
         

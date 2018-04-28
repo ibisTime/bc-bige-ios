@@ -256,7 +256,7 @@
         make.centerX.equalTo(commentNumBtn.mas_right).offset(-5);
     }];
     //点击评论
-    UIButton *commentBtn = [UIButton buttonWithTitle:@"说出你的看法"
+    UIButton *commentBtn = [UIButton buttonWithTitle:@"写评论..."
                                           titleColor:kHexColor(@"#9E9E9E")
                                      backgroundColor:kHexColor(@"E5E5E5")
                                            titleFont:12.0
