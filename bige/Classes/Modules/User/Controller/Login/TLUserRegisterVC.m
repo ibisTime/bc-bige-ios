@@ -124,6 +124,9 @@
     self.nickNameTF = nickNameTF;
     //验证码
     CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(0, nickNameTF.yy + 1, w, h)];
+    
+    captchaView.captchaTf.leftView.width = 15;
+    
     [captchaView.captchaBtn addTarget:self action:@selector(sendCaptcha) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:captchaView];
 
@@ -149,7 +152,7 @@
     [self.view addSubview:checkBtn];
     [checkBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(captchaView.mas_left).offset(5);
+        make.left.equalTo(captchaView.mas_left).offset(15);
         make.top.equalTo(captchaView.mas_bottom).offset(18);
     }];
     

@@ -31,16 +31,12 @@
 #import "HTMLStrVC.h"
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
-#import "UserDetailEditVC.h"
-#import "InfoCommentVC.h"
-#import "CircleCommentVC.h"
 #import "MyCollectionListVC.h"
+#import "SettingVC.h"
 
-@interface MineVC ()<MineHeaderSeletedDelegate>
+@interface MineVC ()<MineHeaderDelegate>
 //模型
 @property (nonatomic, strong) MineGroup *group;
-//退出登录
-@property (nonatomic, strong) BaseView *logoutView;
 //
 @property (nonatomic, strong) MineTableView *tableView;
 //头部
@@ -52,10 +48,15 @@
 
 @implementation MineVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.title = @"我的";
     //通知
     [self addNotification];
     //
@@ -68,92 +69,56 @@
 }
 
 #pragma mark - Init
-- (void)addEditItem {
-    
-    [UIBarButtonItem addRightItemWithTitle:@"编辑"
-                                titleColor:kWhiteColor
-                                     frame:CGRectMake(0, 0, 60, 40)
-                                        vc:self
-                                    action:@selector(editInfo)];
-}
-
-- (BaseView *)logoutView {
-    
-    if (!_logoutView) {
-        
-        _logoutView = [[BaseView alloc] initWithFrame:CGRectMake(0, 35, kScreenWidth, 100)];
-        
-        UIButton *logoutBtn = [UIButton buttonWithTitle:@"退出登录"
-                                             titleColor:kThemeColor
-                                        backgroundColor:kWhiteColor
-                                              titleFont:18.0];
-        
-        [logoutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
-
-        [_logoutView addSubview:logoutBtn];
-        [logoutBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.left.right.equalTo(@0);
-            make.top.equalTo(@35);
-            make.height.equalTo(@60);
-        }];
-    }
-    return _logoutView;
-}
 
 - (void)initGroup {
     
     BaseWeakSelf;
     
-    //收藏
-    MineModel *collection = [MineModel new];
+    //账号设置
+    MineModel *accountSetting = [MineModel new];
     
-    collection.text = @"收藏";
-    collection.imgName = @"收藏";
-    collection.action = ^{
+    accountSetting.text = @"账号设置";
+    accountSetting.isSpecial = YES;
+    accountSetting.action = ^{
         
         [weakSelf checkLogin:^{
             
-            MyCollectionListVC *collectionVC = [MyCollectionListVC new];
+            SettingVC *settingVC = [SettingVC new];
             
-            [weakSelf.navigationController pushViewController:collectionVC animated:YES];
+            [weakSelf.navigationController pushViewController:settingVC animated:YES];
         }];
     };
     
-    //圈子评论
-    MineModel *forumComment = [MineModel new];
+    //预警/通知
+    MineModel *notification = [MineModel new];
     
-    forumComment.text = @"圈子评论";
-    forumComment.imgName = @"圈子评论";
-    forumComment.action = ^{
+    notification.text = @"预警/通知";
+    notification.isSpecial = YES;
+    notification.action = ^{
         
         [weakSelf checkLogin:^{
             
-            CircleCommentVC *commentVC = [CircleCommentVC new];
-            
-            [weakSelf.navigationController pushViewController:commentVC animated:YES];
+           
         }];
     };
-    //资讯评论
-    MineModel *infoComment = [MineModel new];
+    //反馈
+    MineModel *feedback = [MineModel new];
     
-    infoComment.text = @"资讯评论";
-    infoComment.imgName = @"资讯评论";
-    infoComment.action = ^{
+    feedback.text = @"反馈";
+    feedback.isSpecial = YES;
+    feedback.action = ^{
         
         [weakSelf checkLogin:^{
             
-            InfoCommentVC *commentVC = [InfoCommentVC new];
             
-            [weakSelf.navigationController pushViewController:commentVC animated:YES];
         }];
     };
     
-    //关于
+    //联系我们
     MineModel *aboutUs = [MineModel new];
     
-    aboutUs.text = @"关于";
-    aboutUs.imgName = @"关于";
+    aboutUs.text = @"联系我们";
+    aboutUs.isSpecial = YES;
     aboutUs.action = ^{
         
         HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
@@ -162,20 +127,10 @@
         
         [weakSelf.navigationController pushViewController:htmlVC animated:YES];
     };
-    //清除缓存
-    MineModel *cache = [MineModel new];
-    
-    cache.text = @"清除缓存";
-    cache.isSpecial = YES;
-    cache.isHiddenArrow = YES;
-    cache.action = ^{
-        
-        [weakSelf clearCache];
-    };
     
     self.group = [MineGroup new];
     
-    self.group.sections = @[@[collection, forumComment, infoComment, aboutUs, cache]];
+    self.group.sections = @[@[accountSetting, notification],@[feedback, aboutUs]];
     
     self.tableView.mineGroup = self.group;
     
@@ -184,24 +139,22 @@
 
 - (void)initTableView {
     
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 110)];
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(155 + kStatusBarHeight))];
     
     imageView.contentMode = UIViewContentModeScaleAspectFill;
-    imageView.image = kImage(@"我的-背景");
+    imageView.image = kImage(@"我的背景");
     
     imageView.tag = 1500;
-    imageView.backgroundColor = kAppCustomMainColor;
+//    imageView.backgroundColor = kAppCustomMainColor;
     
     [self.view addSubview:imageView];
     
     self.tableView = [[MineTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight - kTabBarHeight) style:UITableViewStyleGrouped];
     
-    self.tableView.tableFooterView = self.logoutView;
-
     [self.view addSubview:self.tableView];
     
     //tableview的header
-    self.headerView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 110)];
+    self.headerView = [[MineHeaderView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(155 + kStatusBarHeight) + 70)];
     
     self.headerView.delegate = self;
     
@@ -271,10 +224,6 @@
     } else {
         
         [self.headerView.nameBtn setTitle:[TLUser user].nickname forState:UIControlStateNormal];
-
-        self.tableView.tableFooterView.hidden = NO;
-        //编辑
-        [self addEditItem];
     }
 }
 
@@ -284,21 +233,6 @@
 
     self.headerView.userPhoto.image = USER_PLACEHOLDER_SMALL;
     self.navigationItem.rightBarButtonItem = nil;
-}
-
-/**
- 编辑资料
- */
-- (void)editInfo {
-    
-    BaseWeakSelf;
-    
-    [self checkLogin:^{
-        
-        UserDetailEditVC *editVC = [UserDetailEditVC new];
-        
-        [weakSelf.navigationController pushViewController:editVC animated:YES];
-    }];
 }
 
 /**
@@ -414,13 +348,30 @@
 }
 
 #pragma mark - MineHeaderSeletedDelegate
-- (void)didSelectedWithType:(MineHeaderSeletedType)type idx:(NSInteger)idx {
+- (void)didSelectedWithType:(MineHeaderType)type idx:(NSInteger)idx {
     
     switch (type) {
-        case MineHeaderSeletedTypeLogin:
+        case MineHeaderTypeLogin:
         {
             [self checkLogin:nil];
         }break;
+            
+        case MineHeaderTypeIntegralCenter:
+        {
+            
+        }break;
+            
+        case MineHeaderTypeCollection:
+        {
+            [self checkLogin:^{
+                
+                MyCollectionListVC *collectionVC = [MyCollectionListVC new];
+                
+                [self.navigationController pushViewController:collectionVC animated:YES];
+            }];
+            
+        }break;
+            
         default:
             break;
     }

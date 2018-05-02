@@ -8,14 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
-    MineHeaderSeletedTypeDefault = 0,   //设置
-    MineHeaderSeletedTypeLogin,         //登录
+typedef NS_ENUM(NSUInteger, MineHeaderType) {
+    MineHeaderTypeDefault = 0,   //设置
+    MineHeaderTypeLogin,         //登录
+    MineHeaderTypeIntegralCenter,//积分中心
+    MineHeaderTypeCollection,    //收藏
 };
 
-@protocol MineHeaderSeletedDelegate <NSObject>
+@protocol MineHeaderDelegate <NSObject>
 
-- (void)didSelectedWithType:(MineHeaderSeletedType)type idx:(NSInteger)idx;
+- (void)didSelectedWithType:(MineHeaderType)type idx:(NSInteger)idx;
 
 @end
 
@@ -25,7 +27,7 @@ typedef NS_ENUM(NSUInteger, MineHeaderSeletedType) {
 //昵称
 @property (nonatomic, strong) UIButton *nameBtn;
 
-@property (nonatomic, weak) id<MineHeaderSeletedDelegate> delegate;
+@property (nonatomic, weak) id<MineHeaderDelegate> delegate;
 
 
 @end

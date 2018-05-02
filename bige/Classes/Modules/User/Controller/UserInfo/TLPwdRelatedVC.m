@@ -83,9 +83,9 @@
     self.phoneTf = phoneTf;
     
     //验证码
-    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(phoneTf.x, phoneTf.y + 1, phoneTf.width, phoneTf.height)];
+    CaptchaView *captchaView = [[CaptchaView alloc] initWithFrame:CGRectMake(0, phoneTf.yy + 1, phoneTf.width, phoneTf.height)];
     
-    captchaView.captchaTf.leftLbl.text = @"短信验证码";
+    captchaView.captchaTf.leftLbl.text = @"手机验证码";
     
     [self.bgSV addSubview:captchaView];
     _captchaView = captchaView;

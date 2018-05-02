@@ -94,7 +94,7 @@
 }
 
 /**
- 判断用户是否登录
+ 判断用户是否登录(点赞，收藏之类的)
  */
 - (void)checkLogin:(void(^)(void))loginSuccess event:(void(^)(void))event {
     

@@ -79,6 +79,8 @@
                                         titleColor:kWhiteColor
                                    backgroundColor:kClearColor
                                          titleFont:11.0 cornerRadius:5];
+    
+    [self addSubview:self.priceFluctBtn];
     //关注量
     self.followNumLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                 textColor:kTextColor2
@@ -149,6 +151,12 @@
         
         make.left.equalTo(self.currencyNameLbl.mas_left).offset(-5);
         make.top.equalTo(self.currencyNameLbl.mas_bottom).offset(5);
+    }];
+    //涨跌情况
+    [self.priceFluctBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(self.rmbPriceLbl.mas_right).offset(10);
+        make.centerY.equalTo(self.rmbPriceLbl.mas_centerY);
     }];
     //关注
     [self.followNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {

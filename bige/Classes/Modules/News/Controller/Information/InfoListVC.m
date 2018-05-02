@@ -8,15 +8,12 @@
 
 #import "InfoListVC.h"
 //M
-#import "NewsFlashModel.h"
 #import "InformationModel.h"
 #import "InfoManager.h"
 //V
-#import "NewsFlashListTableView.h"
 #import "InformationListTableView.h"
 #import "TLPlaceholderView.h"
 //C
-#import "NewsFlashDetailVC.h"
 #import "InfoDetailVC.h"
 
 @interface InfoListVC ()<RefreshDelegate>

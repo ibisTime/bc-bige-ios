@@ -205,7 +205,7 @@ static NSString *informationListCellID = @"InformationListCell";
     [textLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@15);
-        make.centerY.equalTo(@0);
+        make.top.equalTo(@15);
     }];
     
     if (section == 2) {

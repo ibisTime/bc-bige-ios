@@ -27,9 +27,9 @@
     
     CGFloat btnWidth = 95;
     
-    self.captchaTf = [[TLTextField alloc] initWithFrame:CGRectMake(15, 0, frame.size.width - btnWidth, frame.size.height)
+    self.captchaTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 0, frame.size.width - btnWidth, frame.size.height)
                                               leftTitle:@""
-                                             titleWidth:0
+                                             titleWidth:100
                                             placeholder:@"请输入验证码"];
     self.captchaTf.rightViewMode = UITextFieldViewModeAlways;
     self.captchaTf.keyboardType = UIKeyboardTypeNumberPad;

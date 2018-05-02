@@ -24,11 +24,10 @@
 #import "CustomTabBar.h"
 #import "BaseView.h"
 //C
-#import "TLChangeMobileVC.h"
 #import "TLPwdRelatedVC.h"
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
-#import "ZHAddressChooseVC.h"
+#import "EditVC.h"
 
 @interface SettingVC ()
 
@@ -59,8 +58,6 @@
     [self setGroup];
     //
     [self initTableView];
-    //
-    [self initHeaderView];
 
 }
 
@@ -81,87 +78,10 @@
     
 }
 
-- (void)initHeaderView {
-    
-    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 88)];
-    
-    self.headerView.userInteractionEnabled = YES;
-    self.headerView.backgroundColor = kWhiteColor;
-    //头像
-    [self.headerView addSubview:self.photoIV];
-    //text
-    [self.headerView addSubview:self.textLbl];
-    //右箭头
-    [self.headerView addSubview:self.rightArrowIV];
-    
-    self.tableView.tableHeaderView = self.headerView;
-
-    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectHeadIcon:)];
-    
-    [self.headerView addGestureRecognizer:tapGR];
-    
-}
-
-- (UIImageView *)photoIV {
-    
-    if (!_photoIV) {
-        _photoIV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 19, 50, 50)];
-        _photoIV.layer.cornerRadius = 25;
-        [_photoIV sd_setImageWithURL:[NSURL URLWithString:[[TLUser user].photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
-        
-        _photoIV.contentMode = UIViewContentModeScaleAspectFill;
-        _photoIV.clipsToBounds = YES;
-    }
-    
-    return _photoIV;
-}
-
-- (UILabel *)textLbl {
-    
-    if (!_textLbl) {
-        _textLbl = [UILabel labelWithFrame:CGRectMake(self.photoIV.xx + 20, self.photoIV.y, kScreenWidth - self.photoIV.xx - 20 - 20 - 30, 25)
-                               textAligment:NSTextAlignmentLeft
-                            backgroundColor:kWhiteColor
-                                       font:Font(14.0)
-                                  textColor:kTextColor];
-        _textLbl.text = @"按照等级从图片库中选择";
-        _textLbl.centerY = self.photoIV.centerY;
-    }
-    return _textLbl;
-    
-}
-
-- (UIImageView *)rightArrowIV {
-    
-    if (!_rightArrowIV) {
-        
-        CGFloat arrowW = 7;
-        CGFloat arrowH = 12;
-        CGFloat rightMargin = 15;
-        
-        _rightArrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
-        
-        _rightArrowIV.frame = CGRectMake(kScreenWidth - arrowW - rightMargin, 0, arrowW, arrowH);
-        _rightArrowIV.contentMode = UIViewContentModeScaleAspectFit;
-        _rightArrowIV.centerY = self.photoIV.centerY;
-    }
-    return _rightArrowIV;
-}
-
 #pragma mark - Group
 - (void)setGroup {
     
     BaseWeakSelf;
-    
-    //修改手机号
-    SettingModel *changeMobile = [SettingModel new];
-    changeMobile.text = @"修改手机号";
-    [changeMobile setAction:^{
-        
-        TLChangeMobileVC *changeMobileVC = [[TLChangeMobileVC alloc] init];
-        
-        [weakSelf.navigationController pushViewController:changeMobileVC animated:YES];
-    }];
     
     //修改登录密码
     SettingModel *changeLoginPwd = [SettingModel new];
@@ -182,21 +102,28 @@
         [weakSelf.navigationController pushViewController:pwdRelatedVC animated:YES];
         
     }];
-    //收货地址
-    SettingModel *address = [SettingModel new];
-    address.text = @"收货地址";
-    [address setAction:^{
+    
+    //昵称
+    UserEditModel *nickNameModel = [UserEditModel new];
+    nickNameModel.title = @"昵称";
+    nickNameModel.content = [TLUser user].nickname;
+    
+    SettingModel *changeNickName = [SettingModel new];
+    changeNickName.text = @"昵称";
+    [changeNickName setAction:^{
         
-        ZHAddressChooseVC *chooseVC = [ZHAddressChooseVC new];
+        EditVC *editVC = [[EditVC alloc] init];
+        editVC.title = @"填写昵称";
+        editVC.editModel = nickNameModel;
+        editVC.type = UserEditTypeNickName;
         
+        [weakSelf.navigationController pushViewController:editVC animated:YES];
         
-        [self
-         .navigationController pushViewController:chooseVC animated:YES];
     }];
     
     self.group = [SettingGroup new];
     
-    self.group.sections = @[@[changeMobile, changeLoginPwd, address]];
+    self.group.sections = @[@[changeLoginPwd, changeNickName]];
     
 }
 
@@ -209,7 +136,7 @@
         _loginOutBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 55, kScreenWidth, 45)];
         _loginOutBtn.backgroundColor = kWhiteColor;
         [_loginOutBtn setTitle:@"退出登录" forState:UIControlStateNormal];
-        [_loginOutBtn setTitleColor:kAppCustomMainColor forState:UIControlStateNormal];
+        [_loginOutBtn setTitleColor:kThemeColor forState:UIControlStateNormal];
         _loginOutBtn.layer.cornerRadius = 5;
         _loginOutBtn.clipsToBounds = YES;
         _loginOutBtn.titleLabel.font = FONT(15);
@@ -224,28 +151,11 @@
         
     } confirm:^(UIAlertAction *action) {
         
-        UITabBarController *tbcController = self.tabBarController;
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            tbcController.selectedIndex = 0;
-            
-            CustomTabBar *tabBar = (CustomTabBar *)tbcController.tabBar;
-            tabBar.selectedIdx = 0;
-        });
-        
         [self.navigationController popViewControllerAnimated:YES];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:kUserLoginOutNotification object:nil];
     }];
     
-    
-}
-
-#pragma mark - 选择头像
-- (void)selectHeadIcon:(UITapGestureRecognizer *)tapGR {
-
-   
 }
 
 - (void)didReceiveMemoryWarning {

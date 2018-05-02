@@ -9,15 +9,12 @@
 #import "BaseTableViewCell.h"
 //M
 #import "PlatformModel.h"
-#import "CurrencyModel.h"
 /**
  具体平台
  */
 @interface PlatformCell : BaseTableViewCell
 //
 @property (nonatomic, strong) PlatformModel *platform;
-//
-@property (nonatomic, strong) CurrencyModel *currency;
 //关注情况
 @property (nonatomic, strong) UIButton *followBtn;
 

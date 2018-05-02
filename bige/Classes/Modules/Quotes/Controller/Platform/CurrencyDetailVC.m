@@ -147,7 +147,6 @@
         make.centerY.equalTo(@0);
 //        make.centerX.equalTo(@(-15));
         make.centerX.equalTo(@(-5));
-
     }];
 
     //向下箭头

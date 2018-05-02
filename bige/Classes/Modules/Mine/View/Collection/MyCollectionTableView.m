@@ -8,7 +8,8 @@
 
 #import "MyCollectionTableView.h"
 //V
-#import "MyCollectionCell.h"
+#import "InformationListCell.h"
+#import "InformationListCell2.h"
 
 @interface MyCollectionTableView()<UITableViewDelegate, UITableViewDataSource>
 
@@ -16,7 +17,8 @@
 
 @implementation MyCollectionTableView
 
-static NSString *identifierCell = @"MyCollectionCell";
+static NSString *informationListCell = @"InformationListCell";
+static NSString *informationListCell2 = @"InformationListCell2";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
@@ -25,7 +27,8 @@ static NSString *identifierCell = @"MyCollectionCell";
         self.dataSource = self;
         self.delegate = self;
         
-        [self registerClass:[MyCollectionCell class] forCellReuseIdentifier:identifierCell];
+        [self registerClass:[InformationListCell class] forCellReuseIdentifier:informationListCell];
+        [self registerClass:[InformationListCell2 class] forCellReuseIdentifier:informationListCell2];
     }
     
     return self;
@@ -40,11 +43,21 @@ static NSString *identifierCell = @"MyCollectionCell";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MyCollectionCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
+    InformationModel *info = self.collections[indexPath.row];
     
-    cell.collectionModel = self.collections[indexPath.row];
-    cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
-
+    if (info.pics.count == 1) {
+        
+        InformationListCell *cell = [tableView dequeueReusableCellWithIdentifier:informationListCell forIndexPath:indexPath];
+        
+        cell.infoModel = info;
+        
+        return cell;
+    }
+    
+    InformationListCell2 *cell = [tableView dequeueReusableCellWithIdentifier:informationListCell2 forIndexPath:indexPath];
+    
+    cell.infoModel = info;
+    
     return cell;
 }
 
@@ -62,7 +75,14 @@ static NSString *identifierCell = @"MyCollectionCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return self.collections[indexPath.row].cellHeight;
+    InformationModel *info = self.collections[indexPath.row];
+    
+    if (info.pics.count == 1) {
+        
+        return 130;
+    }
+    return info.cellHeight;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

@@ -6,6 +6,8 @@
 //  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
+//M
+#import "InformationModel.h"
 //V
 #import "MyCollectionTableView.h"
 //C
@@ -16,7 +18,7 @@
 //
 @property (nonatomic, strong) MyCollectionTableView *tableView;
 //收藏列表
-@property (nonatomic, strong) NSArray <MyCollectionModel *>*collections;
+@property (nonatomic, strong) NSArray <InformationModel *>*collections;
 
 @end
 
@@ -67,7 +69,7 @@
     
     helper.tableView = self.tableView;
     
-    [helper modelClass:[MyCollectionModel class]];
+    [helper modelClass:[InformationModel class]];
     
     [self.tableView addRefreshAction:^{
         
@@ -108,7 +110,7 @@
     
     BaseWeakSelf;
     
-    MyCollectionModel *collectionModel = self.collections[indexPath.row];
+    InformationModel *collectionModel = self.collections[indexPath.row];
     
     InfoDetailVC *detailVC = [InfoDetailVC new];
     

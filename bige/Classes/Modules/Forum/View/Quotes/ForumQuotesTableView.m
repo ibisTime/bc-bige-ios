@@ -51,11 +51,11 @@ static NSString *currencyCell = @"ForumQuotesCurrencyCell";
     
     if (self.type == ForumQuotesTypePlatform) {
 
-        CurrencyModel *currency = self.currencys[indexPath.row];
+//        CurrencyModel *currency = self.currencys[indexPath.row];
 
         PlatformCell *cell = [tableView dequeueReusableCellWithIdentifier:platformCell forIndexPath:indexPath];
 
-        cell.currency = currency;
+//        cell.currency = currency;
         cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
 
         return cell;

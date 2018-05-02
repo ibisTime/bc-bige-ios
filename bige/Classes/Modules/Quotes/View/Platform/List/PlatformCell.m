@@ -30,7 +30,6 @@
 //涨跌情况
 @property (nonatomic, strong) UIButton *priceFluctBtn;
 
-
 @end
 
 @implementation PlatformCell

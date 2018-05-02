@@ -11,9 +11,7 @@
 #import "UIBarButtonItem+convience.h"
 //M
 #import "QuotesManager.h"
-#import "OptionalListModel.h"
 #import "PlatformTitleModel.h"
-#import "CurrencyTitleModel.h"
 //V
 #import "BaseView.h"
 #import "SelectScrollView.h"

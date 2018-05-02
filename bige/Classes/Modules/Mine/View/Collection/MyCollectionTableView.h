@@ -8,10 +8,10 @@
 
 #import "TLTableView.h"
 //M
-#import "MyCollectionModel.h"
+#import "InformationModel.h"
 
 @interface MyCollectionTableView : TLTableView
 //
-@property (nonatomic, strong) NSArray <MyCollectionModel *>*collections;
+@property (nonatomic, strong) NSArray <InformationModel *>*collections;
 
 @end

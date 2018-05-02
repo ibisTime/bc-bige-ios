@@ -11,6 +11,8 @@
 //Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
+//Category
+#import "UIButton+EnLargeEdge.h"
 //M
 #import "TLUser.h"
 
@@ -35,19 +37,18 @@
     
     self.backgroundColor = kClearColor;
     
-    UIImageView *bgIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 110 + kNavigationBarHeight)];
+    UIImageView *bgIV = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(155 + kStatusBarHeight))];
     
-//    bgIV.image =kImage(@"我的-背景");
     bgIV.contentMode = UIViewContentModeScaleToFill;
     
     [self addSubview:bgIV];
     
     //头像
-    CGFloat imgWidth = 66;
+    CGFloat imgWidth = 60;
     
     self.userPhoto = [[UIImageView alloc] init];
     
-    self.userPhoto.frame = CGRectMake(15, 11, imgWidth, imgWidth);
+    self.userPhoto.frame = CGRectMake(15, 50 + kStatusBarHeight, imgWidth, imgWidth);
     self.userPhoto.image = USER_PLACEHOLDER_SMALL;
     self.userPhoto.layer.cornerRadius = imgWidth/2.0;
     self.userPhoto.layer.masksToBounds = YES;
@@ -73,6 +74,40 @@
         make.left.equalTo(self.userPhoto.mas_right).offset(15);
     }];
     
+    CGFloat btnW = kScreenWidth/2.0;
+    //积分中心
+    UIButton *integralBtn = [UIButton buttonWithTitle:@"积分中心"
+                                           titleColor:kTextColor
+                                      backgroundColor:kWhiteColor
+                                            titleFont:14.0];
+    [integralBtn addTarget:self action:@selector(selectInteralCenter) forControlEvents:UIControlEventTouchUpInside];
+    [integralBtn setImage:kImage(@"积分中心") forState:UIControlStateNormal];
+    [self addSubview:integralBtn];
+    [integralBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(@0);
+        make.bottom.equalTo(@0);
+        make.width.equalTo(@(btnW));
+        make.height.equalTo(@70);
+    }];
+    [integralBtn setTitleBottom];
+    //收藏
+    UIButton *collectionBtn = [UIButton buttonWithTitle:@"我的收藏"
+                                           titleColor:kTextColor
+                                      backgroundColor:kWhiteColor
+                                            titleFont:14.0];
+    [collectionBtn addTarget:self action:@selector(selectCollection) forControlEvents:UIControlEventTouchUpInside];
+    [collectionBtn setImage:kImage(@"我的收藏") forState:UIControlStateNormal];
+
+    [self addSubview:collectionBtn];
+    [collectionBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(integralBtn.mas_right);
+        make.bottom.equalTo(@0);
+        make.width.equalTo(@(btnW));
+        make.height.equalTo(@70);
+    }];
+    [collectionBtn setTitleBottom];
 }
 
 #pragma mark - Events
@@ -80,7 +115,23 @@
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)] && ![TLUser user].isLogin) {
         
-        [self.delegate didSelectedWithType:MineHeaderSeletedTypeLogin idx:0];
+        [self.delegate didSelectedWithType:MineHeaderTypeLogin idx:0];
+    }
+}
+
+- (void)selectInteralCenter {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
+        
+        [self.delegate didSelectedWithType:MineHeaderTypeIntegralCenter idx:0];
+    }
+}
+
+- (void)selectCollection {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
+        
+        [self.delegate didSelectedWithType:MineHeaderTypeCollection idx:0];
     }
 }
 
@@ -88,7 +139,7 @@
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
         
-        [self.delegate didSelectedWithType:MineHeaderSeletedTypeDefault idx:0];
+        [self.delegate didSelectedWithType:MineHeaderTypeDefault idx:0];
     }
     
 }
