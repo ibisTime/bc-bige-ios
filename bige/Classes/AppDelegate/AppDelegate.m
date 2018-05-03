@@ -20,6 +20,9 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WXApi.h"
 #import "IQKeyboardManager.h"
+#import <ZDCChat/ZDCChat.h>
+#import <ZendeskSDK/ZendeskSDK.h>
+
 //C
 #import "NavigationController.h"
 #import "TabbarViewController.h"
@@ -50,8 +53,10 @@
     [self configWeChat];
     //服务器环境
     [self configServiceAddress];
-    //键盘
+    //配置键盘
     [self configIQKeyboard];
+    //配置Zendesk
+    [self configZendesk];
     //配置极光
     [self jpushInitWithLaunchOption:launchOptions];
     //配置根控制器
@@ -122,6 +127,18 @@
     [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[ForumDetailVC class]];
     [[IQKeyboardManager sharedManager].disabledToolbarClasses addObject:[ForumCircleCommentVC class]];
 
+}
+
+- (void)configZendesk {
+    
+    // supprot
+    [[ZDKConfig instance] initializeWithAppId:@"f9ab448e1dfdb93e3b4ff1f2c2d4fb3a72140cbfd6ee10e0"
+                                   zendeskUrl:@"https://beicoin.zendesk.com"
+                                     clientId:@"mobile_sdk_client_b388fa777945f99314b7"];
+    
+    // 客服
+    [ZDCChat initializeWithAccountKey:@"MvxwoT6827HylJtr6360QQQ5yve4Z2Ny"];
+    
 }
 
 - (void)configRootViewController {

@@ -8,14 +8,8 @@
 
 #import "InputTextView.h"
 
-//Macro
-//Framework
 //Category
 #import "TLAlert.h"
-//Extension
-//M
-//V
-//C
 
 #define DEFAULT_HEIGHT (205)
 

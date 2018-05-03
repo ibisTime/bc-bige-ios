@@ -58,8 +58,8 @@ typedef struct TitleInfo TitleInfo;
     }
     
     self.contentTf = [[TLTextField alloc] initWithFrame:CGRectMake(0, 10, kScreenWidth, 45)
-                                              leftTitle:@"昵称"
-                                             titleWidth:80
+                                              leftTitle:@""
+                                             titleWidth:15
                                             placeholder:@"请填写昵称"];
     
     self.contentTf.text = [[TLUser user].nickname valid] ? [TLUser user].nickname: @"";

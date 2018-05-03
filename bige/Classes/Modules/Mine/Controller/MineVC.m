@@ -20,6 +20,11 @@
 #import "TLProgressHUD.h"
 #import "NSString+Check.h"
 #import <MBProgressHUD.h>
+#import <ZendeskSDK/ZendeskSDK.h>
+#import <ZDCChat/ZDCChat.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <CDCommon/UIScrollView+TLAdd.h>
+
 //M
 #import "MineGroup.h"
 //V
@@ -28,13 +33,14 @@
 #import "TLImagePicker.h"
 #import "BaseView.h"
 //C
-#import "HTMLStrVC.h"
+#import "LinkUsVC.h"
 #import "NavigationController.h"
 #import "TLUserLoginVC.h"
 #import "MyCollectionListVC.h"
 #import "SettingVC.h"
+#import "WarningSettingVC.h"
 
-@interface MineVC ()<MineHeaderDelegate>
+@interface MineVC ()<MineHeaderDelegate, UINavigationControllerDelegate, ZDKHelpCenterConversationsUIDelegate>
 //模型
 @property (nonatomic, strong) MineGroup *group;
 //
@@ -68,6 +74,15 @@
     
 }
 
+#pragma mark - UINavigationControllerDelegate
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+    // 判断要显示的控制器是否是自己
+    if ([viewController isKindOfClass:[ZDKHelpCenterOverviewController class]]) {
+
+    }
+    
+}
+
 #pragma mark - Init
 
 - (void)initGroup {
@@ -92,13 +107,15 @@
     //预警/通知
     MineModel *notification = [MineModel new];
     
-    notification.text = @"预警/通知";
+    notification.text = @"预警设置";
     notification.isSpecial = YES;
     notification.action = ^{
         
         [weakSelf checkLogin:^{
             
-           
+            WarningSettingVC *warnVC = [WarningSettingVC new];
+            
+            [weakSelf.navigationController pushViewController:warnVC animated:YES];
         }];
     };
     //反馈
@@ -110,7 +127,12 @@
         
         [weakSelf checkLogin:^{
             
-            
+            ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
+
+//            [ZDKHelpCenter setUIDelegate:weakSelf];
+
+            [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
+                                 withContentModel:contentModel];
         }];
     };
     
@@ -121,11 +143,9 @@
     aboutUs.isSpecial = YES;
     aboutUs.action = ^{
         
-        HTMLStrVC *htmlVC = [[HTMLStrVC alloc] init];
+        LinkUsVC *linkVC = [LinkUsVC new];
         
-        htmlVC.type = HTMLTypeAboutUs;
-        
-        [weakSelf.navigationController pushViewController:htmlVC animated:YES];
+        [weakSelf.navigationController pushViewController:linkVC animated:YES];
     };
     
     self.group = [MineGroup new];
@@ -139,6 +159,8 @@
 
 - (void)initTableView {
     
+    self.navigationController.delegate = self;
+
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(155 + kStatusBarHeight))];
     
     imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -217,7 +239,7 @@
     
     if (![TLUser user].isLogin) {
         
-        [self.headerView.nameBtn setTitle:@"快速登录" forState:UIControlStateNormal];
+        [self.headerView.nameBtn setTitle:@"点击登录" forState:UIControlStateNormal];
         self.tableView.tableFooterView.hidden = YES;
         self.navigationItem.rightBarButtonItem = nil;
         
@@ -229,7 +251,7 @@
 
 - (void)loginOut {
     
-    [self.headerView.nameBtn setTitle:@"快速登录" forState:UIControlStateNormal];
+    [self.headerView.nameBtn setTitle:@"点击登录" forState:UIControlStateNormal];
 
     self.headerView.userPhoto.image = USER_PLACEHOLDER_SMALL;
     self.navigationItem.rightBarButtonItem = nil;
@@ -350,6 +372,8 @@
 #pragma mark - MineHeaderSeletedDelegate
 - (void)didSelectedWithType:(MineHeaderType)type idx:(NSInteger)idx {
     
+    BaseWeakSelf;
+    
     switch (type) {
         case MineHeaderTypeLogin:
         {
@@ -367,9 +391,19 @@
                 
                 MyCollectionListVC *collectionVC = [MyCollectionListVC new];
                 
-                [self.navigationController pushViewController:collectionVC animated:YES];
+                [weakSelf.navigationController pushViewController:collectionVC animated:YES];
             }];
             
+        }break;
+            
+        case MineHeaderTypePhoto:
+        {
+            [self checkLogin:^{
+                
+            } event:^{
+                
+                [weakSelf.imagePicker picker];
+            }];
         }break;
             
         default:
@@ -377,6 +411,12 @@
     }
 }
 
+#pragma mark - ZDKHelpCenterConversationsUIDelegate
+
+//- (ZDKContactUsVisibility)active {
+//
+//    return ZDKContactUsVisibilityOff;
+//}
 
 /**
  VC被释放时移除通知

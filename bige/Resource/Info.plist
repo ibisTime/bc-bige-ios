@@ -111,7 +111,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>币格财经将访问您的相机, 用来上传头像</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>链接社将访问您的相册, 用来上传头像</string>
+	<string>币格财经将访问您的相册, 用来上传头像</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>

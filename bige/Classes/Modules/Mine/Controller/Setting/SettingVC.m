@@ -53,7 +53,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title = @"个人设置";
+    self.title = @"账号设置";
     //
     [self setGroup];
     //
@@ -105,7 +105,7 @@
     
     //昵称
     UserEditModel *nickNameModel = [UserEditModel new];
-    nickNameModel.title = @"昵称";
+    nickNameModel.title = @"";
     nickNameModel.content = [TLUser user].nickname;
     
     SettingModel *changeNickName = [SettingModel new];
@@ -113,7 +113,7 @@
     [changeNickName setAction:^{
         
         EditVC *editVC = [[EditVC alloc] init];
-        editVC.title = @"填写昵称";
+        editVC.title = @"修改昵称";
         editVC.editModel = nickNameModel;
         editVC.type = UserEditTypeNickName;
         

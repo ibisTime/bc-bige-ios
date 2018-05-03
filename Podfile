@@ -24,6 +24,9 @@ target ‘bige’ do
     pod 'Realm',                    '2.8.0'
     #极光
     pod 'JPush',                    '3.0.8'
+    #Zendesk
+    pod 'ZendeskSDK',               '1.11.0.1'
+
     #公共库
     pod 'CDCommon', '1.0.3'
 end

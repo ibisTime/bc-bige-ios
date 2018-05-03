@@ -58,9 +58,9 @@
     
     [self addSubview:self.userPhoto];
     
-//    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectPhoto:)];
-//
-//    [self.userPhoto addGestureRecognizer:tapGR];
+    UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectPhoto:)];
+
+    [self.userPhoto addGestureRecognizer:tapGR];
     //昵称
     self.nameBtn = [UIButton buttonWithTitle:@""
                                   titleColor:kWhiteColor
@@ -74,6 +74,22 @@
         make.left.equalTo(self.userPhoto.mas_right).offset(15);
     }];
     
+    //右箭头
+//    CGFloat arrowW = 6;
+//    CGFloat arrowH = 10;
+//    CGFloat rightMargin = 15;
+//
+//    UIImageView *arrowIV = [[UIImageView alloc] initWithImage:kImage(@"更多-白色")];
+//
+//    [self addSubview:arrowIV];
+//    [arrowIV mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.width.equalTo(@(arrowW));
+//        make.height.equalTo(@(arrowH));
+//        make.centerY.equalTo(@0);
+//        make.right.equalTo(@(-rightMargin));
+//    }];
+
     CGFloat btnW = kScreenWidth/2.0;
     //积分中心
     UIButton *integralBtn = [UIButton buttonWithTitle:@"积分中心"
@@ -132,6 +148,14 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
         
         [self.delegate didSelectedWithType:MineHeaderTypeCollection idx:0];
+    }
+}
+
+- (void)selectPhoto:(UITapGestureRecognizer *)tapGR {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
+        
+        [self.delegate didSelectedWithType:MineHeaderTypePhoto idx:0];
     }
 }
 

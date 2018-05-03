@@ -71,7 +71,7 @@
     //当前人民币价格
     self.rmbPriceLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kThemeColor
-                                                    font:26.0];
+                                                    font:20.0];
     
     [self addSubview:self.rmbPriceLbl];
     //涨跌情况
@@ -238,7 +238,7 @@
     //收
     self.endPriceLbl.text = [NSString stringWithFormat:@"收:%@", [platform.close convertToRealMoneyWithNum:8]];
     //市值
-    self.marketVolumeLbl.text = [NSString stringWithFormat:@"市值:%@", [platform.maxMarketCapCny convertToRealMoneyWithNum:8]];
+    self.marketVolumeLbl.text = [NSString stringWithFormat:@"市值:%@", [platform getNumWithVolume:platform.maxMarketCapCny]];
 }
 
 #pragma mark - Events
