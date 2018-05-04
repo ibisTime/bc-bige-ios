@@ -125,6 +125,12 @@
 		2128826D2057A13D00A57A5A /* MineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882672057A13C00A57A5A /* MineModel.m */; };
 		2128826F2057A13D00A57A5A /* MineGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882692057A13C00A57A5A /* MineGroup.m */; };
 		212882732057A37700A57A5A /* YYImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882712057A37700A57A5A /* YYImageClipViewController.m */; };
+		212AB4EA209C048B004A99F9 /* SimulationContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4E9209C048B004A99F9 /* SimulationContactVC.m */; };
+		212AB4ED209C0999004A99F9 /* KLineTrainCampVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4EC209C0999004A99F9 /* KLineTrainCampVC.m */; };
+		212AB4F0209C0A46004A99F9 /* RealAssetLinkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4EF209C0A46004A99F9 /* RealAssetLinkVC.m */; };
+		212AB4F3209C3164004A99F9 /* SimulationTradeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4F2209C3164004A99F9 /* SimulationTradeHeaderView.m */; };
+		212AB4F6209C44C0004A99F9 /* SimulationTradeSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4F5209C44C0004A99F9 /* SimulationTradeSliderView.m */; };
+		212AB4F9209C4B3D004A99F9 /* SimulationQuotesListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4F8209C4B3D004A99F9 /* SimulationQuotesListVC.m */; };
 		212B896E2099658700BD3A94 /* HomeChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B896D2099658700BD3A94 /* HomeChildVC.m */; };
 		212B89712099869B00BD3A94 /* BannerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B89702099869B00BD3A94 /* BannerModel.m */; };
 		212B897420998CE500BD3A94 /* OptionalInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212B897320998CE500BD3A94 /* OptionalInfoView.m */; };
@@ -148,6 +154,8 @@
 		212B89B3209B0ADF00BD3A94 /* ZDCChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 212B89AF209B0ADE00BD3A94 /* ZDCChat.framework */; };
 		212B89B4209B0ADF00BD3A94 /* ZDCChatStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 212B89B0209B0ADE00BD3A94 /* ZDCChatStrings.bundle */; };
 		212B89B5209B0ADF00BD3A94 /* ZDCChat.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 212B89B1209B0ADE00BD3A94 /* ZDCChat.bundle */; };
+		212D018E209C5BFE00F4AAB6 /* SimulationQuotesTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212D018D209C5BFE00F4AAB6 /* SimulationQuotesTableView.m */; };
+		212D0191209C5CB000F4AAB6 /* SimulationQuotesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212D0190209C5CB000F4AAB6 /* SimulationQuotesCell.m */; };
 		212FEEA520688CBF0002F293 /* ForumDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212FEEA420688CBF0002F293 /* ForumDetailModel.m */; };
 		212FEEA820688FD30002F293 /* ForumDetailTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212FEEA720688FD30002F293 /* ForumDetailTableView.m */; };
 		212FEEAB20688FF90002F293 /* ForumDetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212FEEAA20688FF90002F293 /* ForumDetailCell.m */; };
@@ -561,6 +569,18 @@
 		2128826B2057A13C00A57A5A /* MineGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineGroup.h; sourceTree = "<group>"; };
 		212882712057A37700A57A5A /* YYImageClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageClipViewController.m; sourceTree = "<group>"; };
 		212882722057A37700A57A5A /* YYImageClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageClipViewController.h; sourceTree = "<group>"; };
+		212AB4E8209C048B004A99F9 /* SimulationContactVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationContactVC.h; sourceTree = "<group>"; };
+		212AB4E9209C048B004A99F9 /* SimulationContactVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationContactVC.m; sourceTree = "<group>"; };
+		212AB4EB209C0999004A99F9 /* KLineTrainCampVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLineTrainCampVC.h; sourceTree = "<group>"; };
+		212AB4EC209C0999004A99F9 /* KLineTrainCampVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KLineTrainCampVC.m; sourceTree = "<group>"; };
+		212AB4EE209C0A46004A99F9 /* RealAssetLinkVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RealAssetLinkVC.h; sourceTree = "<group>"; };
+		212AB4EF209C0A46004A99F9 /* RealAssetLinkVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RealAssetLinkVC.m; sourceTree = "<group>"; };
+		212AB4F1209C3164004A99F9 /* SimulationTradeHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationTradeHeaderView.h; sourceTree = "<group>"; };
+		212AB4F2209C3164004A99F9 /* SimulationTradeHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationTradeHeaderView.m; sourceTree = "<group>"; };
+		212AB4F4209C44C0004A99F9 /* SimulationTradeSliderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationTradeSliderView.h; sourceTree = "<group>"; };
+		212AB4F5209C44C0004A99F9 /* SimulationTradeSliderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationTradeSliderView.m; sourceTree = "<group>"; };
+		212AB4F7209C4B3D004A99F9 /* SimulationQuotesListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationQuotesListVC.h; sourceTree = "<group>"; };
+		212AB4F8209C4B3D004A99F9 /* SimulationQuotesListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationQuotesListVC.m; sourceTree = "<group>"; };
 		212B896C2099658700BD3A94 /* HomeChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeChildVC.h; sourceTree = "<group>"; };
 		212B896D2099658700BD3A94 /* HomeChildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeChildVC.m; sourceTree = "<group>"; };
 		212B896F2099869A00BD3A94 /* BannerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerModel.h; sourceTree = "<group>"; };
@@ -603,6 +623,10 @@
 		212B89AF209B0ADE00BD3A94 /* ZDCChat.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ZDCChat.framework; sourceTree = "<group>"; };
 		212B89B0209B0ADE00BD3A94 /* ZDCChatStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChatStrings.bundle; sourceTree = "<group>"; };
 		212B89B1209B0ADE00BD3A94 /* ZDCChat.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ZDCChat.bundle; sourceTree = "<group>"; };
+		212D018C209C5BFE00F4AAB6 /* SimulationQuotesTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationQuotesTableView.h; sourceTree = "<group>"; };
+		212D018D209C5BFE00F4AAB6 /* SimulationQuotesTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationQuotesTableView.m; sourceTree = "<group>"; };
+		212D018F209C5CB000F4AAB6 /* SimulationQuotesCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationQuotesCell.h; sourceTree = "<group>"; };
+		212D0190209C5CB000F4AAB6 /* SimulationQuotesCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationQuotesCell.m; sourceTree = "<group>"; };
 		212FEEA320688CBF0002F293 /* ForumDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForumDetailModel.h; sourceTree = "<group>"; };
 		212FEEA420688CBF0002F293 /* ForumDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ForumDetailModel.m; sourceTree = "<group>"; };
 		212FEEA620688FD30002F293 /* ForumDetailTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ForumDetailTableView.h; sourceTree = "<group>"; };
@@ -1047,6 +1071,14 @@
 				21268FD7208DD309005B6B46 /* SimulationTradeVC.m */,
 				21268FE3208EC8B9005B6B46 /* SimulationTradeDetailVC.h */,
 				21268FE4208EC8B9005B6B46 /* SimulationTradeDetailVC.m */,
+				212AB4F7209C4B3D004A99F9 /* SimulationQuotesListVC.h */,
+				212AB4F8209C4B3D004A99F9 /* SimulationQuotesListVC.m */,
+				212AB4E8209C048B004A99F9 /* SimulationContactVC.h */,
+				212AB4E9209C048B004A99F9 /* SimulationContactVC.m */,
+				212AB4EB209C0999004A99F9 /* KLineTrainCampVC.h */,
+				212AB4EC209C0999004A99F9 /* KLineTrainCampVC.m */,
+				212AB4EE209C0A46004A99F9 /* RealAssetLinkVC.h */,
+				212AB4EF209C0A46004A99F9 /* RealAssetLinkVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1054,8 +1086,8 @@
 		210DE828208DB1F700F6F366 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				21268FDC208DD6EA005B6B46 /* SimulationTradeView.h */,
-				21268FDD208DD6EA005B6B46 /* SimulationTradeView.m */,
+				212D018B209C5A7000F4AAB6 /* Detail */,
+				212D018A209C5A6200F4AAB6 /* Slider */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1866,6 +1898,30 @@
 				212B89B1209B0ADE00BD3A94 /* ZDCChat.bundle */,
 			);
 			path = ZDCChat;
+			sourceTree = "<group>";
+		};
+		212D018A209C5A6200F4AAB6 /* Slider */ = {
+			isa = PBXGroup;
+			children = (
+				212AB4F4209C44C0004A99F9 /* SimulationTradeSliderView.h */,
+				212AB4F5209C44C0004A99F9 /* SimulationTradeSliderView.m */,
+				212D018C209C5BFE00F4AAB6 /* SimulationQuotesTableView.h */,
+				212D018D209C5BFE00F4AAB6 /* SimulationQuotesTableView.m */,
+				212D018F209C5CB000F4AAB6 /* SimulationQuotesCell.h */,
+				212D0190209C5CB000F4AAB6 /* SimulationQuotesCell.m */,
+			);
+			path = Slider;
+			sourceTree = "<group>";
+		};
+		212D018B209C5A7000F4AAB6 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				21268FDC208DD6EA005B6B46 /* SimulationTradeView.h */,
+				21268FDD208DD6EA005B6B46 /* SimulationTradeView.m */,
+				212AB4F1209C3164004A99F9 /* SimulationTradeHeaderView.h */,
+				212AB4F2209C3164004A99F9 /* SimulationTradeHeaderView.m */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		214593E4206B22EF0006E238 /* HomePage */ = {
@@ -3129,6 +3185,7 @@
 				2124BED1206355E600CB79E8 /* SearchHistoryTableView.m in Sources */,
 				21AC59491FDE7A1B00F19DE8 /* TLCaptchaView.m in Sources */,
 				21AC594C1FDE7A1B00F19DE8 /* TLTextField.m in Sources */,
+				212AB4F9209C4B3D004A99F9 /* SimulationQuotesListVC.m in Sources */,
 				9EE318332085A03600AC0070 /* AppDelegate.m in Sources */,
 				21111BB61F8B5F2C0021B3FE /* PasswordView.m in Sources */,
 				212882652057A11100A57A5A /* MineTableView.m in Sources */,
@@ -3167,6 +3224,7 @@
 				2126900820906E6C005B6B46 /* CurrencyTrendMapView.m in Sources */,
 				2128825220577D3900A57A5A /* ForumModel.m in Sources */,
 				21AC593E1FDE7A1B00F19DE8 /* TopLabelUtil.m in Sources */,
+				212D0191209C5CB000F4AAB6 /* SimulationQuotesCell.m in Sources */,
 				2126900220906200005B6B46 /* CurrencyInfoChildVC.m in Sources */,
 				2124BE16205FD40700CB79E8 /* ShareView.m in Sources */,
 				219CF5372073559600012F68 /* AppDelegate+JPush.m in Sources */,
@@ -3231,6 +3289,7 @@
 				21111BED1F8B5F2C0021B3FE /* NSArray+Custom.m in Sources */,
 				214593F5206B2B270006E238 /* HomePageInfoCell.m in Sources */,
 				21AC59421FDE7A1B00F19DE8 /* TLDatePicker.m in Sources */,
+				212AB4F0209C0A46004A99F9 /* RealAssetLinkVC.m in Sources */,
 				21EF0B8020667AA5008EA865 /* MyCommentDetailVC.m in Sources */,
 				21EF0B9E20677DBD008EA865 /* PlatformTitleModel.m in Sources */,
 				214593FE206B34A10006E238 /* HomePageInfoVC.m in Sources */,
@@ -3265,6 +3324,7 @@
 				21158E461F1C4F9E00A07266 /* TabBarModel.m in Sources */,
 				21AC59671FDE80FB00F19DE8 /* UIColor+theme.m in Sources */,
 				21EB9C6520561AF700394C3C /* UIViewController+Extension.m in Sources */,
+				212D018E209C5BFE00F4AAB6 /* SimulationQuotesTableView.m in Sources */,
 				2124BEB3206285CE00CB79E8 /* QuotesOptionalChildVC.m in Sources */,
 				212FEEAB20688FF90002F293 /* ForumDetailCell.m in Sources */,
 				217BDAF62069483A00E17DEE /* CircleCommentTableView.m in Sources */,
@@ -3296,6 +3356,7 @@
 				212B897D2099AC6A00BD3A94 /* HomeQuotesSortBar.m in Sources */,
 				21269017209170E1005B6B46 /* PlatformInfoCell.m in Sources */,
 				21CFFB1D20566BC500D245ED /* NewsFlashListCell.m in Sources */,
+				212AB4F6209C44C0004A99F9 /* SimulationTradeSliderView.m in Sources */,
 				219CF5302072550300012F68 /* SGQRCodeTool.m in Sources */,
 				219CF5272072550300012F68 /* ScanSuccessJumpVC.m in Sources */,
 				2124BEE5206394B900CB79E8 /* UserEditModel.m in Sources */,
@@ -3316,6 +3377,7 @@
 				217BDAF92069484D00E17DEE /* CircleCommentCell.m in Sources */,
 				2124BEC72063493600CB79E8 /* SearchCurrencyCell.m in Sources */,
 				2124BE8E20623EAA00CB79E8 /* PlatformTableView.m in Sources */,
+				212AB4EA209C048B004A99F9 /* SimulationContactVC.m in Sources */,
 				21AC594F1FDE7A1B00F19DE8 /* TLUploadManager.m in Sources */,
 				21268FF92090202C005B6B46 /* CurrencyBottomView.m in Sources */,
 				21EF0B9120668FE3008EA865 /* MyCollectionCell.m in Sources */,
@@ -3341,6 +3403,7 @@
 				212B899E209ADBA300BD3A94 /* WarningSettingVC.m in Sources */,
 				212B89712099869B00BD3A94 /* BannerModel.m in Sources */,
 				21158E491F1C502400A07266 /* BarButton.m in Sources */,
+				212AB4F3209C3164004A99F9 /* SimulationTradeHeaderView.m in Sources */,
 				212B89942099DD2400BD3A94 /* SettingTableView.m in Sources */,
 				21F82CA31F17719D0019B176 /* TLAuthHelper.m in Sources */,
 				21AC597E1FDE823C00F19DE8 /* NSString+Date.m in Sources */,
@@ -3355,6 +3418,7 @@
 				21AC58861FDE73B200F19DE8 /* TLAccountSetBaseVC.m in Sources */,
 				21268FDE208DD6EA005B6B46 /* SimulationTradeView.m in Sources */,
 				2128826D2057A13D00A57A5A /* MineModel.m in Sources */,
+				212AB4ED209C0999004A99F9 /* KLineTrainCampVC.m in Sources */,
 				21CFFB2020566C1C00D245ED /* NewsFlashModel.m in Sources */,
 				21EF0B392064A7DB008EA865 /* InfoTypeModel.m in Sources */,
 			);

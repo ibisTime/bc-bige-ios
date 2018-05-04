@@ -51,11 +51,11 @@
     
     BaseWeakSelf;
     
-    _headView = [[SortBar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeadBarHeight) sortNames:_itemTitles sortBlock:^(NSInteger index) {
+    _headView = [[SortBar alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kHeadBarHeight) sortNames:_itemTitles sortBlock:^(NSInteger index) {
         
         weakSelf.selectIndex = index;
         
-        [weakSelf.scrollView scrollRectToVisible:CGRectMake(kScreenWidth*index, 0, kScreenWidth, weakSelf.scrollView.height) animated:YES];
+        [weakSelf.scrollView scrollRectToVisible:CGRectMake(weakSelf.width*index, 0, weakSelf.width, weakSelf.scrollView.height) animated:YES];
         if (weakSelf.selectBlock) {
             
             weakSelf.selectBlock(index);
@@ -68,8 +68,8 @@
 
 - (void)initScrollView {
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeadBarHeight, kScreenWidth, self.frame.size.height)];
-    _scrollView.contentSize = CGSizeMake(kScreenWidth * _itemTitles.count, self.height - kHeadBarHeight);
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, kHeadBarHeight, self.frame.size.width, self.frame.size.height)];
+    _scrollView.contentSize = CGSizeMake(self.frame.size.width * _itemTitles.count, self.height - kHeadBarHeight);
     _scrollView.delegate = self;
     _scrollView.pagingEnabled = YES;
     _scrollView.bounces = NO;
@@ -91,7 +91,6 @@
     _currentIndex = currentIndex;
     
     _headView.curruntIndex = _currentIndex;
-
 }
 
 @end

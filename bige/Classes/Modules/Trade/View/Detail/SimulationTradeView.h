@@ -10,7 +10,7 @@
 //M
 #import "SimulationTradeInfoModel.h"
 
-typedef void(^SimulationTradeBlock)(NSString *type);
+typedef void(^SimulationTradeBlock)(NSInteger type);
 
 @interface SimulationTradeView : BaseView
 

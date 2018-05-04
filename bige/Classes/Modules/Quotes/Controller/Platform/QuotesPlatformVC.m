@@ -275,7 +275,7 @@
     
     self.tableView = [[PlatformTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@"暂无行情"];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无行情" text:@"暂无行情"];
     self.tableView.refreshDelegate = self;
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

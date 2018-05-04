@@ -7,10 +7,6 @@
 //
 
 #import "HomeVC.h"
-//Macro
-//Framework
-//Category
-//Extension
 //M
 #import "InformationModel.h"
 #import "InfoManager.h"

@@ -59,6 +59,7 @@
     self.nickNameLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                textColor:kTextColor
                                                     font:16.0];
+    self.nickNameLbl.text = @"模拟练习区";
     [self addSubview:self.nickNameLbl];
     [self.nickNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -161,13 +162,11 @@
 #pragma mark - Events
 - (void)clickBtn:(UIButton *)sender {
     
-    NSInteger index = sender.tag = 1600;
-    
-    NSArray *typeArr = @[kBuyCurrency, kSellCurrency, kCancelOrder, kHoldThePosition, kInquire];
-    
+    NSInteger index = sender.tag - 1600;
+        
     if (self.tradeBlock) {
         
-        self.tradeBlock(typeArr[index]);
+        self.tradeBlock(index);
     }
 }
 
@@ -176,23 +175,21 @@
     
     _infoModel = infoModel;
     //头像
-    [self.userPhoto sd_setImageWithURL:[NSURL URLWithString:[infoModel.user.photo convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
-    //昵称
-    self.nickNameLbl.text = infoModel.user.nickname;
+    [self.userPhoto sd_setImageWithURL:[NSURL URLWithString:[infoModel.userPhoto convertImageUrl]] placeholderImage:USER_PLACEHOLDER_SMALL];
     //成绩
     CGFloat rank = [infoModel.rank doubleValue]*100;
     
-    self.achieveLbl.text = [NSString stringWithFormat:@"战胜了%lf%%的用户", rank];
+    self.achieveLbl.text = [NSString stringWithFormat:@"战胜了%.2lf%%的用户", rank];
     //总资产
-    NSString *cnyAmount = [infoModel.cnyAmount stringValue];
+    NSString *cnyAmount = [NSString stringWithFormat:@"%.2lf", [infoModel.cnyAmount doubleValue]];
     //浮动盈亏
-    NSString *totalFloat = [infoModel.totalFloat stringValue];
+    NSString *totalFloat = [NSString stringWithFormat:@"%.2lf", [infoModel.totalFloat doubleValue]];
     //交易所数量
     NSString *exchangeCount = [infoModel.exchangeCount stringValue];
     //总市值
-    NSString *marketAmount = [infoModel.marketAmount stringValue];
+    NSString *marketAmount = [NSString stringWithFormat:@"%.2lf", [infoModel.marketAmount doubleValue]];
     //当日参考盈亏
-    NSString *dailyFloat = [infoModel.dailyFloat stringValue];
+    NSString *dailyFloat = [NSString stringWithFormat:@"%.2lf", [infoModel.dailyFloat doubleValue]];
     //持有币种
     NSString *symbolCount = [infoModel.symbolCount stringValue];
 

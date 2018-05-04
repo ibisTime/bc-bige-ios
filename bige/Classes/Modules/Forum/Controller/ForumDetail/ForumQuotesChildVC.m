@@ -76,7 +76,7 @@
     self.tableView = [[ForumQuotesTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
     self.tableView.tag = 1800 + self.index;
-    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@"暂无行情"];
+    self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无行情" text:@"暂无行情"];
 
     self.tableView.type = self.type;
 

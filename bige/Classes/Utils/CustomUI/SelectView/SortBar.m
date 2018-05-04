@@ -15,7 +15,7 @@
 #import "AppColorMacro.h"
 
 #define btnNum (_sortNames.count > 5 ? 5: _sortNames.count)
-#define widthItem (kScreenWidth/(btnNum*1.0))
+#define widthItem (self.width/(btnNum*1.0))
 #define btnFont MIN(kWidth(15.0), 15)
 
 static const float kAnimationdDuration = 0.3;
@@ -69,7 +69,7 @@ static const float kAnimationdDuration = 0.3;
     CGFloat lineW = [NSString getWidthWithString:self.sortNames[0] font:MIN(kWidth(16.0), 16)];
     CGFloat lineH = 3;
     
-    CGFloat leftM = self.allBtnWidth > kScreenWidth ? 10: (widthItem - lineW)/2.0;
+    CGFloat leftM = self.allBtnWidth > self.width ? 10: (widthItem - lineW)/2.0;
     
     _selectLine = [[UIView alloc] init];
     
@@ -112,7 +112,7 @@ static const float kAnimationdDuration = 0.3;
         
         CGFloat widthMargin = [NSString getWidthWithString:title font:MIN(kWidth(16.0), 16)] + 20;
         
-        CGFloat btnW = self.allBtnWidth > kScreenWidth ? widthMargin: widthItem;
+        CGFloat btnW = self.allBtnWidth > self.width ? widthMargin: widthItem;
         
         UIButton *button = [UIButton buttonWithTitle:_sortNames[i] titleColor:[UIColor textColor] backgroundColor:kWhiteColor titleFont:btnFont];
         
@@ -166,7 +166,7 @@ static const float kAnimationdDuration = 0.3;
     
     UIButton *button = [self viewWithTag:100+index];
     
-    CGFloat length = button.centerX - kScreenWidth/2;
+    CGFloat length = button.centerX - self.width/2;
     
     [self scrollRectToVisible:CGRectMake(length, 0, self.width, self.height) animated:YES];
     

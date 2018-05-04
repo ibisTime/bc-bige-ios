@@ -13,14 +13,21 @@
 //Category
 #import "UIButton+EnLargeEdge.h"
 //Extension
+#import <ZendeskSDK/ZendeskSDK.h>
 //M
 #import "SimulationTradeInfoModel.h"
+#import "TradeManager.h"
+
 //V
 #import "SimulationTradeView.h"
 #import "TLBannerView.h"
 //C
+#import "SimulationTradeDetailVC.h"
+#import "SimulationContactVC.h"
+#import "KLineTrainCampVC.h"
+#import "RealAssetLinkVC.h"
 
-@interface SimulationTradeVC ()
+@interface SimulationTradeVC ()<ZDKHelpCenterConversationsUIDelegate>
 //
 @property (nonatomic, strong) SimulationTradeView *tradeView;
 //模拟交易信息
@@ -43,6 +50,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //头部
     [self initTradeView];
     //链接
@@ -52,11 +60,29 @@
 }
 
 #pragma mark - Init
+- (void)zendeskUIConfig {
+    
+    //修改zendesk导航栏文字颜色
+    NSDictionary *navbarAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      kWhiteColor ,UITextAttributeTextColor, nil];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarAttributes];
+}
+
 - (void)initTradeView {
+    
+    BaseWeakSelf;
     
     self.tradeView = [[SimulationTradeView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 270)];
     
+    self.tradeView.tradeBlock = ^(NSInteger type) {
+        
+        [weakSelf tradeEventWithType:type];
+    };
+    
     [self.bgSV addSubview:self.tradeView];
+    
 }
 
 - (void)initBannerView {
@@ -153,6 +179,82 @@
 
 - (void)clickBottomBtn:(UIButton *)sender {
     
+    NSInteger index = sender.tag - 1700;
+    
+    switch (index) {
+        case 0:
+        {
+            SimulationContactVC *contactVC = [SimulationContactVC new];
+            
+            [self.navigationController pushViewController:contactVC animated:YES];
+        }break;
+           
+        case 1:
+        {
+            //zendesk
+            [self zendeskUIConfig];
+            
+            ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
+            
+            [ZDKHelpCenter setUIDelegate:self];
+            
+            [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
+                                 withContentModel:contentModel];
+        }break;
+        
+        case 2:
+        {
+            RealAssetLinkVC *linkVC = [RealAssetLinkVC new];
+            
+            [self.navigationController pushViewController:linkVC animated:YES];
+        }break;
+            
+        case 3:
+        {
+            KLineTrainCampVC *campVC = [KLineTrainCampVC new];
+            
+            [self.navigationController pushViewController:campVC animated:YES];
+        }break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)tradeEventWithType:(NSInteger )type {
+    
+    switch (type) {
+        //买入
+        case 0:
+        {
+            SimulationTradeDetailVC *detailVC = [SimulationTradeDetailVC new];
+            
+            [self.navigationController pushViewController:detailVC animated:YES];
+        }break;
+        //卖出
+        case 1:
+        {
+            
+        }break;
+        //撤单
+        case 2:
+        {
+            
+        }break;
+        //持仓
+        case 3:
+        {
+            
+        }break;
+        //查询
+        case 4:
+        {
+            
+        }break;
+            
+        default:
+            break;
+    }
     
 }
 
@@ -162,6 +264,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"628511";
+    http.showView = self.view;
     http.parameters[@"userId"] = [TLUser user].userId;
     
     [http postWithSuccess:^(id responseObject) {
@@ -173,6 +276,13 @@
     } failure:^(NSError *error) {
         
     }];
+}
+
+#pragma mark - ZDKHelpCenterConversationsUIDelegate
+
+- (ZDKContactUsVisibility)active {
+
+    return ZDKContactUsVisibilityOff;
 }
 
 - (void)didReceiveMemoryWarning {

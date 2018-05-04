@@ -8,7 +8,6 @@
 
 #import "BaseModel.h"
 
-@class SimulationUser;
 /**
  模拟交易信息
  */
@@ -27,15 +26,8 @@
 @property (nonatomic, strong) NSNumber *dailyFloat;
 //持有币种
 @property (nonatomic, strong) NSNumber *symbolCount;
-//用户信息
-@property (nonatomic, strong) SimulationUser *user;
+//用户头像
+@property (nonatomic, copy) NSString *userPhoto;
 
 @end
 
-@interface SimulationUser : NSObject
-//昵称
-@property (nonatomic, copy) NSString *nickname;
-//头像
-@property (nonatomic, copy) NSString *photo;
-
-@end

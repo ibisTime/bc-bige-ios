@@ -12,6 +12,3 @@
 
 @end
 
-@implementation SimulationUser
-
-@end

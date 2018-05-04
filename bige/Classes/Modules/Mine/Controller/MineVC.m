@@ -21,7 +21,6 @@
 #import "NSString+Check.h"
 #import <MBProgressHUD.h>
 #import <ZendeskSDK/ZendeskSDK.h>
-#import <ZDCChat/ZDCChat.h>
 #import <IQKeyboardManager/IQKeyboardManager.h>
 #import <CDCommon/UIScrollView+TLAdd.h>
 
@@ -40,7 +39,7 @@
 #import "SettingVC.h"
 #import "WarningSettingVC.h"
 
-@interface MineVC ()<MineHeaderDelegate, UINavigationControllerDelegate, ZDKHelpCenterConversationsUIDelegate>
+@interface MineVC ()<MineHeaderDelegate>
 //模型
 @property (nonatomic, strong) MineGroup *group;
 //
@@ -63,6 +62,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    //zendesk
+    [self zendeskUIConfig];
     //通知
     [self addNotification];
     //
@@ -74,16 +75,18 @@
     
 }
 
-#pragma mark - UINavigationControllerDelegate
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    // 判断要显示的控制器是否是自己
-    if ([viewController isKindOfClass:[ZDKHelpCenterOverviewController class]]) {
-
-    }
-    
-}
-
 #pragma mark - Init
+
+- (void)zendeskUIConfig {
+    
+    //修改zendesk导航栏文字颜色
+    NSDictionary *navbarAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                      kWhiteColor ,UITextAttributeTextColor, nil];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    //修改zendesk导航栏背景颜色
+    [[UINavigationBar appearance] setBarTintColor:kAppCustomMainColor];
+    [[UINavigationBar appearance] setTitleTextAttributes:navbarAttributes];
+}
 
 - (void)initGroup {
     
@@ -159,8 +162,6 @@
 
 - (void)initTableView {
     
-    self.navigationController.delegate = self;
-
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kWidth(155 + kStatusBarHeight))];
     
     imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -410,13 +411,6 @@
             break;
     }
 }
-
-#pragma mark - ZDKHelpCenterConversationsUIDelegate
-
-//- (ZDKContactUsVisibility)active {
-//
-//    return ZDKContactUsVisibilityOff;
-//}
 
 /**
  VC被释放时移除通知
