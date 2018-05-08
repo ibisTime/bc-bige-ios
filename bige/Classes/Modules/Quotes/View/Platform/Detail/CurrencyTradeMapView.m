@@ -98,7 +98,7 @@
     
     //买卖实图
     //交易对
-    NSString *symbol = [NSString stringWithFormat:@"%@%@", platform.symbol, platform.toSymbol];
+    NSString *symbol = [NSString stringWithFormat:@"%@/%@", platform.symbol, platform.toSymbol];
     NSString *html = [NSString stringWithFormat:@"%@/charts/buySellBar.html?symbol=%@&exchange=%@",@"http://47.52.236.63:2303", symbol, platform.exchangeEname];
     NSLog(@"html = %@", html);
     

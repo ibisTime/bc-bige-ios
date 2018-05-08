@@ -9,5 +9,7 @@
 #import "BaseViewController.h"
 
 @interface SimulationTradeDetailVC : BaseViewController
+//
+@property (nonatomic, copy) NSString *direction;
 
 @end

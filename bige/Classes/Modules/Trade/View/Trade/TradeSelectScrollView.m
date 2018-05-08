@@ -1,12 +1,12 @@
 //
-//  SelectScrollView.m
-//  YS_iOS
+//  TradeSelectScrollView.m
+//  bige
 //
-//  Created by 蔡卓越 on 2017/6/24.
-//  Copyright © 2017年 caizhuoyue. All rights reserved.
+//  Created by 蔡卓越 on 2018/5/7.
+//  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
-#import "SelectScrollView.h"
+#import "TradeSelectScrollView.h"
 //Category
 #import "UIView+Responder.h"
 #import <UIScrollView+TLAdd.h>
@@ -16,7 +16,7 @@
 
 #define kHeadBarHeight 45
 
-@interface SelectScrollView ()<UIScrollViewDelegate>
+@interface TradeSelectScrollView()<UIScrollViewDelegate>
 
 @property (nonatomic, strong) NSArray *itemTitles;
 
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation SelectScrollView
+@implementation TradeSelectScrollView
 
 - (instancetype)initWithFrame:(CGRect)frame itemTitles:(NSArray *)itemTitles {
     
@@ -51,11 +51,11 @@
     
     BaseWeakSelf;
     
-    _headView = [[SortBar alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kHeadBarHeight) sortNames:_itemTitles sortBlock:^(NSInteger index) {
+    _headView = [[TradeSortBar alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, kHeadBarHeight) sortNames:_itemTitles sortBlock:^(NSInteger index) {
         
         weakSelf.selectIndex = index;
         
-        [weakSelf.scrollView scrollRectToVisible:CGRectMake(weakSelf.width*index, 0, weakSelf.width, weakSelf.scrollView.height) animated:YES];
+        [weakSelf.scrollView scrollRectToVisible:CGRectMake(weakSelf.width*index, 0, weakSelf.width, weakSelf.scrollView.height) animated:NO];
         if (weakSelf.selectBlock) {
             
             weakSelf.selectBlock(index);

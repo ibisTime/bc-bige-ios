@@ -83,6 +83,7 @@
 		2124BEE5206394B900CB79E8 /* UserEditModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEE3206394B900CB79E8 /* UserEditModel.m */; };
 		2124BEEB2063960900CB79E8 /* UserEditCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEE92063960900CB79E8 /* UserEditCell.m */; };
 		2124BEEE2063B61B00CB79E8 /* ThirdLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2124BEED2063B61B00CB79E8 /* ThirdLoginModel.m */; };
+		21257E4B20A1D55C0094C651 /* AllDivisionListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21257E4A20A1D55C0094C651 /* AllDivisionListVC.m */; };
 		21268FD4208DB60C005B6B46 /* TLUserForgetPwdVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FD1208DB60C005B6B46 /* TLUserForgetPwdVC.m */; };
 		21268FD5208DB60C005B6B46 /* TLUserRegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FD3208DB60C005B6B46 /* TLUserRegisterVC.m */; };
 		21268FD8208DD309005B6B46 /* SimulationTradeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 21268FD7208DD309005B6B46 /* SimulationTradeVC.m */; };
@@ -125,6 +126,19 @@
 		2128826D2057A13D00A57A5A /* MineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882672057A13C00A57A5A /* MineModel.m */; };
 		2128826F2057A13D00A57A5A /* MineGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882692057A13C00A57A5A /* MineGroup.m */; };
 		212882732057A37700A57A5A /* YYImageClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 212882712057A37700A57A5A /* YYImageClipViewController.m */; };
+		212A3087209FFB1500B6F7FF /* TradeBuyChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A3086209FFB1500B6F7FF /* TradeBuyChildVC.m */; };
+		212A308A209FFB2400B6F7FF /* TradeSellChildVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A3089209FFB2400B6F7FF /* TradeSellChildVC.m */; };
+		212A3091209FFBBF00B6F7FF /* TradeSellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A3090209FFBBF00B6F7FF /* TradeSellView.m */; };
+		212A3094209FFD5000B6F7FF /* TradeBuyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A3093209FFD5000B6F7FF /* TradeBuyView.m */; };
+		212A309720A0222C00B6F7FF /* TradeSelectScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A309620A0222C00B6F7FF /* TradeSelectScrollView.m */; };
+		212A309A20A0225F00B6F7FF /* TradeSortBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A309920A0225F00B6F7FF /* TradeSortBar.m */; };
+		212A309D20A0848D00B6F7FF /* AccountModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A309C20A0848D00B6F7FF /* AccountModel.m */; };
+		212A30A020A179C600B6F7FF /* TradeListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A309F20A179C600B6F7FF /* TradeListTableView.m */; };
+		212A30A320A17B2F00B6F7FF /* TradeListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A30A220A17B2F00B6F7FF /* TradeListCell.m */; };
+		212A30A620A1806500B6F7FF /* TradeListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A30A520A1806500B6F7FF /* TradeListModel.m */; };
+		212A30AD20A19D3100B6F7FF /* DivisionListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A30AC20A19D3100B6F7FF /* DivisionListTableView.m */; };
+		212A30B020A19D5B00B6F7FF /* DivisionListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A30AF20A19D5B00B6F7FF /* DivisionListCell.m */; };
+		212A30B320A19DE600B6F7FF /* DivisionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 212A30B220A19DE600B6F7FF /* DivisionModel.m */; };
 		212AB4EA209C048B004A99F9 /* SimulationContactVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4E9209C048B004A99F9 /* SimulationContactVC.m */; };
 		212AB4ED209C0999004A99F9 /* KLineTrainCampVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4EC209C0999004A99F9 /* KLineTrainCampVC.m */; };
 		212AB4F0209C0A46004A99F9 /* RealAssetLinkVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212AB4EF209C0A46004A99F9 /* RealAssetLinkVC.m */; };
@@ -485,6 +499,8 @@
 		2124BEEA2063960900CB79E8 /* UserEditCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserEditCell.h; sourceTree = "<group>"; };
 		2124BEEC2063B61B00CB79E8 /* ThirdLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThirdLoginModel.h; sourceTree = "<group>"; };
 		2124BEED2063B61B00CB79E8 /* ThirdLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ThirdLoginModel.m; sourceTree = "<group>"; };
+		21257E4920A1D55C0094C651 /* AllDivisionListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AllDivisionListVC.h; sourceTree = "<group>"; };
+		21257E4A20A1D55C0094C651 /* AllDivisionListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AllDivisionListVC.m; sourceTree = "<group>"; };
 		21268FD0208DB60B005B6B46 /* TLUserForgetPwdVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUserForgetPwdVC.h; sourceTree = "<group>"; };
 		21268FD1208DB60C005B6B46 /* TLUserForgetPwdVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLUserForgetPwdVC.m; sourceTree = "<group>"; };
 		21268FD2208DB60C005B6B46 /* TLUserRegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLUserRegisterVC.h; sourceTree = "<group>"; };
@@ -569,6 +585,32 @@
 		2128826B2057A13C00A57A5A /* MineGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineGroup.h; sourceTree = "<group>"; };
 		212882712057A37700A57A5A /* YYImageClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YYImageClipViewController.m; sourceTree = "<group>"; };
 		212882722057A37700A57A5A /* YYImageClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YYImageClipViewController.h; sourceTree = "<group>"; };
+		212A3085209FFB1500B6F7FF /* TradeBuyChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeBuyChildVC.h; sourceTree = "<group>"; };
+		212A3086209FFB1500B6F7FF /* TradeBuyChildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeBuyChildVC.m; sourceTree = "<group>"; };
+		212A3088209FFB2400B6F7FF /* TradeSellChildVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSellChildVC.h; sourceTree = "<group>"; };
+		212A3089209FFB2400B6F7FF /* TradeSellChildVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeSellChildVC.m; sourceTree = "<group>"; };
+		212A308F209FFBBF00B6F7FF /* TradeSellView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSellView.h; sourceTree = "<group>"; };
+		212A3090209FFBBF00B6F7FF /* TradeSellView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeSellView.m; sourceTree = "<group>"; };
+		212A3092209FFD5000B6F7FF /* TradeBuyView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeBuyView.h; sourceTree = "<group>"; };
+		212A3093209FFD5000B6F7FF /* TradeBuyView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeBuyView.m; sourceTree = "<group>"; };
+		212A309520A0222C00B6F7FF /* TradeSelectScrollView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSelectScrollView.h; sourceTree = "<group>"; };
+		212A309620A0222C00B6F7FF /* TradeSelectScrollView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeSelectScrollView.m; sourceTree = "<group>"; };
+		212A309820A0225F00B6F7FF /* TradeSortBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeSortBar.h; sourceTree = "<group>"; };
+		212A309920A0225F00B6F7FF /* TradeSortBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeSortBar.m; sourceTree = "<group>"; };
+		212A309B20A0848D00B6F7FF /* AccountModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AccountModel.h; sourceTree = "<group>"; };
+		212A309C20A0848D00B6F7FF /* AccountModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccountModel.m; sourceTree = "<group>"; };
+		212A309E20A179C600B6F7FF /* TradeListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeListTableView.h; sourceTree = "<group>"; };
+		212A309F20A179C600B6F7FF /* TradeListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeListTableView.m; sourceTree = "<group>"; };
+		212A30A120A17B2F00B6F7FF /* TradeListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeListCell.h; sourceTree = "<group>"; };
+		212A30A220A17B2F00B6F7FF /* TradeListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeListCell.m; sourceTree = "<group>"; };
+		212A30A420A1806500B6F7FF /* TradeListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TradeListModel.h; sourceTree = "<group>"; };
+		212A30A520A1806500B6F7FF /* TradeListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TradeListModel.m; sourceTree = "<group>"; };
+		212A30AB20A19D3100B6F7FF /* DivisionListTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DivisionListTableView.h; sourceTree = "<group>"; };
+		212A30AC20A19D3100B6F7FF /* DivisionListTableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DivisionListTableView.m; sourceTree = "<group>"; };
+		212A30AE20A19D5B00B6F7FF /* DivisionListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DivisionListCell.h; sourceTree = "<group>"; };
+		212A30AF20A19D5B00B6F7FF /* DivisionListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DivisionListCell.m; sourceTree = "<group>"; };
+		212A30B120A19DE600B6F7FF /* DivisionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DivisionModel.h; sourceTree = "<group>"; };
+		212A30B220A19DE600B6F7FF /* DivisionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DivisionModel.m; sourceTree = "<group>"; };
 		212AB4E8209C048B004A99F9 /* SimulationContactVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimulationContactVC.h; sourceTree = "<group>"; };
 		212AB4E9209C048B004A99F9 /* SimulationContactVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimulationContactVC.m; sourceTree = "<group>"; };
 		212AB4EB209C0999004A99F9 /* KLineTrainCampVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KLineTrainCampVC.h; sourceTree = "<group>"; };
@@ -1065,20 +1107,15 @@
 		210DE827208DB1EE00F6F366 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				212A30AA20A19CBD00B6F7FF /* RealAssetLink */,
+				212A30A920A19CA900B6F7FF /* KLine */,
+				212A30A820A19C9C00B6F7FF /* Contact */,
+				212A30A720A19C4400B6F7FF /* Detail */,
+				212A307E209FFABC00B6F7FF /* Trade */,
 				210DE82A208DB22400F6F366 /* TradeVC.h */,
 				210DE82B208DB22400F6F366 /* TradeVC.m */,
 				21268FD6208DD309005B6B46 /* SimulationTradeVC.h */,
 				21268FD7208DD309005B6B46 /* SimulationTradeVC.m */,
-				21268FE3208EC8B9005B6B46 /* SimulationTradeDetailVC.h */,
-				21268FE4208EC8B9005B6B46 /* SimulationTradeDetailVC.m */,
-				212AB4F7209C4B3D004A99F9 /* SimulationQuotesListVC.h */,
-				212AB4F8209C4B3D004A99F9 /* SimulationQuotesListVC.m */,
-				212AB4E8209C048B004A99F9 /* SimulationContactVC.h */,
-				212AB4E9209C048B004A99F9 /* SimulationContactVC.m */,
-				212AB4EB209C0999004A99F9 /* KLineTrainCampVC.h */,
-				212AB4EC209C0999004A99F9 /* KLineTrainCampVC.m */,
-				212AB4EE209C0A46004A99F9 /* RealAssetLinkVC.h */,
-				212AB4EF209C0A46004A99F9 /* RealAssetLinkVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1086,6 +1123,7 @@
 		210DE828208DB1F700F6F366 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				212A308B209FFB4000B6F7FF /* Trade */,
 				212D018B209C5A7000F4AAB6 /* Detail */,
 				212D018A209C5A6200F4AAB6 /* Slider */,
 			);
@@ -1099,6 +1137,12 @@
 				21268FDA208DD3A9005B6B46 /* TradeManager.m */,
 				21268FE0208DE833005B6B46 /* SimulationTradeInfoModel.h */,
 				21268FE1208DE833005B6B46 /* SimulationTradeInfoModel.m */,
+				212A309B20A0848D00B6F7FF /* AccountModel.h */,
+				212A309C20A0848D00B6F7FF /* AccountModel.m */,
+				212A30A420A1806500B6F7FF /* TradeListModel.h */,
+				212A30A520A1806500B6F7FF /* TradeListModel.m */,
+				212A30B120A19DE600B6F7FF /* DivisionModel.h */,
+				212A30B220A19DE600B6F7FF /* DivisionModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1818,6 +1862,76 @@
 			path = ImageClip;
 			sourceTree = "<group>";
 		};
+		212A307E209FFABC00B6F7FF /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				212A3085209FFB1500B6F7FF /* TradeBuyChildVC.h */,
+				212A3086209FFB1500B6F7FF /* TradeBuyChildVC.m */,
+				212A3088209FFB2400B6F7FF /* TradeSellChildVC.h */,
+				212A3089209FFB2400B6F7FF /* TradeSellChildVC.m */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		212A308B209FFB4000B6F7FF /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				212A3092209FFD5000B6F7FF /* TradeBuyView.h */,
+				212A3093209FFD5000B6F7FF /* TradeBuyView.m */,
+				212A308F209FFBBF00B6F7FF /* TradeSellView.h */,
+				212A3090209FFBBF00B6F7FF /* TradeSellView.m */,
+				212A309520A0222C00B6F7FF /* TradeSelectScrollView.h */,
+				212A309620A0222C00B6F7FF /* TradeSelectScrollView.m */,
+				212A309820A0225F00B6F7FF /* TradeSortBar.h */,
+				212A309920A0225F00B6F7FF /* TradeSortBar.m */,
+				212A309E20A179C600B6F7FF /* TradeListTableView.h */,
+				212A309F20A179C600B6F7FF /* TradeListTableView.m */,
+				212A30A120A17B2F00B6F7FF /* TradeListCell.h */,
+				212A30A220A17B2F00B6F7FF /* TradeListCell.m */,
+			);
+			path = Trade;
+			sourceTree = "<group>";
+		};
+		212A30A720A19C4400B6F7FF /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				21268FE3208EC8B9005B6B46 /* SimulationTradeDetailVC.h */,
+				21268FE4208EC8B9005B6B46 /* SimulationTradeDetailVC.m */,
+				212AB4F7209C4B3D004A99F9 /* SimulationQuotesListVC.h */,
+				212AB4F8209C4B3D004A99F9 /* SimulationQuotesListVC.m */,
+				21257E4920A1D55C0094C651 /* AllDivisionListVC.h */,
+				21257E4A20A1D55C0094C651 /* AllDivisionListVC.m */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		212A30A820A19C9C00B6F7FF /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				212AB4E8209C048B004A99F9 /* SimulationContactVC.h */,
+				212AB4E9209C048B004A99F9 /* SimulationContactVC.m */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		212A30A920A19CA900B6F7FF /* KLine */ = {
+			isa = PBXGroup;
+			children = (
+				212AB4EB209C0999004A99F9 /* KLineTrainCampVC.h */,
+				212AB4EC209C0999004A99F9 /* KLineTrainCampVC.m */,
+			);
+			path = KLine;
+			sourceTree = "<group>";
+		};
+		212A30AA20A19CBD00B6F7FF /* RealAssetLink */ = {
+			isa = PBXGroup;
+			children = (
+				212AB4EE209C0A46004A99F9 /* RealAssetLinkVC.h */,
+				212AB4EF209C0A46004A99F9 /* RealAssetLinkVC.m */,
+			);
+			path = RealAssetLink;
+			sourceTree = "<group>";
+		};
 		212B89842099DD0700BD3A94 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -1920,6 +2034,10 @@
 				21268FDD208DD6EA005B6B46 /* SimulationTradeView.m */,
 				212AB4F1209C3164004A99F9 /* SimulationTradeHeaderView.h */,
 				212AB4F2209C3164004A99F9 /* SimulationTradeHeaderView.m */,
+				212A30AB20A19D3100B6F7FF /* DivisionListTableView.h */,
+				212A30AC20A19D3100B6F7FF /* DivisionListTableView.m */,
+				212A30AE20A19D5B00B6F7FF /* DivisionListCell.h */,
+				212A30AF20A19D5B00B6F7FF /* DivisionListCell.m */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -3163,6 +3281,8 @@
 				21AC589F1FDE754400F19DE8 /* AppConfig.m in Sources */,
 				212B89A5209AE60700BD3A94 /* WarningSettingTableView.m in Sources */,
 				21268FE2208DE833005B6B46 /* SimulationTradeInfoModel.m in Sources */,
+				212A309D20A0848D00B6F7FF /* AccountModel.m in Sources */,
+				21257E4B20A1D55C0094C651 /* AllDivisionListVC.m in Sources */,
 				2124BE15205FD40700CB79E8 /* CustomShareView.m in Sources */,
 				217BDB032069DE3A00E17DEE /* CircleCommentModel.m in Sources */,
 				217BDAE92068C89A00E17DEE /* ForumCircleCell.m in Sources */,
@@ -3206,6 +3326,7 @@
 				21111BBA1F8B5F2C0021B3FE /* TLImagePickerController.m in Sources */,
 				2128825820579D6900A57A5A /* ForumListCell.m in Sources */,
 				21268FD8208DD309005B6B46 /* SimulationTradeVC.m in Sources */,
+				212A309A20A0225F00B6F7FF /* TradeSortBar.m in Sources */,
 				21AC59611FDE80A300F19DE8 /* UIButton+EnLargeEdge.m in Sources */,
 				21AC597C1FDE823C00F19DE8 /* NSString+Extension.m in Sources */,
 				2124BED42063560200CB79E8 /* SearchHistoryCell.m in Sources */,
@@ -3259,6 +3380,7 @@
 				210DE82C208DB22400F6F366 /* TradeVC.m in Sources */,
 				21CFFB2C205673D100D245ED /* NewsFlashDetailVC.m in Sources */,
 				212B89802099B6F300BD3A94 /* HomeQuotesTableView.m in Sources */,
+				212A3087209FFB1500B6F7FF /* TradeBuyChildVC.m in Sources */,
 				21AC58871FDE73B200F19DE8 /* TLPwdRelatedVC.m in Sources */,
 				21EF0B8A20668F0A008EA865 /* MyCollectionListVC.m in Sources */,
 				21AC59501FDE7A1B00F19DE8 /* TLPlaceholderView.m in Sources */,
@@ -3275,6 +3397,7 @@
 				212FEEA520688CBF0002F293 /* ForumDetailModel.m in Sources */,
 				21EB9C6B20562C9700394C3C /* DataDictionaryModel.m in Sources */,
 				2126902A2092BC48005B6B46 /* CurrencyKLineVC.m in Sources */,
+				212A308A209FFB2400B6F7FF /* TradeSellChildVC.m in Sources */,
 				21EF0B3C2064AC5A008EA865 /* ForumDetailVC.m in Sources */,
 				2124BEDF2063940400CB79E8 /* UserDetailEditVC.m in Sources */,
 				21AC59411FDE7A1B00F19DE8 /* TLProgressHUD.m in Sources */,
@@ -3282,6 +3405,7 @@
 				212B897720999E0C00BD3A94 /* OptionInfoModel.m in Sources */,
 				21459408206B35290006E238 /* HomePageCircleModel.m in Sources */,
 				21AC593D1FDE7A1B00F19DE8 /* TLTextView.m in Sources */,
+				212A30AD20A19D3100B6F7FF /* DivisionListTableView.m in Sources */,
 				21AC58721FDE734F00F19DE8 /* TLAccountBaseVC.m in Sources */,
 				21111BEC1F8B5F2C0021B3FE /* Foundation+Log.m in Sources */,
 				2126901320916FB3005B6B46 /* PlatformInfoTableView.m in Sources */,
@@ -3314,10 +3438,12 @@
 				21AC59471FDE7A1B00F19DE8 /* TLAlert.m in Sources */,
 				21459401206B34B30006E238 /* HomePageCircleVC.m in Sources */,
 				212B896E2099658700BD3A94 /* HomeChildVC.m in Sources */,
+				212A30A020A179C600B6F7FF /* TradeListTableView.m in Sources */,
 				21CFFB0320565DB900D245ED /* QuotesVC.m in Sources */,
 				21EF0B9B20677477008EA865 /* OptionalListModel.m in Sources */,
 				21AC59661FDE80FB00F19DE8 /* UIColor+Extension.m in Sources */,
 				2124BEB62062885A00CB79E8 /* AddOptionalTableView.m in Sources */,
+				212A30B320A19DE600B6F7FF /* DivisionModel.m in Sources */,
 				21EF0B6C206643D3008EA865 /* CircleCommentVC.m in Sources */,
 				21EF0B9520669035008EA865 /* MyCollectionModel.m in Sources */,
 				2124BEEB2063960900CB79E8 /* UserEditCell.m in Sources */,
@@ -3336,8 +3462,10 @@
 				21EF0B86206682D6008EA865 /* MyCommentDetailCell.m in Sources */,
 				21F82C9B1F17719D0019B176 /* BaseModel.m in Sources */,
 				2128824E20577CAB00A57A5A /* ForumChildVC.m in Sources */,
+				212A3091209FFBBF00B6F7FF /* TradeSellView.m in Sources */,
 				21F82CA01F17719D0019B176 /* BaseCollectionView.m in Sources */,
 				21EF0B4F2064D2A5008EA865 /* ForumInfoTableView.m in Sources */,
+				212A30A320A17B2F00B6F7FF /* TradeListCell.m in Sources */,
 				2126900B20908440005B6B46 /* CurrencyTradeMapView.m in Sources */,
 				212690272091C8AD005B6B46 /* CurrencyInfoCell2.m in Sources */,
 				21268FEB208ED14D005B6B46 /* InfoListVC.m in Sources */,
@@ -3346,6 +3474,7 @@
 				21CFFB0020565D8100D245ED /* HomeVC.m in Sources */,
 				217BDAFF2069487A00E17DEE /* CircleCommentDetailCell.m in Sources */,
 				21CFFB0920565DDD00D245ED /* MineVC.m in Sources */,
+				212A3094209FFD5000B6F7FF /* TradeBuyView.m in Sources */,
 				2128824A2057774900A57A5A /* OptionalCell.m in Sources */,
 				21B76C92206A342C00056AFB /* QQManager.m in Sources */,
 				2124BE832061FFF500CB79E8 /* CurrencyModel.m in Sources */,
@@ -3363,6 +3492,7 @@
 				2126901E2091B485005B6B46 /* CurrencyInfoHeaderView.m in Sources */,
 				21F82C9D1F17719D0019B176 /* BaseWKWebViewController.m in Sources */,
 				21AC597F1FDE823C00F19DE8 /* NSString+Check.m in Sources */,
+				212A30B020A19D5B00B6F7FF /* DivisionListCell.m in Sources */,
 				2128825B20579D8600A57A5A /* ForumListTableView.m in Sources */,
 				2124BEBD2062907000CB79E8 /* SearchCurrencyVC.m in Sources */,
 				212882732057A37700A57A5A /* YYImageClipViewController.m in Sources */,
@@ -3411,6 +3541,7 @@
 				21268FF620901C02005B6B46 /* CurrencyDetailVC.m in Sources */,
 				2124BE7020613E5900CB79E8 /* InfoCommentDetailVC.m in Sources */,
 				21AC59601FDE80A300F19DE8 /* UIButton+Custom.m in Sources */,
+				212A30A620A1806500B6F7FF /* TradeListModel.m in Sources */,
 				21268FD4208DB60C005B6B46 /* TLUserForgetPwdVC.m in Sources */,
 				21AC58791FDE737200F19DE8 /* TLUserLoginVC.m in Sources */,
 				21FB30CA1F26E9EF0028ADEE /* HTMLStrVC.m in Sources */,
@@ -3420,6 +3551,7 @@
 				2128826D2057A13D00A57A5A /* MineModel.m in Sources */,
 				212AB4ED209C0999004A99F9 /* KLineTrainCampVC.m in Sources */,
 				21CFFB2020566C1C00D245ED /* NewsFlashModel.m in Sources */,
+				212A309720A0222C00B6F7FF /* TradeSelectScrollView.m in Sources */,
 				21EF0B392064A7DB008EA865 /* InfoTypeModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3528,7 +3660,7 @@
 				CODE_SIGN_ENTITLEMENTS = bige/bige.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SNU3HUYLFC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3566,7 +3698,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SNU3HUYLFC;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

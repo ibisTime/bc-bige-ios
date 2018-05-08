@@ -167,7 +167,7 @@
                                      color:oneMonthPercentColor];
     //趋势图
     //交易对
-    NSString *symbol = [NSString stringWithFormat:@"%@%@", platform.symbol, platform.toSymbol];
+    NSString *symbol = [NSString stringWithFormat:@"%@/%@", platform.symbol, platform.toSymbol];
     NSString *html = [NSString stringWithFormat:@"%@/charts/marketLine.html?symbol=%@&exchange=%@&period=60min",@"http://47.52.236.63:2303", symbol, platform.exchangeEname];
     NSLog(@"html = %@", html);
     

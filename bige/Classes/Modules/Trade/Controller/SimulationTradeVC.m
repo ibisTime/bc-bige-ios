@@ -229,12 +229,18 @@
         {
             SimulationTradeDetailVC *detailVC = [SimulationTradeDetailVC new];
             
+            detailVC.direction = @"0";
+            
             [self.navigationController pushViewController:detailVC animated:YES];
         }break;
         //卖出
         case 1:
         {
+            SimulationTradeDetailVC *detailVC = [SimulationTradeDetailVC new];
             
+            detailVC.direction = @"1";
+            
+            [self.navigationController pushViewController:detailVC animated:YES];
         }break;
         //撤单
         case 2:

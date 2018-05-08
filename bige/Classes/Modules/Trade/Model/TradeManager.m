@@ -19,4 +19,15 @@ NSString *const kInquire            = @"15";        //查询
 
 @implementation TradeManager
 
++ (instancetype)manager {
+    
+    static TradeManager *manager;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        
+        manager = [[TradeManager alloc] init];
+    });
+    return manager;
+}
+
 @end

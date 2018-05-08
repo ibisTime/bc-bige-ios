@@ -45,7 +45,10 @@
                message:(NSString *)message
          confirmAction:(void(^)())confirmAction;
 
-+ (void)alertWithTitle:(NSString *)title message:(NSString *)message confirmMsg:(NSString *)confirmMsg confirmAction:(void(^)())confirmAction;
++ (void)alertWithTitle:(NSString *)title
+               message:(NSString *)message
+            confirmMsg:(NSString *)confirmMsg
+         confirmAction:(void(^)())confirmAction;
 
 //+ (void)alertWithTitle:(NSString *)title
 //                message:(NSString *)message

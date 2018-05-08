@@ -28,5 +28,9 @@
  两个数相乘，可以指定小数位数
  */
 + (NSString *)mult1:(NSString *)mult1 mult2:(NSString *)mult2 scale:(NSUInteger)scale;
+/**
+ 两个数相除，可以指定小数位数
+ */
++ (NSString *)div1:(NSString *)div1 div2:(NSString *)div2 scale:(NSUInteger)scale;
 
 @end

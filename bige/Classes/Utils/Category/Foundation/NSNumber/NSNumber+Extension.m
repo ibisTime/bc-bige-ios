@@ -156,4 +156,22 @@
     return [[result decimalNumberByRoundingAccordingToBehavior:roundUp] stringValue];
     
 }
+
++ (NSString *)div1:(NSString *)div1 div2:(NSString *)div2 scale:(NSUInteger)scale {
+    
+    NSDecimalNumber *div1Num = [[NSDecimalNumber alloc] initWithString:div1];
+    NSDecimalNumber *div2Num = [[NSDecimalNumber alloc] initWithString:div2];
+    NSDecimalNumber *result = [div1Num decimalNumberByDividingBy:div2Num];
+    NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                       decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                       scale:scale
+                                       raiseOnExactness:NO
+                                       raiseOnOverflow:NO
+                                       raiseOnUnderflow:NO
+                                       raiseOnDivideByZero:YES];
+    
+    return [[result decimalNumberByRoundingAccordingToBehavior:roundUp] stringValue];
+    
+}
+
 @end

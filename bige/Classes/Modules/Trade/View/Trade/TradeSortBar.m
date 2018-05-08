@@ -1,13 +1,12 @@
 //
-//  SortOrderBar.m
-//  BS
+//  TradeSortBar.m
+//  bige
 //
-//  Created by 蔡卓越 on 16/4/21.
-//  Copyright © 2016年 caizhuoyue. All rights reserved.
+//  Created by 蔡卓越 on 2018/5/7.
+//  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
-#import "SortBar.h"
-
+#import "TradeSortBar.h"
 #import "NSString+CGSize.h"
 #import <UIScrollView+TLAdd.h>
 
@@ -20,7 +19,7 @@
 
 static const float kAnimationdDuration = 0.3;
 
-@interface SortBar ()
+@interface TradeSortBar()
 
 @property (nonatomic, copy) SortSelectBlock sortBlock;
 
@@ -36,8 +35,7 @@ static const float kAnimationdDuration = 0.3;
 
 @end
 
-@implementation SortBar
-
+@implementation TradeSortBar
 
 - (instancetype)initWithFrame:(CGRect)frame sortNames:(NSArray*)sortNames sortBlock:(SortSelectBlock)sortBlock {
     if (self = [super initWithFrame:frame]) {
@@ -64,8 +62,6 @@ static const float kAnimationdDuration = 0.3;
     
     [self createItems];
     
-    [self changeItemTitleColorWithIndex:0];
-    
     CGFloat lineW = [NSString getWidthWithString:self.sortNames[0] font:MIN(kWidth(16.0), 16)];
     CGFloat lineH = 3;
     
@@ -73,10 +69,10 @@ static const float kAnimationdDuration = 0.3;
     
     _selectLine = [[UIView alloc] init];
     
-    _selectLine.backgroundColor = kAppCustomMainColor;
+    _selectLine.backgroundColor = kRiseColor;
     _selectLine.layer.cornerRadius = lineH/2.0;
     _selectLine.clipsToBounds = YES;
-
+    
     [self addSubview:_selectLine];
     
     [_selectLine mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -92,18 +88,9 @@ static const float kAnimationdDuration = 0.3;
     
     CGFloat w = 0;
     
-    self.allBtnWidth = 0;
+    self.allBtnWidth = self.width + 1;
     
-    //判断是否超过屏幕宽度
-    
-    for (NSInteger i = 0; i < _sortNames.count; i++) {
-        
-        NSString *title = _sortNames[i];
-        
-        CGFloat widthMargin = [NSString getWidthWithString:title font:MIN(kWidth(16.0), 16)] + 20 + 10;
-        
-        self.allBtnWidth += widthMargin;
-    }
+    NSArray *colorArr = @[kRiseColor, kThemeColor];
     
     for (NSInteger i = 0; i < _sortNames.count; i++) {
         
@@ -113,14 +100,16 @@ static const float kAnimationdDuration = 0.3;
         
         CGFloat btnW = self.allBtnWidth > self.width ? widthMargin: widthItem;
         
-        UIButton *button = [UIButton buttonWithTitle:_sortNames[i] titleColor:[UIColor textColor] backgroundColor:kWhiteColor titleFont:btnFont];
+        UIButton *button = [UIButton buttonWithTitle:_sortNames[i]
+                                          titleColor:colorArr[i]
+                                     backgroundColor:kWhiteColor
+                                           titleFont:btnFont];
         
-        [button setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
-        [self addSubview:button];
         button.tag = 100 +i;
         
         [button addTarget:self action:@selector(sortBtnOnClicked:) forControlEvents:UIControlEventTouchUpInside];
-        
+        [self addSubview:button];
+
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             
             make.centerY.mas_equalTo(0);
@@ -163,6 +152,8 @@ static const float kAnimationdDuration = 0.3;
     
     _selectIndex = index;
     
+    NSArray *colorArr = @[kRiseColor, kThemeColor];
+
     UIButton *button = [self viewWithTag:100+index];
     
     CGFloat length = button.centerX - self.width/2;
@@ -177,13 +168,15 @@ static const float kAnimationdDuration = 0.3;
     
     [UIView animateWithDuration:kAnimationdDuration animations:^{
         
+        _selectLine.backgroundColor = colorArr[index];
+        
         [_selectLine mas_updateConstraints:^(MASConstraintMaker *make) {
             
             make.left.mas_equalTo(leftMargin);
             make.width.mas_equalTo(widthMargin - 20);
         }];
         
-        [self changeItemTitleColorWithIndex:button.tag - 100];
+//        [self changeItemTitleColorWithIndex:button.tag - 100];
         
         [self layoutIfNeeded];
     }];

@@ -1,16 +1,16 @@
 //
-//  SortOrderBar.h
-//  BS
+//  TradeSortBar.h
+//  bige
 //
-//  Created by 蔡卓越 on 16/4/21.
-//  Copyright © 2016年 caizhuoyue. All rights reserved.
+//  Created by 蔡卓越 on 2018/5/7.
+//  Copyright © 2018年 caizhuoyue. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 typedef void (^SortSelectBlock) (NSInteger index);
 
-@interface SortBar : UIScrollView
+@interface TradeSortBar : UIScrollView
 
 @property (nonatomic, assign) NSInteger curruntIndex;
 /**
@@ -29,7 +29,5 @@ typedef void (^SortSelectBlock) (NSInteger index);
 - (void)selectSortBarWithIndex:(NSInteger)index;
 
 - (instancetype)initWithFrame:(CGRect)frame sortNames:(NSArray*)sortNames sortBlock:(SortSelectBlock)sortBlock;
-
-
 
 @end
