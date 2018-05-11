@@ -26,6 +26,7 @@ static NSString *informationListCellID = @"InformationListCell";
         
         self.dataSource = self;
         self.delegate = self;
+        self.sectionHidden = YES;
         
         [self registerClass:[InfoCommentCell class] forCellReuseIdentifier:infoCommentCellID];
         [self registerClass:[InformationListCell class] forCellReuseIdentifier:informationListCellID];
@@ -213,6 +214,7 @@ static NSString *informationListCellID = @"InformationListCell";
         if (self.newestComments.count == 0) {
             
             headerView.height = 175;
+            headerView.hidden = self.sectionHidden;
             
             UIView *whiteView = [[UIView alloc] initWithFrame:CGRectMake(0, 55, kScreenWidth, 120)];
             

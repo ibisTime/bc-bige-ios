@@ -14,6 +14,7 @@ typedef NS_ENUM(NSUInteger, MineHeaderType) {
     MineHeaderTypeIntegralCenter,//积分中心
     MineHeaderTypeCollection,    //收藏
     MineHeaderTypePhoto,         //头像
+    MineHeaderTypeFollow,        //关注
 };
 
 @protocol MineHeaderDelegate <NSObject>

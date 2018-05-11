@@ -33,7 +33,7 @@
 //151, 215, 76 RGB(195, 207, 72)
 #define kNavBarBackgroundColor  RGB(241, 241, 241)
 
-#define kBackgroundColor        [UIColor colorWithHexString:@"#FAFCFF"]   //背景色
+#define kBackgroundColor        [UIColor colorWithHexString:@"#F5F5F9"]   //背景色
 #define kLineColor              [UIColor colorWithHexString:@"#eeeeee"]   //分割线
 #define kBlueLineColor              [UIColor colorWithHexString:@"#FAFCFF"]   //蓝色分割线
 #define kTextColor              [UIColor colorWithHexString:@"#333333"]   //一级文字

@@ -31,6 +31,8 @@
 
 - (void)initSubviews {
     
+    self.backgroundColor = kWhiteColor;
+    
     //topLine
     UIView *topLine = [[UIView alloc] init];
     

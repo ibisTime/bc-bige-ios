@@ -8,10 +8,10 @@
 
 #import "TLTableView.h"
 //M
-#import "CurrencyModel.h"
+#import "PlatformModel.h"
 
 @interface SearchCurrencyTableView : TLTableView
 //
-@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) NSMutableArray <PlatformModel *>*currencys;
 
 @end

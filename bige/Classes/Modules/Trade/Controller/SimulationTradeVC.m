@@ -8,8 +8,6 @@
 
 #import "SimulationTradeVC.h"
 
-//Macro
-//Framework
 //Category
 #import "UIButton+EnLargeEdge.h"
 //Extension
@@ -17,7 +15,6 @@
 //M
 #import "SimulationTradeInfoModel.h"
 #import "TradeManager.h"
-
 //V
 #import "SimulationTradeView.h"
 #import "TLBannerView.h"
@@ -26,6 +23,8 @@
 #import "SimulationContactVC.h"
 #import "KLineTrainCampVC.h"
 #import "RealAssetLinkVC.h"
+#import "AllDivisionListVC.h"
+#import "PositionVC.h"
 
 @interface SimulationTradeVC ()<ZDKHelpCenterConversationsUIDelegate>
 //
@@ -44,8 +43,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    //获取资产概况
-    [self requestAssetInfo];
+    
+    if ([TLUser user].userId) {
+        
+        //获取资产概况
+        [self requestAssetInfo];
+    }
+    
 }
 
 - (void)viewDidLoad {
@@ -204,9 +208,11 @@
         
         case 2:
         {
-            RealAssetLinkVC *linkVC = [RealAssetLinkVC new];
+            if (self.didSelectRealAsset) {
+                
+                self.didSelectRealAsset();
+            }
             
-            [self.navigationController pushViewController:linkVC animated:YES];
         }break;
             
         case 3:
@@ -245,17 +251,23 @@
         //撤单
         case 2:
         {
+            AllDivisionListVC *divisionVC = [AllDivisionListVC new];
             
+            [self.navigationController pushViewController:divisionVC animated:YES];
         }break;
         //持仓
         case 3:
         {
+            PositionVC *positionVC = [PositionVC new];
             
+            [self.navigationController pushViewController:positionVC animated:YES];
         }break;
         //查询
         case 4:
         {
+            AllDivisionListVC *divisionVC = [AllDivisionListVC new];
             
+            [self.navigationController pushViewController:divisionVC animated:YES];
         }break;
             
         default:

@@ -15,6 +15,7 @@
 #import "TopLabelUtil.h"
 //C
 #import "SimulationTradeVC.h"
+#import "RealAssetLinkVC.h"
 
 @interface TradeVC ()<SegmentDelegate>
 //顶部切换
@@ -80,6 +81,8 @@
 
 - (void)addSubViewController {
     
+    BaseWeakSelf;
+    
     for (NSInteger i = 0; i < 2; i++) {
         
         if (i == 0) {
@@ -88,14 +91,19 @@
             
             childVC.view.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight);
             
+            childVC.didSelectRealAsset = ^{
+              
+                [weakSelf.labelUnil selectSortBarWithIndex:1];
+            };
+            
             [self addChildViewController:childVC];
             [self.switchSV addSubview:childVC.view];
 
         } else {
             
-            SimulationTradeVC *childVC = [SimulationTradeVC new];
+            RealAssetLinkVC *childVC = [RealAssetLinkVC new];
             
-            childVC.view.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight);
+            childVC.view.frame = CGRectMake(kScreenWidth, 0, kScreenWidth, kSuperViewHeight - kTabBarHeight);
             
             [self addChildViewController:childVC];
             [self.switchSV addSubview:childVC.view];

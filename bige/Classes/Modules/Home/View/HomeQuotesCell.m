@@ -172,10 +172,9 @@
     self.rankLbl.backgroundColor = platform.rankColor;
     
     //图标
-    self.iconIV.backgroundColor = kAppCustomMainColor;
     
-    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.pic convertImageUrl]]
-                   placeholderImage:kImage(@"")];
+    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.symbolPic convertImageUrl]]
+                   placeholderImage:kImage(@"默认图标")];
     //币种名称
     self.currencyNameLbl.text = [platform.symbol uppercaseString];
     //一日交易量

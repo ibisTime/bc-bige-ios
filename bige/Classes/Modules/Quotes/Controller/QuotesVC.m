@@ -94,8 +94,6 @@
 
 #pragma mark - Init
 - (void)addItem {
-    //添加选择
-//    [UIBarButtonItem addLeftItemWithImageName:@"添加" frame:CGRectMake(0, 0, 40, 40) vc:self action:@selector(addCurrency)];
     //搜索
     [UIBarButtonItem addRightItemWithImageName:@"搜索" frame:CGRectMake(0, 0, 40, 40) vc:self action:@selector(search)];
 }

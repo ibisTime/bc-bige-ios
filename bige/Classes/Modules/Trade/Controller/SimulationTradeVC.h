@@ -10,4 +10,6 @@
 
 @interface SimulationTradeVC : BaseViewController
 
+@property (nonatomic, copy) void(^didSelectRealAsset)();
+
 @end

@@ -13,7 +13,7 @@
 //Extension
 #import <IQKeyboardManager.h>
 //M
-#import "CurrencyModel.h"
+#import "PlatformModel.h"
 //V
 #import "SelectScrollView.h"
 #import "TLTextField.h"
@@ -23,6 +23,7 @@
 //C
 #import "SearchCurrcneyChildVC.h"
 #import "SearchHistoryChildVC.h"
+#import "CurrencyDetailVC.h"
 
 @interface SearchCurrencyVC ()<UITextFieldDelegate, RefreshDelegate>
 //
@@ -36,7 +37,7 @@
 //行情列表
 @property (nonatomic, strong) SearchCurrencyTableView *currencyTableView;
 //
-@property (nonatomic, strong) NSMutableArray <CurrencyModel *>*currencys;
+@property (nonatomic, strong) NSMutableArray <PlatformModel *>*currencys;
 //搜索内容
 @property (nonatomic, copy) NSString *searchStr;
 //
@@ -78,8 +79,6 @@
     [self initResultTableView];
     //获取搜索结果
     [self requestSearchList];
-
-    [self initSelectScrollView];
     //
     [self addSubViewController];
 }
@@ -159,42 +158,27 @@
     
     BaseWeakSelf;
     
-    for (NSInteger i = 0; i < self.titles.count; i++) {
+    //
+    SearchHistoryChildVC *childVC = [[SearchHistoryChildVC alloc] init];
+    
+    childVC.view.frame = CGRectMake(0, 0, kScreenWidth, kSuperViewHeight);
+    
+    childVC.historyBlock = ^(NSString *searchStr) {
         
-        if (i == 0) {
-            
-            //
-            SearchCurrcneyChildVC *childVC = [[SearchCurrcneyChildVC alloc] init];
-            
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
-            
-            [self addChildViewController:childVC];
-            
-            [self.selectSV.scrollView addSubview:childVC.view];
-            self.currencyVC = childVC;
-            
-        } else {
-            
-            //
-            SearchHistoryChildVC *childVC = [[SearchHistoryChildVC alloc] init];
-            
-            childVC.view.frame = CGRectMake(kScreenWidth*i, 1, kScreenWidth, kSuperViewHeight - 40);
-            
-            childVC.historyBlock = ^(NSString *searchStr) {
-                
-                //获取搜索结果
-                weakSelf.helper.parameters[@"keywords"] = searchStr;
-                
-                [weakSelf.currencyTableView beginRefreshing];
-            };
-            
-            [self addChildViewController:childVC];
-            
-            [self.selectSV.scrollView addSubview:childVC.view];
-            
-            self.historyVC = childVC;
-        }
-    }
+        weakSelf.searchTF.text = searchStr;
+        
+        weakSelf.historyVC.view.hidden = YES;
+        //获取搜索结果
+        weakSelf.helper.parameters[@"keywords"] = searchStr;
+        
+        [weakSelf.currencyTableView beginRefreshing];
+    };
+    
+    [self addChildViewController:childVC];
+    
+    [self.view addSubview:childVC.view];
+    
+    self.historyVC = childVC;
 }
 
 #pragma mark - Events
@@ -205,7 +189,7 @@
     //搜索框没有搜索时，显示
     if (sender.text.length == 0) {
         
-        self.selectSV.hidden = NO;
+        self.historyVC.view.hidden = NO;
     }
 }
 
@@ -226,17 +210,19 @@
     
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
-    helper.code = @"628340";
-    helper.parameters[@"keywords"] = self.searchStr;
+    helper.code = @"628350";
     
     if ([TLUser user].userId) {
         
         helper.parameters[@"userId"] = [TLUser user].userId;
     }
     
+    helper.parameters[@"keywords"] = self.searchStr;
+    helper.parameters[@"percentPeriod"] = @"24h";
+
     helper.tableView = self.currencyTableView;
     
-    [helper modelClass:[CurrencyModel class]];
+    [helper modelClass:[PlatformModel class]];
     
     self.helper = helper;
     
@@ -280,7 +266,7 @@
  */
 - (void)addCurrency:(NSInteger)index {
     
-    CurrencyModel *currency = self.currencys[index];
+    PlatformModel *currency = self.currencys[index];
     
     TLNetworking *http = [TLNetworking new];
     
@@ -288,8 +274,8 @@
     http.showView = self.view;
     http.parameters[@"userId"] = [TLUser user].userId;
     http.parameters[@"exchangeEname"] = currency.exchangeEname;
-    http.parameters[@"coin"] = currency.coinSymbol;
-    http.parameters[@"toCoin"] = currency.toCoinSymbol;
+    http.parameters[@"coin"] = currency.symbol;
+    http.parameters[@"toCoin"] = currency.toSymbol;
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -316,7 +302,7 @@
     
     self.searchStr = textField.text;
     
-    self.selectSV.hidden = YES;
+    self.historyVC.view.hidden = YES;
     //保存搜索记录
     [self.historyVC saveSearchRecord:textField.text];
     //获取搜索结果
@@ -326,27 +312,69 @@
     return YES;
 }
 
+/**
+ 关注
+ */
+- (void)followCurrency:(NSInteger)index {
+    
+    PlatformModel *platformModel = self.currencys[index];
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"628330";
+    http.showView = self.view;
+    http.parameters[@"exchangeEname"] = platformModel.exchangeEname;
+    http.parameters[@"userId"] = [TLUser user].userId;
+    http.parameters[@"symbol"] = platformModel.symbol;
+    http.parameters[@"toSymbol"] = platformModel.toSymbol;
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        NSString *promptStr = [platformModel.isChoice isEqualToString:@"1"] ? @"删除自选成功": @"添加自选成功";
+        [TLAlert alertWithSucces:promptStr];
+        
+        if ([platformModel.isChoice isEqualToString:@"1"]) {
+            
+            platformModel.isChoice = @"0";
+            
+        } else {
+            
+            platformModel.isChoice = @"1";
+        }
+        
+        [self.currencyTableView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FollowOrCancelFollow" object:nil];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if ([refreshTableview isKindOfClass:[SearchCurrencyTableView class]]) {
+    PlatformModel *platform = self.currencys[indexPath.row];
+    
+    CurrencyDetailVC *detailVC = [CurrencyDetailVC new];
+    
+    detailVC.symbolID = platform.ID;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+}
+
+- (void)refreshTableViewEventClick:(TLTableView *)refreshTableview selectRowAtIndex:(NSInteger)index {
+    
+    BaseWeakSelf;
+    [self checkLogin:^{
         
-        if (![TLUser user].isLogin) {
-            
-            [TLAlert alertWithInfo:@"添加自选功能需要登录后才能使用"];
-            return ;
-        };
+        //刷新关注状态
+        [weakSelf.currencyTableView beginRefreshing];
         
-        CurrencyModel *currency = self.currencys[indexPath.row];
+    } event:^{
         
-        if ([currency.isChoice isEqualToString:@"0"]) {
-            
-            //添加币种
-            [self addCurrency:indexPath.row];
-            return ;
-        }
-    }
-   
+        [weakSelf followCurrency:index];
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

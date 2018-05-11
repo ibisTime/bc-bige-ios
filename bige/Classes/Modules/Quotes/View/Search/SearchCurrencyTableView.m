@@ -44,10 +44,22 @@ static NSString *searchCurrencyCell = @"SearchCurrencyCell";
     
     cell.backgroundColor = indexPath.row%2 == 0 ? kBackgroundColor: kWhiteColor;
     
-    cell.currency = self.currencys[indexPath.row];
-    
+    cell.platform = self.currencys[indexPath.row];
+    cell.followBtn.tag = 3000 + indexPath.row;
+    [cell.followBtn addTarget:self action:@selector(selectFollow:) forControlEvents:UIControlEventTouchUpInside];
     return cell;
 }
+
+- (void)selectFollow:(UIButton *)sender {
+    
+    NSInteger index = sender.tag - 3000;
+    
+    if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshTableViewEventClick:selectRowAtIndex:)]) {
+        
+        [self.refreshDelegate refreshTableViewEventClick:self selectRowAtIndex:index];
+    }
+}
+
 
 #pragma mark - UITableViewDelegate
 
@@ -63,7 +75,7 @@ static NSString *searchCurrencyCell = @"SearchCurrencyCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 68;
+    return 65;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {

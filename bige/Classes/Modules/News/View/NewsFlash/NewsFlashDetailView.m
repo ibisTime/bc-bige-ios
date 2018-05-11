@@ -19,6 +19,8 @@
 #import "SGQRCodeTool.h"
 
 @interface NewsFlashDetailView()
+//来源
+@property (nonatomic, strong) UILabel *sourceLbl;
 //内容
 @property (nonatomic, strong) UILabel *contentLbl;
 //时间
@@ -63,10 +65,15 @@
     
     [self addSubview:iconIV];
     self.iconIV = iconIV;
+    //来源
+    self.sourceLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                             textColor:kTextColor
+                                                  font:15.0];
+    [self addSubview:self.sourceLbl];
     //内容
     self.contentLbl = [UILabel labelWithBackgroundColor:kClearColor
                                               textColor:kTextColor
-                                                   font:17.0];
+                                                   font:15.0];
     
     self.contentLbl.numberOfLines = 0;
     
@@ -121,12 +128,17 @@
         make.left.equalTo(self.timeIconIV.mas_right).offset(10);
         make.top.equalTo(self.iconIV.mas_bottom).offset(20);
     }];
-    
+    //来源
+    [self.sourceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(self.timeLbl.mas_bottom).offset(10);
+        make.left.equalTo(@25);
+    }];
     //内容
     [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@25);
-        make.top.equalTo(self.timeLbl.mas_bottom).offset(20);
+        make.top.equalTo(self.sourceLbl.mas_bottom).offset(10);
         make.width.equalTo(@(kScreenWidth - 50));
     }];
     
@@ -159,7 +171,9 @@
     
     _flashModel = flashModel;
     
-    [self.contentLbl labelWithTextString:[NSString stringWithFormat:@"【快讯】%@", flashModel.content] lineSpace:5];
+    self.sourceLbl.text = flashModel.source;
+    
+    [self.contentLbl labelWithTextString:[NSString stringWithFormat:@"%@", flashModel.content] lineSpace:5];
     //星期
     NSString *weekday = [NSString weekdayStringFromDate:flashModel.showDatetime];
     NSString *time = [flashModel.showDatetime convertDateWithFormat:@"yyyy-M-d HH:mm:ss"];

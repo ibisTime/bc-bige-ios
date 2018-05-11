@@ -8,10 +8,12 @@
 
 #import "BaseTableViewCell.h"
 //M
-#import "CurrencyModel.h"
+#import "PlatformModel.h"
 
 @interface SearchCurrencyCell : BaseTableViewCell
 //
-@property (nonatomic, strong) CurrencyModel *currency;
+@property (nonatomic, strong) PlatformModel *platform;
+//关注情况
+@property (nonatomic, strong) UIButton *followBtn;
 
 @end

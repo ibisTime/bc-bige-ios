@@ -55,14 +55,14 @@
     //标题
     self.titleLbl = [UILabel labelWithBackgroundColor:kClearColor
                                             textColor:kTextColor
-                                                 font:15.0];
+                                                 font:17.0];
     self.titleLbl.numberOfLines = 0;
     
     [self addSubview:self.titleLbl];
     //时间
     self.timeLbl = [UILabel labelWithBackgroundColor:kClearColor
                                            textColor:kTextColor2
-                                                font:13.0];
+                                                font:12.0];
     [self addSubview:self.timeLbl];
     //阅读数
     self.readLbl = [[ImageLabel alloc] initWithFrame:CGRectZero];
@@ -107,15 +107,15 @@
         
         make.right.equalTo(@(-x));
         make.top.equalTo(@10);
-        make.width.equalTo(@110);
-        make.height.equalTo(@100);
+        make.width.equalTo(@113);
+        make.height.equalTo(@75);
     }];
     //标题
     [self.titleLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(self.infoIV.mas_top);
         make.left.equalTo(@(x));
-        make.right.equalTo(self.infoIV.mas_left).offset(-x);
+        make.right.equalTo(self.infoIV.mas_left).offset(-10);
         make.height.lessThanOrEqualTo(@60);
     }];
     //时间

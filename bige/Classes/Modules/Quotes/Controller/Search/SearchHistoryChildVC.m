@@ -32,17 +32,14 @@
 #pragma mark - Init
 - (void)initTableView {
     
-    self.tableView = [[SearchHistoryTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    self.tableView = [[SearchHistoryTableView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kSuperViewHeight) style:UITableViewStylePlain];
 
     self.tableView.placeHolderView = [TLPlaceholderView placeholderViewWithText:@"没有查找到历史搜索" topMargin:100];
     
     self.tableView.refreshDelegate = self;
     
     [self.view addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.edges.mas_equalTo(0);
-    }];
+    
 }
 
 #pragma mark - Notification

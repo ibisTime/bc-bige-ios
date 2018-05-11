@@ -119,8 +119,40 @@
 - (void)addNotification {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subVCLeaveTop) name:@"SubVCLeaveTop" object:nil];
+    //点击关注
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followOrCancelFollow) name:@"FollowOrCancelFollow" object:nil];
 }
 
+- (void)subVCLeaveTop {
+    
+    self.canScroll = YES;
+    self.vcCanScroll = NO;
+}
+
+- (void)followOrCancelFollow {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"628352";
+    http.showView = self.view;
+    http.parameters[@"id"] = self.symbolID;
+    if ([TLUser user].userId) {
+        
+        http.parameters[@"userId"] = [TLUser user].userId;
+    }
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.platform = [PlatformModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.infoView.platform = self.platform;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+#pragma mark - Init
 - (void)initTitleView {
     
     UIView *titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 120, 44)];
@@ -322,14 +354,20 @@
 #pragma mark - Events
 - (void)bottomEventType:(BottomEventType)type {
     
+    BaseWeakSelf;
+    
     switch (type) {
             
         case BottomEventTypeEarlyWarning:
         {
             
-            self.warningView.platform = self.platform;
-
-            [self.warningView show];
+            [self checkLogin:^{
+                
+                weakSelf.warningView.platform = weakSelf.platform;
+                
+                [weakSelf.warningView show];
+            }];
+            
         }break;
             
         case BottomEventTypeFollow:
@@ -342,7 +380,10 @@
                 http.code = @"628352";
                 http.showView = self.view;
                 http.parameters[@"id"] = self.symbolID;
-                
+                if ([TLUser user].userId) {
+                    
+                    http.parameters[@"userId"] = [TLUser user].userId;
+                }
                 [http postWithSuccess:^(id responseObject) {
                     //刷新关注状态
                     weakSelf.platform = [PlatformModel mj_objectWithKeyValues:responseObject[@"data"]];
@@ -355,7 +396,7 @@
                 
             } event:^{
                 
-                [self followCurrency];
+                [weakSelf followCurrency];
             }];
             
         }break;
@@ -374,12 +415,6 @@
         default:
             break;
     }
-}
-
-- (void)subVCLeaveTop {
-    
-    self.canScroll = YES;
-    self.vcCanScroll = NO;
 }
 
 - (void)clickPullDown:(UITapGestureRecognizer *)tapGR {
@@ -420,6 +455,10 @@
     http.code = @"628352";
     http.showView = self.view;
     http.parameters[@"id"] = self.symbolID;
+    if ([TLUser user].userId) {
+        
+        http.parameters[@"userId"] = [TLUser user].userId;
+    }
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -481,7 +520,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *promptStr = [self.platform.isChoice isEqualToString:@"1"] ? @"添加自选成功": @"删除自选成功";
+        NSString *promptStr = [self.platform.isChoice isEqualToString:@"1"] ? @"删除自选成功": @"添加自选成功";
         [TLAlert alertWithSucces:promptStr];
         
         if ([self.platform.isChoice isEqualToString:@"1"]) {
@@ -494,6 +533,8 @@
         }
         
         self.bottomView.platform = self.platform;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FollowOrCancelFollow" object:nil];
         
     } failure:^(NSError *error) {
         

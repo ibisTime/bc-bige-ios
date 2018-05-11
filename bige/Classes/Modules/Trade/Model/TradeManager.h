@@ -10,6 +10,8 @@
 
 @interface TradeManager : BaseModel
 
+//编号
+@property (nonatomic, copy) NSString *ID;
 //币种名称
 @property (nonatomic, copy) NSString *symbol;
 //参考币种

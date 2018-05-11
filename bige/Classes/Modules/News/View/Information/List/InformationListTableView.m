@@ -81,7 +81,7 @@ static NSString *informationListCell2 = @"InformationListCell2";
 
     if (info.pics.count == 1) {
         
-        return 130;
+        return 105;
     }
     return info.cellHeight;
 }

@@ -141,10 +141,8 @@
     
     _warning = warning;
     //图标
-    self.iconIV.backgroundColor = kAppCustomMainColor;
-    
-    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[warning.pic convertImageUrl]]
-                   placeholderImage:kImage(@"")];
+    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[warning.symbolPic convertImageUrl]]
+                   placeholderImage:kImage(@"默认图标")];
     //币种名称
     self.symbolLbl.text = [warning.symbol uppercaseString];
     //人民币价格

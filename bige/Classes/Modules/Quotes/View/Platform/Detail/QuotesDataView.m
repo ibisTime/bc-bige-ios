@@ -180,10 +180,10 @@
     
     _platform = platform;
     //总市值
-    NSString *marketVolume = [NSString stringWithFormat:@"总市值  %@", [platform.maxMarketCapCny convertToRealMoneyWithNum:8]];
+    NSString *marketVolume = [NSString stringWithFormat:@"总市值  %@", [platform getNumWithVolume:platform.maxMarketCapCny]];
     
     [self.marketVolumeLbl labelWithString:marketVolume
-                                    title:[platform.maxMarketCapCny convertToRealMoneyWithNum:8]
+                                    title:[platform getNumWithVolume:platform.maxMarketCapCny]
                                      font:Font(13.0)
                                     color:kTextColor];
     //额
@@ -237,7 +237,7 @@
     //当前人民币价格
     NSString *lastCnyPrice = [NSString stringWithFormat:@"现价格  ￥%.2lf", [platform.lastCnyPrice doubleValue]];
     [self.rmbPriceLbl labelWithString:lastCnyPrice
-                                  title:[platform.lastCnyPrice convertToRealMoneyWithNum:8]
+                                  title:[NSString stringWithFormat:@"￥%.2lf", [platform.lastCnyPrice doubleValue]]
                                    font:Font(13.0)
                                   color:kTextColor];
     

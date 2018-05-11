@@ -184,10 +184,8 @@
     self.rankLbl.backgroundColor = platform.rankColor;
 
     //图标
-    self.iconIV.backgroundColor = kAppCustomMainColor;
-    
-    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.pic convertImageUrl]]
-                   placeholderImage:kImage(@"")];
+    [self.iconIV sd_setImageWithURL:[NSURL URLWithString:[platform.symbolPic convertImageUrl]]
+                   placeholderImage:kImage(@"默认图标")];
     //币种名称
     self.currencyNameLbl.text = [platform.symbol uppercaseString];
     //一日交易量
@@ -198,7 +196,7 @@
     self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%@", [platform.lastPrice convertToRealMoneyWithNum:8]];
     //人民币价格
     self.rmbPriceLbl.text = [NSString stringWithFormat:@"￥%.2lf", [platform.lastCnyPrice doubleValue]];
-    self.rmbPriceLbl.textColor = platform.bgColor;
+//    self.rmbPriceLbl.textColor = platform.bgColor;
     //涨跌情况
     NSString *priceFluctStr = platform.changeRate;
     CGFloat fluct = [priceFluctStr doubleValue];

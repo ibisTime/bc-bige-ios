@@ -59,8 +59,9 @@
     [self addSubview:sellLbl];
     [sellLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(@(-15));
+        make.left.equalTo(@(kScreenWidth - 30));
         make.top.equalTo(@15);
+        make.width.lessThanOrEqualTo(@15);
     }];
     
 }

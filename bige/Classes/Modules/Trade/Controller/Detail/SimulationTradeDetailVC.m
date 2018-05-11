@@ -144,8 +144,7 @@
 
 - (void)initHeaderView {
     
-    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 386)];
-    
+    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 361)];
     //顶部
     [self initTopView];
     
@@ -279,9 +278,10 @@
                 [weakSelf.quotesBtn setTitle:symbol forState:UIControlStateNormal];
                 
                 weakSelf.manager.symbol = infoModel.symbol;
-                
                 weakSelf.manager.toSymbol = infoModel.toSymbol;
-                
+                weakSelf.manager.ID = infoModel.marketGlobal.ID;
+                //刷新关注状态
+                [weakSelf requestQuotesInfo];
                 //刷新买卖五档
                 [weakSelf requestTradeList];
                 //刷新可用余额
@@ -291,6 +291,7 @@
             
             childVC.didSelectQuotes = ^(PlatformModel *quotes) {
                 
+                
                 [weakSelf.sliderView hide];
                 
                 NSString *symbol = [NSString stringWithFormat:@"%@/%@", [quotes.symbol uppercaseString], [quotes.toSymbol uppercaseString]];
@@ -298,9 +299,10 @@
                 [weakSelf.quotesBtn setTitle:symbol forState:UIControlStateNormal];
                 
                 weakSelf.manager.symbol = quotes.symbol;
-                
                 weakSelf.manager.toSymbol = quotes.toSymbol;
-                
+                weakSelf.manager.ID = quotes.ID;
+                //刷新关注状态
+                [weakSelf requestQuotesInfo];
                 //刷新买卖五档
                 [weakSelf requestTradeList];
                 //刷新可用余额
@@ -325,7 +327,9 @@
     
     self.tradeSelectSV.selectBlock = ^(NSInteger index) {
         
-        weakSelf.manager.type = index == 0 ? @"0": @"1";
+        weakSelf.manager.direction = index == 0 ? @"0": @"1";
+        
+        [weakSelf.tradeTableView reloadData];
     };
     
     [self.headerView addSubview:self.tradeSelectSV];
@@ -454,7 +458,7 @@
     
     CurrencyDetailVC *detailVC = [CurrencyDetailVC new];
     
-    detailVC.symbolID = self.platform.ID;
+    detailVC.symbolID = self.manager.ID;
     
     [self.navigationController pushViewController:detailVC animated:YES];
 }
@@ -467,14 +471,14 @@
     
     http.code = @"628330";
     http.showView = self.view;
-    http.parameters[@"exchangeEname"] = self.platform.exchangeEname;
+    http.parameters[@"exchangeEname"] = self.manager.exchange;
     http.parameters[@"userId"] = [TLUser user].userId;
-    http.parameters[@"symbol"] = self.platform.symbol;
-    http.parameters[@"toSymbol"] = self.platform.toSymbol;
+    http.parameters[@"symbol"] = self.manager.symbol;
+    http.parameters[@"toSymbol"] = self.manager.toSymbol;
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *promptStr = [self.platform.isChoice isEqualToString:@"1"] ? @"添加自选成功": @"删除自选成功";
+        NSString *promptStr = [self.platform.isChoice isEqualToString:@"1"] ? @"删除自选成功": @"添加自选成功";
         [TLAlert alertWithSucces:promptStr];
         
         if ([self.platform.isChoice isEqualToString:@"1"]) {
@@ -516,22 +520,24 @@
         
         if (objs.count > 0) {
             
-            PlatformModel *quotes = objs[0];
+            weakSelf.platform = objs[0];
             
-            NSString *symbol = [NSString stringWithFormat:@"%@/%@", [quotes.symbol uppercaseString], [quotes.toSymbol uppercaseString]];
+            NSString *symbol = [NSString stringWithFormat:@"%@/%@", [weakSelf.platform.symbol uppercaseString], [weakSelf.platform.toSymbol uppercaseString]];
             
             [weakSelf.quotesBtn setTitle:symbol forState:UIControlStateNormal];
             
-            weakSelf.manager.symbol = quotes.symbol;
-            weakSelf.manager.toSymbol = quotes.toSymbol;
-            weakSelf.manager.exchange = quotes.exchangeEname;
-            
+            weakSelf.manager.symbol = weakSelf.platform.symbol;
+            weakSelf.manager.toSymbol = weakSelf.platform.toSymbol;
+            weakSelf.manager.exchange = weakSelf.platform.exchangeEname;
+            weakSelf.manager.ID = weakSelf.platform.ID;
+            //刷新关注状态
+            [weakSelf requestQuotesInfo];
             //获取买卖五档
             [weakSelf requestTradeList];
             //获取可用余额
             [[NSNotificationCenter defaultCenter] postNotificationName:@"QotesDidLoad" object:nil];
             //刷新当前委托列表
-            [self.divisionTableView beginRefreshing];
+            [weakSelf.divisionTableView beginRefreshing];
         }
         
     } failure:^(NSError *error) {
@@ -579,7 +585,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"628923";
-    http.showView = self.view;
+//    http.showView = self.view;
     http.parameters[@"exchange"] = self.manager.exchange;
     http.parameters[@"toSymbol"] = self.manager.toSymbol;
     
@@ -648,6 +654,33 @@
     [self.divisionTableView endRefreshingWithNoMoreData_tl];
 }
 
+/**
+ 查询币种详情
+ */
+- (void)requestQuotesInfo {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"628352";
+    http.showView = self.view;
+    http.parameters[@"id"] = self.platform.ID;
+    if ([TLUser user].userId) {
+        
+        http.parameters[@"userId"] = [TLUser user].userId;
+    }
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.platform = [PlatformModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        NSString *imgName = [self.platform.isChoice isEqualToString:@"0"] ? @"币种未关注": @"币种关注";
+        [self.followBtn setImage:kImage(imgName) forState:UIControlStateNormal];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 - (void)cancelDivision:(NSInteger)index {
     
     DivisionModel *division = self.divisionList[index];
@@ -655,6 +688,7 @@
     TLNetworking *http = [TLNetworking new];
     
     http.code = @"628501";
+    http.showView = self.view;
     http.parameters[@"code"] = division.code;
     
     [http postWithSuccess:^(id responseObject) {

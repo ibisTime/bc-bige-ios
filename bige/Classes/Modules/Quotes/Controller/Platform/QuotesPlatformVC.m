@@ -59,6 +59,8 @@
 - (void)addNotification {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didSwitchLabel:) name:@"DidSwitchLabel" object:nil];
+    //点击关注
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(followOrCancelFollow) name:@"FollowOrCancelFollow" object:nil];
 }
 
 - (void)didSwitchLabel:(NSNotification *)notification {
@@ -76,6 +78,12 @@
     }
     //定时器停止
     [self stopTimer];
+}
+
+- (void)followOrCancelFollow {
+    
+    //刷新列表
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - 定时器
@@ -358,7 +366,7 @@
 
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *promptStr = [platformModel.isChoice isEqualToString:@"1"] ? @"添加自选成功": @"删除自选成功";
+        NSString *promptStr = [platformModel.isChoice isEqualToString:@"1"] ? @"删除自选成功": @"添加自选成功";
         [TLAlert alertWithSucces:promptStr];
         
         if ([platformModel.isChoice isEqualToString:@"1"]) {
@@ -442,16 +450,18 @@
 #pragma mark - RefreshDelegate
 - (void)refreshTableView:(TLTableView *)refreshTableview didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (_currentIndex != 0) {
+    PlatformModel *platform = self.platforms[indexPath.row];
+    
+    if ([platform.exchangeEname isEqualToString:@"marketGlobal"]) {
         
-        PlatformModel *platform = self.platforms[indexPath.row];
-        
-        CurrencyDetailVC *detailVC = [CurrencyDetailVC new];
-        
-        detailVC.symbolID = platform.ID;
-        
-        [self.navigationController pushViewController:detailVC animated:YES];
+        return ;
     }
+    CurrencyDetailVC *detailVC = [CurrencyDetailVC new];
+    
+    detailVC.symbolID = platform.ID;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
+    
 }
 
 - (void)refreshTableViewEventClick:(TLTableView *)refreshTableview selectRowAtIndex:(NSInteger)index {

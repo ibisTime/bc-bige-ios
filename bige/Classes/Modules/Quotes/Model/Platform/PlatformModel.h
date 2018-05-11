@@ -14,7 +14,7 @@
 //排名
 @property (nonatomic, assign) NSInteger rank;
 //图标
-@property (nonatomic, copy) NSString *pic;
+@property (nonatomic, copy) NSString *symbolPic;
 //编号
 @property (nonatomic, copy) NSString *ID;
 //类型

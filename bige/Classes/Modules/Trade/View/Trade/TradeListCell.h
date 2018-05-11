@@ -13,5 +13,7 @@
 @interface TradeListCell : BaseTableViewCell
 //
 @property (nonatomic, strong) TradeInfoModel *tradeInfo;
+//价格
+@property (nonatomic, strong) UILabel *priceLbl;
 
 @end

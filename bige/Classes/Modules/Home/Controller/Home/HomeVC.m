@@ -7,6 +7,8 @@
 //
 
 #import "HomeVC.h"
+//Category
+#import "UIBarButtonItem+convience.h"
 //M
 #import "InformationModel.h"
 #import "InfoManager.h"
@@ -22,6 +24,9 @@
 //C
 #import "InfoDetailVC.h"
 #import "HomeChildVC.h"
+#import "SearchCurrencyVC.h"
+#import "NavigationController.h"
+#import "CurrencyDetailVC.h"
 
 @interface HomeVC ()<RefreshDelegate>
 //头部
@@ -57,6 +62,8 @@
     self.title = @"币格财经";
     //添加通知
     //    [self addNotification];
+    //搜索
+    [self addItem];
     //HeaderView
     [self initHeaderView];
     //资讯
@@ -90,6 +97,11 @@
         [self.newsView addSubview:_bannerView];
     }
     return _bannerView;
+}
+
+- (void)addItem {
+    //搜索
+    [UIBarButtonItem addRightItemWithImageName:@"搜索" frame:CGRectMake(0, 0, 40, 40) vc:self action:@selector(search)];
 }
 
 - (void)initHeaderView {
@@ -299,7 +311,7 @@
     self.infoTableView = [[InformationListTableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     
     self.infoTableView.refreshDelegate = self;
-    self.infoTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"" text:@"暂无新闻"];
+    self.infoTableView.placeHolderView = [TLPlaceholderView placeholderViewWithImage:@"暂无记录" text:@"暂无资讯"];
     
     [self.view addSubview:self.infoTableView];
     [self.infoTableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -316,6 +328,20 @@
 - (void)clickMore {
     
     self.tabBarController.selectedIndex = 1;
+}
+
+/**
+ 搜索
+ */
+- (void)search {
+    
+    BaseWeakSelf;
+    
+    SearchCurrencyVC *searchVC = [SearchCurrencyVC new];
+    
+    NavigationController *nav = [[NavigationController alloc] initWithRootViewController:searchVC];
+    
+    [self presentViewController:nav animated:YES completion:nil];
 }
 
 #pragma mark - Data
@@ -359,11 +385,31 @@
             infoView.infoModel = obj;
             
             [self.optionalSV addSubview:infoView];
+            
+            UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectOptional:)];
+            [infoView addGestureRecognizer:tapGR];
         }];
         
     } failure:^(NSError *error) {
         
     }];
+}
+
+- (void)selectOptional:(UITapGestureRecognizer *)tapGR {
+    
+    NSInteger index = tapGR.view.tag - 2500;
+    
+    OptionInfoModel *optional = self.platforms[index];
+    
+    if ([optional.exchangeEname isEqualToString:@"marketGlobal"]) {
+        
+        return ;
+    }
+    CurrencyDetailVC *detailVC = [CurrencyDetailVC new];
+    
+    detailVC.symbolID = optional.marketGlobal.ID;
+    
+    [self.navigationController pushViewController:detailVC animated:YES];
 }
 
 - (void)requestBannerList {
@@ -404,6 +450,8 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"628205";
+    
+    helper.parameters[@"location"] = @"1";
     
     helper.tableView = self.infoTableView;
     

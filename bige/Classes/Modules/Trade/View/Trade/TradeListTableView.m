@@ -59,6 +59,8 @@ static NSString *identifierCell = @"TradeListCell";
     
     cell.tradeInfo = indexPath.section == 0 ? self.tradeList.asks[(self.tradeList.asks.count - indexPath.row - 1)]: self.tradeList.bids[indexPath.row];
     
+    cell.priceLbl.textColor = indexPath.section == 0 ? kThemeColor: kRiseColor;
+    
     return cell;
 }
 
@@ -130,9 +132,11 @@ static NSString *identifierCell = @"TradeListCell";
         
         if (self.tradeList.bids.count > 0) {
             
-            TradeInfoModel *tradeInfo = self.tradeList.bids[0];
+            TradeInfoModel *tradeInfo = self.tradeList.asks[0];
             
             lastPriceLbl.text = [tradeInfo.price convertToRealMoneyWithNum:8];
+            lastPriceLbl.textColor = kThemeColor;
+            
             [TradeManager manager].price = tradeInfo.price;
         }
         
@@ -140,9 +144,11 @@ static NSString *identifierCell = @"TradeListCell";
         
         if (self.tradeList.asks.count > 0) {
             
-            TradeInfoModel *tradeInfo = self.tradeList.asks[0];
+            TradeInfoModel *tradeInfo = self.tradeList.bids[0];
             
             lastPriceLbl.text = [tradeInfo.price convertToRealMoneyWithNum:8];
+            lastPriceLbl.textColor = kRiseColor;
+
             [TradeManager manager].price = tradeInfo.price;
         }
     }

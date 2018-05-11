@@ -90,7 +90,7 @@
 //        make.right.equalTo(@(-rightMargin));
 //    }];
 
-    CGFloat btnW = kScreenWidth/2.0;
+    CGFloat btnW = kScreenWidth/3.0;
     //积分中心
     UIButton *integralBtn = [UIButton buttonWithTitle:@"积分中心"
                                            titleColor:kTextColor
@@ -124,6 +124,24 @@
         make.height.equalTo(@70);
     }];
     [collectionBtn setTitleBottom];
+    
+    //我的关注
+    UIButton *followBtn = [UIButton buttonWithTitle:@"我的关注"
+                                             titleColor:kTextColor
+                                        backgroundColor:kWhiteColor
+                                              titleFont:14.0];
+    [followBtn addTarget:self action:@selector(selectFollow) forControlEvents:UIControlEventTouchUpInside];
+    [followBtn setImage:kImage(@"我的关注") forState:UIControlStateNormal];
+    
+    [self addSubview:followBtn];
+    [followBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.equalTo(collectionBtn.mas_right);
+        make.bottom.equalTo(@0);
+        make.width.equalTo(@(btnW));
+        make.height.equalTo(@70);
+    }];
+    [followBtn setTitleBottom];
 }
 
 #pragma mark - Events
@@ -148,6 +166,14 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
         
         [self.delegate didSelectedWithType:MineHeaderTypeCollection idx:0];
+    }
+}
+
+- (void)selectFollow {
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectedWithType:idx:)]) {
+        
+        [self.delegate didSelectedWithType:MineHeaderTypeFollow idx:0];
     }
 }
 

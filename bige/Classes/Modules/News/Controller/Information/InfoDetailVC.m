@@ -14,6 +14,7 @@
 #import "APICodeMacro.h"
 //Category
 #import "TLProgressHUD.h"
+#import "NSString+CGSize.h"
 //Extension
 #import <IQKeyboardManager.h>
 #import <TFHpple.h>
@@ -209,9 +210,9 @@
         make.width.height.equalTo(@20);
     }];
     //收藏
-    UIButton *collectionBtn = [UIButton buttonWithImageName:@"未收藏"];
+    UIButton *collectionBtn = [UIButton buttonWithImageName:@"币种未关注"];
     
-    NSString *image = [self.detailModel.isCollect isEqualToString:@"1"] ? @"收藏": @"未收藏";
+    NSString *image = [self.detailModel.isCollect isEqualToString:@"1"] ? @"币种关注": @"币种未关注";
     
     [collectionBtn setImage:kImage(image) forState:UIControlStateNormal];
     
@@ -228,8 +229,29 @@
     
     self.collectionBtn = collectionBtn;
     
+    NSString *commentCount = [NSString stringWithFormat:@"%ld", self.detailModel.commentCount];
+    
+    CGFloat commentW = [commentCount integerValue] < 10 ? 15: [NSString getWidthWithString:commentCount font:11.0] + 10;
+    
+    self.commentNumLbl = [UILabel labelWithBackgroundColor:kThemeColor
+                                                 textColor:kWhiteColor
+                                                      font:11.0];
+    self.commentNumLbl.textAlignment = NSTextAlignmentCenter;
+    self.commentNumLbl.text = commentCount;
+    self.commentNumLbl.layer.cornerRadius = 15/2.0;
+    self.commentNumLbl.clipsToBounds = YES;
+    
+    [self.bottomView addSubview:self.commentNumLbl];
+    [self.commentNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.equalTo(@8);
+        make.right.equalTo(collectionBtn.mas_left).offset(-10);
+        make.height.equalTo(@15);
+        make.width.equalTo(@(commentW));
+    }];
+    
     //评论数
-    UIButton *commentNumBtn = [UIButton buttonWithImageName:@"留言"];
+    UIButton *commentNumBtn = [UIButton buttonWithImageName:@"资讯详情留言"];
     
     commentNumBtn.contentMode = UIViewContentModeScaleAspectFit;
     [commentNumBtn addTarget:self action:@selector(lookAllComment) forControlEvents:UIControlEventTouchUpInside];
@@ -238,41 +260,30 @@
     
     [commentNumBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(collectionBtn.mas_left).offset(-15);
+        make.right.equalTo(self.commentNumLbl.mas_left).offset(3);
         make.centerY.equalTo(@0);
-        make.width.height.equalTo(@20);
-    }];
-    
-    self.commentNumLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                 textColor:kThemeColor
-                                                      font:9.0];
-    
-    self.commentNumLbl.text = [NSString stringWithFormat:@"%ld", self.detailModel.commentCount];
-
-    [self.bottomView addSubview:self.commentNumLbl];
-    [self.commentNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(commentNumBtn.mas_top).offset(-1);
-        make.centerX.equalTo(commentNumBtn.mas_right).offset(-5);
+        make.width.height.equalTo(@17);
     }];
     //点击评论
     UIButton *commentBtn = [UIButton buttonWithTitle:@"写评论..."
-                                          titleColor:kHexColor(@"#9E9E9E")
-                                     backgroundColor:kHexColor(@"E5E5E5")
+                                          titleColor:kHexColor(@"#212832")
+                                     backgroundColor:kHexColor(@"f7f8fa")
                                            titleFont:12.0
                                         cornerRadius:17.5];
     
     [commentBtn addTarget:self action:@selector(clickComment) forControlEvents:UIControlEventTouchUpInside];
+    [commentBtn setImage:kImage(@"写评论") forState:UIControlStateNormal];
     [self.bottomView addSubview:commentBtn];
     [commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@15);
-        make.height.equalTo(@35);
+        make.height.equalTo(@30);
         make.centerY.equalTo(@0);
         make.right.equalTo(commentNumBtn.mas_left).offset(-15);
     }];
     
-    [commentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, kWidth(-100), 0, 0)];
+    [commentBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, kWidth(-125), 0, 0)];
+    [commentBtn setImageEdgeInsets:UIEdgeInsetsMake(0, kWidth(-140), 0, 0)];
 }
 
 #pragma mark - 通知
@@ -350,7 +361,7 @@
         [http postWithSuccess:^(id responseObject) {
             
             weakSelf.detailModel = [InfoDetailModel mj_objectWithKeyValues:responseObject[@"data"]];
-            NSString *image = [weakSelf.detailModel.isCollect isEqualToString:@"1"] ? @"收藏": @"未收藏";
+            NSString *image = [weakSelf.detailModel.isCollect isEqualToString:@"1"] ? @"币种关注": @"币种未关注";
             
             [weakSelf.collectionBtn setImage:kImage(image) forState:UIControlStateNormal];
             
@@ -561,6 +572,8 @@
         weakSelf.tableView.newestComments = objs;
         //刷新
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weakSelf.tableView.sectionHidden = NO;
+            
             [weakSelf.tableView reloadData_tl];
         });
         //底部按钮
@@ -672,7 +685,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *image = [self.detailModel.isCollect isEqualToString:@"1"] ? @"未收藏": @"收藏";
+        NSString *image = [self.detailModel.isCollect isEqualToString:@"1"] ? @"币种未关注": @"币种关注";
         NSString *promptStr = [self.detailModel.isCollect isEqualToString:@"1"] ? @"取消收藏成功": @"收藏成功";
         [TLAlert alertWithSucces:promptStr];
         [sender setImage:kImage(image) forState:UIControlStateNormal];

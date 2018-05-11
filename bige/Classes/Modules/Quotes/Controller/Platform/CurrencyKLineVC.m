@@ -16,6 +16,8 @@
 #import "CurrencyInfoView.h"
 #import "CurrencyBottomView.h"
 #import "CurrencyKLineMapView.h"
+#import "SetWarningView.h"
+
 //C
 #import "CurrencyKLineHScreenVC.h"
 
@@ -32,6 +34,8 @@
 @property (nonatomic, strong) CurrencyKLineMapView *kLineView;
 //底部按钮
 @property (nonatomic, strong) CurrencyBottomView *bottomView;
+//设置预警
+@property (nonatomic, strong) SetWarningView *warningView;
 //币种信息
 @property (nonatomic, strong) PlatformModel *platform;
 //是否加载
@@ -49,6 +53,7 @@
     _isDown = NO;
     //获取行情详情
     [self requestQuotesInfo];
+
 }
 
 #pragma mark - Init
@@ -61,6 +66,15 @@
         [self.view addSubview:_changeView];
     }
     return _changeView;
+}
+
+- (SetWarningView *)warningView {
+    
+    if (!_warningView) {
+        
+        _warningView = [[SetWarningView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kScreenHeight)];
+    }
+    return _warningView;
 }
 
 - (void)initSubviews {
@@ -166,11 +180,18 @@
 #pragma mark - Events
 - (void)bottomEventType:(BottomEventType)type {
     
+    BaseWeakSelf;
+    
     switch (type) {
             
         case BottomEventTypeEarlyWarning:
         {
-            
+            [self checkLogin:^{
+                
+                weakSelf.warningView.platform = weakSelf.platform;
+                
+                [weakSelf.warningView show];
+            }];
             
         }break;
             
@@ -256,6 +277,10 @@
     http.code = @"628352";
     http.showView = self.view;
     http.parameters[@"id"] = self.symbolID;
+    if ([TLUser user].userId) {
+        
+        http.parameters[@"userId"] = [TLUser user].userId;
+    }
     
     [http postWithSuccess:^(id responseObject) {
         
@@ -288,7 +313,7 @@
     
     [http postWithSuccess:^(id responseObject) {
         
-        NSString *promptStr = [self.platform.isChoice isEqualToString:@"1"] ? @"添加自选成功": @"删除自选成功";
+        NSString *promptStr = [self.platform.isChoice isEqualToString:@"1"] ? @"删除自选成功": @"添加自选成功";
         [TLAlert alertWithSucces:promptStr];
         
         if ([self.platform.isChoice isEqualToString:@"1"]) {
@@ -301,6 +326,33 @@
         }
         
         self.bottomView.platform = self.platform;
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"FollowOrCancelFollow" object:nil];
+        //刷新关注人数
+        [self followOrCancelFollow];
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+- (void)followOrCancelFollow {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"628352";
+    http.showView = self.view;
+    http.parameters[@"id"] = self.symbolID;
+    if ([TLUser user].userId) {
+        
+        http.parameters[@"userId"] = [TLUser user].userId;
+    }
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.platform = [PlatformModel mj_objectWithKeyValues:responseObject[@"data"]];
+        
+        self.infoView.platform = self.platform;
         
     } failure:^(NSError *error) {
         

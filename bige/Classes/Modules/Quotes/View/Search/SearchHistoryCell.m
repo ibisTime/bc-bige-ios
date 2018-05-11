@@ -23,15 +23,6 @@
 
 #pragma mark - Init
 - (void)initSubviews {
-    //icon
-    UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"时间")];
-    
-    [self addSubview:iconIV];
-    [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@10);
-        make.centerY.equalTo(@0);
-    }];
     //内容
     self.contentLbl = [UILabel labelWithBackgroundColor:kClearColor
                                               textColor:kTextColor
@@ -40,9 +31,18 @@
     [self addSubview:self.contentLbl];
     [self.contentLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.left.equalTo(iconIV.mas_right).offset(10);
-        make.centerY.equalTo(iconIV.mas_centerY);
+        make.left.equalTo(@20);
+        make.centerY.equalTo(@0);
     }];
+    //icon
+        UIImageView *iconIV = [[UIImageView alloc] initWithImage:kImage(@"更多-灰色")];
+    
+        [self addSubview:iconIV];
+        [iconIV mas_makeConstraints:^(MASConstraintMaker *make) {
+    
+            make.right.equalTo(@(-15));
+            make.centerY.equalTo(@0);
+        }];
 }
 
 @end

@@ -16,5 +16,7 @@
 @property (nonatomic, strong) NSArray <InfoCommentModel*> *newestComments;
 //
 @property (nonatomic, strong) InfoDetailModel *detailModel;
+//
+@property (nonatomic, assign) BOOL sectionHidden;
 
 @end

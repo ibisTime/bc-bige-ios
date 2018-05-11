@@ -132,12 +132,12 @@
 - (void)configZendesk {
     
     // supprot
-    [[ZDKConfig instance] initializeWithAppId:@"f9ab448e1dfdb93e3b4ff1f2c2d4fb3a72140cbfd6ee10e0"
-                                   zendeskUrl:@"https://beicoin.zendesk.com"
-                                     clientId:@"mobile_sdk_client_b388fa777945f99314b7"];
+    [[ZDKConfig instance] initializeWithAppId:@"7b12f548a8c7d2461f3f70a687f94ee1719b187e58edbe9b"
+                                   zendeskUrl:@"https://bige520.zendesk.com"
+                                     clientId:@"mobile_sdk_client_8e980d19940515baec80"];
     
     // 客服
-    [ZDCChat initializeWithAccountKey:@"MvxwoT6827HylJtr6360QQQ5yve4Z2Ny"];
+//    [ZDCChat initializeWithAccountKey:@"MvxwoT6827HylJtr6360QQQ5yve4Z2Ny"];
     
 }
 

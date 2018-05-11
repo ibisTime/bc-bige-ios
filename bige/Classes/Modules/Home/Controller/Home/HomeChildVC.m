@@ -241,7 +241,7 @@
     [self.headerView addSubview:priceLbl];
     [priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(percentLbl.mas_left).offset(-20);
+        make.right.equalTo(percentLbl.mas_left).offset(-40);
         make.centerY.equalTo(rankLbl.mas_centerY);
     }];
     //bottomLine

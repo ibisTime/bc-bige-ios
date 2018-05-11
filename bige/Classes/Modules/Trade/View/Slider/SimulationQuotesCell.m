@@ -20,7 +20,7 @@
 //当前对应币种
 @property (nonatomic, strong) UILabel *opppsitePriceLbl;
 //涨跌情况
-@property (nonatomic, strong) UIButton *priceFluctBtn;
+@property (nonatomic, strong) UILabel *priceFluctLbl;
 
 @end
 
@@ -53,11 +53,12 @@
     
     [self addSubview:self.opppsitePriceLbl];
     //涨跌情况
-    self.priceFluctBtn = [UIButton buttonWithTitle:@""
-                                        titleColor:kWhiteColor
-                                   backgroundColor:kClearColor
-                                         titleFont:12.0 cornerRadius:5];
-    [self addSubview:self.priceFluctBtn];
+    self.priceFluctLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                 textColor:kWhiteColor
+                                                      font:12.0];
+    self.priceFluctLbl.textAlignment = NSTextAlignmentRight;
+    
+    [self addSubview:self.priceFluctLbl];
 
     //bottomLine
     UIView *bottomLine = [[UIView alloc] init];
@@ -84,7 +85,7 @@
         make.left.equalTo(self.mas_left).offset(15);
     }];
     //涨幅
-    [self.priceFluctBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.priceFluctLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(@(-15));
         make.centerY.equalTo(@0);
@@ -95,7 +96,7 @@
         
         make.centerY.equalTo(@0);
         make.centerX.equalTo(@0);
-        make.width.equalTo(@80);
+        make.width.equalTo(@120);
     }];
     
 }
@@ -107,16 +108,17 @@
     //币种名称
     self.currencyNameLbl.text = [quotes.symbol uppercaseString];
     //对应币种价格
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%@", [quotes.lastPrice convertToRealMoneyWithNum:8]];
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"￥%@", [quotes.lastCnyPrice convertToRealMoneyWithNum:8]];
     //涨跌幅
     NSString *fluctStr = [quotes getResultWithPercent:quotes.percentChange];
-    [self.priceFluctBtn setTitle:fluctStr forState:UIControlStateNormal];
+    self.priceFluctLbl.text = fluctStr;
+    
     UIColor *fluctColor = [quotes getPercentColorWithPercent:quotes.percentChange];
-    [self.priceFluctBtn setTitleColor:fluctColor forState:UIControlStateNormal];
+    self.priceFluctLbl.textColor = fluctColor;
     self.opppsitePriceLbl.textColor = fluctColor;
 
     CGFloat btnW = [NSString getWidthWithString:fluctStr font:16.0] + 15;
-    [self.priceFluctBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.priceFluctLbl mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@(btnW > 75 ? btnW: 75));
     }];
@@ -129,16 +131,16 @@
     //币种名称
     self.currencyNameLbl.text = [infoModel.symbol uppercaseString];
     //对应币种价格
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%@", [infoModel.marketGlobal.lastPrice convertToRealMoneyWithNum:8]];
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"￥%@", [infoModel.marketGlobal.lastCnyPrice convertToRealMoneyWithNum:8]];
     //涨跌幅
     NSString *fluctStr = [infoModel.marketGlobal getResultWithPercent:infoModel.marketGlobal.percentChange];
-    [self.priceFluctBtn setTitle:fluctStr forState:UIControlStateNormal];
+    self.priceFluctLbl.text = fluctStr;
     UIColor *fluctColor = [infoModel.marketGlobal getPercentColorWithPercent:infoModel.marketGlobal.percentChange];
-    [self.priceFluctBtn setTitleColor:fluctColor forState:UIControlStateNormal];
+    self.priceFluctLbl.textColor = fluctColor;
     self.opppsitePriceLbl.textColor = fluctColor;
 
     CGFloat btnW = [NSString getWidthWithString:fluctStr font:16.0] + 15;
-    [self.priceFluctBtn mas_updateConstraints:^(MASConstraintMaker *make) {
+    [self.priceFluctLbl mas_updateConstraints:^(MASConstraintMaker *make) {
         
         make.width.equalTo(@(btnW > 75 ? btnW: 75));
     }];

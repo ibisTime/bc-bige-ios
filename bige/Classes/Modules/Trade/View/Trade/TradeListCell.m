@@ -12,8 +12,6 @@
 #import "NSNumber+Extension.h"
 
 @interface TradeListCell()
-//价格
-@property (nonatomic, strong) UILabel *priceLbl;
 //数量
 @property (nonatomic, strong) UILabel *numLbl;
 

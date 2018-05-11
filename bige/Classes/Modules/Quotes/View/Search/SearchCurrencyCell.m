@@ -11,18 +11,20 @@
 #import "UILabel+Extension.h"
 #import "NSString+CGSize.h"
 #import "NSString+Extension.h"
+#import <UIImageView+WebCache.h>
+#import "NSNumber+Extension.h"
 
 @interface SearchCurrencyCell()
 //币种名称
-@property (nonnull, strong) UILabel *currencyNameLbl;
+@property (nonatomic, strong) UILabel *currencyNameLbl;
 //平台名称
-@property (nonatomic, strong) UILabel *platformNameLbl;
+@property (nonatomic, strong) UILabel *exchangeNameLbl;
 //当前对应币种
 @property (nonatomic, strong) UILabel *opppsitePriceLbl;
+//当前人民币价格
+@property (nonatomic, strong) UILabel *rmbPriceLbl;
 //涨跌情况
 @property (nonatomic, strong) UIButton *priceFluctBtn;
-//添加
-@property (nonatomic, strong) UIButton *addBtn;
 
 @end
 
@@ -44,36 +46,52 @@
     //币种名称
     self.currencyNameLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                    textColor:kTextColor
-                                                        font:17.0];
+                                                        font:13.0];
     
     [self addSubview:self.currencyNameLbl];
     //平台名称
-    self.platformNameLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                   textColor:kTextColor
-                                                        font:17.0];
+    self.exchangeNameLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                                  textColor:kTextColor
+                                                       font:12.0];
     
-    [self addSubview:self.platformNameLbl];
+    [self addSubview:self.exchangeNameLbl];
     //涨跌情况
     self.priceFluctBtn = [UIButton buttonWithTitle:@""
                                         titleColor:kWhiteColor
                                    backgroundColor:kClearColor
-                                         titleFont:15.0
-                                      cornerRadius:5];
+                                         titleFont:14.0 cornerRadius:5];
     
     [self addSubview:self.priceFluctBtn];
+    
+    //关注情况
+    self.followBtn = [UIButton buttonWithImageName:@"币种未关注"];
+    
+    [self addSubview:self.followBtn];
     //当前对应币种价格
     self.opppsitePriceLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                    textColor:kHexColor(@"#595A6E")
-                                                         font:17.0];
+                                                    textColor:kTextColor4
+                                                         font:12.0];
     
     [self addSubview:self.opppsitePriceLbl];
-    //添加按钮
-    self.addBtn = [UIButton buttonWithImageName:@"小加"
-                              selectedImageName:@"勾选"];
     
-    self.addBtn.userInteractionEnabled = NO;
+    //当前人民币价格
+    self.rmbPriceLbl = [UILabel labelWithBackgroundColor:kClearColor
+                                               textColor:kTextColor
+                                                    font:14.0];
     
-    [self addSubview:self.addBtn];
+    [self addSubview:self.rmbPriceLbl];
+    //bottomLine
+    UIView *bottomLine = [[UIView alloc] init];
+    
+    bottomLine.backgroundColor = kLineColor;
+    
+    [self addSubview:bottomLine];
+    [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.right.bottom.equalTo(@0);
+        make.height.equalTo(@0.5);
+        
+    }];
     //布局
     [self setSubviewLayout];
 }
@@ -86,69 +104,85 @@
         make.top.equalTo(@10);
         make.left.equalTo(@15);
     }];
-    //平台
-    [self.platformNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+    //平台名称
+    [self.exchangeNameLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
+        make.top.equalTo(self.currencyNameLbl.mas_bottom).offset(10);
         make.left.equalTo(self.currencyNameLbl.mas_left);
-        make.top.equalTo(self.currencyNameLbl.mas_bottom).offset(5);
     }];
-    //添加
-    [self.addBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    //关注
+    [self.followBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(@(-15));
+        make.right.equalTo(@0);
         make.centerY.equalTo(@0);
-        make.width.height.equalTo(@22);
+        make.width.height.equalTo(@45);
     }];
     //涨幅
     [self.priceFluctBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.right.equalTo(self.addBtn.mas_left).offset(-15);
+        make.right.equalTo(self.followBtn.mas_left);
         make.centerY.equalTo(@0);
-        make.height.equalTo(@37);
+        make.height.equalTo(@27);
+    }];
+    //rmb价格
+    [self.rmbPriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.right.equalTo(self.priceFluctBtn.mas_left).offset(-15);
+        make.top.equalTo(self.currencyNameLbl.mas_top);
     }];
     //对应币种
     [self.opppsitePriceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.right.equalTo(self.priceFluctBtn.mas_left).offset(-15);
-        make.centerY.equalTo(@0);
+        make.top.equalTo(self.exchangeNameLbl.mas_top);
     }];
     
 }
 
 #pragma mark - Setting
-- (void)setCurrency:(CurrencyModel *)currency {
+- (void)setPlatform:(PlatformModel *)platform {
     
-    _currency = currency;
+    _platform = platform;
     
     //币种名称
-    self.currencyNameLbl.text = [NSString stringWithFormat:@"%@/%@", currency.coinSymbol, currency.toCoinSymbol];
+    self.currencyNameLbl.text = [NSString stringWithFormat:@"%@/%@", [platform.symbol uppercaseString], [platform.toSymbol uppercaseString]];
     //平台名称
-    self.platformNameLbl.text = currency.exchangeCname;
+    self.exchangeNameLbl.text = [NSString stringWithFormat:@"%@", platform.exchangeCname];
+    
     //对应币种价格
-    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"￥%@", currency.lastCnyPrice];
+    self.opppsitePriceLbl.text = [NSString stringWithFormat:@"%@", [platform.lastPrice convertToRealMoneyWithNum:8]];
+    //人民币价格
+    self.rmbPriceLbl.text = [NSString stringWithFormat:@"￥%.2lf", [platform.lastCnyPrice doubleValue]];
+    self.rmbPriceLbl.textColor = platform.bgColor;
     //涨跌情况
-    NSString *priceFluctStr = currency.percentChange;
+    NSString *priceFluctStr = platform.changeRate;
     CGFloat fluct = [priceFluctStr doubleValue];
-
+    
     if (fluct > 0) {
-
+        
         priceFluctStr = [NSString stringWithFormat:@"+%@%%", priceFluctStr];
-
+        
     } else  {
-
+        
         priceFluctStr = [NSString stringWithFormat:@"%@%%", priceFluctStr];
     }
-
+    
     [self.priceFluctBtn setTitle:priceFluctStr forState:UIControlStateNormal];
-    [self.priceFluctBtn setBackgroundColor:currency.bgColor forState:UIControlStateNormal];
-
+    [self.priceFluctBtn setBackgroundColor:platform.bgColor forState:UIControlStateNormal];
+    
     CGFloat btnW = [NSString getWidthWithString:priceFluctStr font:16.0] + 15;
     [self.priceFluctBtn mas_updateConstraints:^(MASConstraintMaker *make) {
-
+        
         make.width.equalTo(@(btnW > 75 ? btnW: 75));
     }];
-    //添加按钮
-    self.addBtn.selected = [currency.isChoice boolValue];
+    //关注情况
+    if ([platform.isChoice isEqualToString:@"0"]) {
+        
+        [self.followBtn setImage:kImage(@"币种未关注") forState:UIControlStateNormal];
+    } else {
+        
+        [self.followBtn setImage:kImage(@"币种关注") forState:UIControlStateNormal];
+    }
 }
 
 @end

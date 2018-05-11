@@ -74,7 +74,7 @@ typedef struct TitleInfo TitleInfo;
     
     promptLbl.frame = CGRectMake(15, self.contentTf.yy + 5, kScreenWidth - 30, 30);
     
-    promptLbl.text = @"昵称不能超过8个汉字或16个英文字母";
+//    promptLbl.text = @"昵称不能超过8个汉字或16个英文字母";
     
     [self.view addSubview:promptLbl];
     

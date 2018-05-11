@@ -38,6 +38,8 @@
 #import "MyCollectionListVC.h"
 #import "SettingVC.h"
 #import "WarningSettingVC.h"
+#import "IntegralCenterVC.h"
+#import "FollowListVC.h"
 
 @interface MineVC ()<MineHeaderDelegate>
 //模型
@@ -383,7 +385,15 @@
             
         case MineHeaderTypeIntegralCenter:
         {
+//            [self checkLogin:^{
+//
+//                IntegralCenterVC *centerVC = [IntegralCenterVC new];
+//
+//                [weakSelf.navigationController pushViewController:centerVC animated:YES];
+//            }];
+            IntegralCenterVC *centerVC = [IntegralCenterVC new];
             
+            [self.navigationController pushViewController:centerVC animated:YES];
         }break;
             
         case MineHeaderTypeCollection:
@@ -404,6 +414,16 @@
             } event:^{
                 
                 [weakSelf.imagePicker picker];
+            }];
+        }break;
+            
+        case MineHeaderTypeFollow:
+        {
+            [self checkLogin:^{
+                
+                FollowListVC *followVC = [FollowListVC new];
+                
+                [self.navigationController pushViewController:followVC animated:YES];
             }];
         }break;
             
