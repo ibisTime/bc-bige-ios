@@ -10,6 +10,7 @@
 //V
 #import "InformationListCell.h"
 #import "InformationListCell2.h"
+#import "InformationListCell3.h"
 
 @interface InformationListTableView()<UITableViewDataSource, UITableViewDelegate>
 
@@ -19,6 +20,7 @@
 
 static NSString *informationListCell = @"InformationListCell";
 static NSString *informationListCell2 = @"InformationListCell2";
+static NSString *informationListCell3 = @"InformationListCell3";
 
 - (instancetype)initWithFrame:(CGRect)frame style:(UITableViewStyle)style {
     
@@ -29,6 +31,7 @@ static NSString *informationListCell2 = @"InformationListCell2";
         
         [self registerClass:[InformationListCell class] forCellReuseIdentifier:informationListCell];
         [self registerClass:[InformationListCell2 class] forCellReuseIdentifier:informationListCell2];
+        [self registerClass:[InformationListCell3 class] forCellReuseIdentifier:informationListCell3];
 
     }
     
@@ -46,6 +49,19 @@ static NSString *informationListCell2 = @"InformationListCell2";
     
     InformationModel *info = self.infos[indexPath.row];
     
+    if ([info.advPicType isEqualToString:@"2"]) {
+        
+        InformationListCell3 *cell = [tableView dequeueReusableCellWithIdentifier:informationListCell3 forIndexPath:indexPath];
+        
+        cell.infoModel = info;
+        cell.shareLbl.tag = 3100 + indexPath.row;
+        
+        UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickShare:)];
+        [cell.shareLbl addGestureRecognizer:tapGR];
+        
+        return cell;
+    }
+    
     if (info.pics.count == 1) {
         
         InformationListCell *cell = [tableView dequeueReusableCellWithIdentifier:informationListCell forIndexPath:indexPath];
@@ -60,6 +76,16 @@ static NSString *informationListCell2 = @"InformationListCell2";
     cell.infoModel = info;
     
     return cell;
+}
+
+- (void)clickShare:(UITapGestureRecognizer *)tapGR {
+    
+    NSInteger index = tapGR.view.tag - 3100;
+    
+    if (self.refreshDelegate && [self.refreshDelegate respondsToSelector:@selector(refreshTableViewEventClick:selectRowAtIndex:)]) {
+        
+        [self.refreshDelegate refreshTableViewEventClick:self selectRowAtIndex:index];
+    }
 }
 
 #pragma mark - UITableViewDelegate
@@ -79,6 +105,11 @@ static NSString *informationListCell2 = @"InformationListCell2";
     
     InformationModel *info = self.infos[indexPath.row];
 
+    if ([info.advPicType isEqualToString:@"2"]) {
+        
+        return kWidth(285);
+    }
+    
     if (info.pics.count == 1) {
         
         return 105;

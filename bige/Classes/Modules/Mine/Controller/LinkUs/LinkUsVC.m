@@ -8,13 +8,6 @@
 
 #import "LinkUsVC.h"
 
-//Macro
-//Framework
-//Category
-//Extension
-//M
-//V
-
 @interface LinkUsVC ()
 
 @property (nonatomic, strong) UIView *bgView;

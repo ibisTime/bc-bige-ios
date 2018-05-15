@@ -238,7 +238,7 @@
     //收
     self.endPriceLbl.text = [NSString stringWithFormat:@"收:%@", [platform.close convertToRealMoneyWithNum:8]];
     //市值
-    self.marketVolumeLbl.text = [NSString stringWithFormat:@"市值:%@", [platform getNumWithVolume:platform.maxMarketCapCny]];
+    self.marketVolumeLbl.text = [NSString stringWithFormat:@"市值:%@", [platform getNumWithVolume:platform.totalMarketCapCny]];
 }
 
 #pragma mark - Events

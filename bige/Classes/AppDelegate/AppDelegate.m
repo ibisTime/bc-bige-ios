@@ -101,6 +101,14 @@
     return YES;
 }
 
+/**
+ * 功能：禁止横屏
+// */
+//- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window
+//{
+//    return UIInterfaceOrientationMaskPortrait;
+//}
+
 #pragma mark - Config
 - (void)configQQ {
     

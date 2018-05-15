@@ -41,7 +41,7 @@
 #import "IntegralCenterVC.h"
 #import "FollowListVC.h"
 
-@interface MineVC ()<MineHeaderDelegate>
+@interface MineVC ()<MineHeaderDelegate, ZDKHelpCenterConversationsUIDelegate>
 //模型
 @property (nonatomic, strong) MineGroup *group;
 //
@@ -134,7 +134,7 @@
             
             ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
 
-//            [ZDKHelpCenter setUIDelegate:weakSelf];
+            [ZDKHelpCenter setUIDelegate:weakSelf];
 
             [ZDKHelpCenter pushHelpCenterOverview:self.navigationController
                                  withContentModel:contentModel];
@@ -430,6 +430,17 @@
         default:
             break;
     }
+}
+
+#pragma mark - ZDKHelpCenterConversationsUIDelegate
+- (ZDKContactUsVisibility)active {
+    
+    return ZDKContactUsVisibilityArticleListOnly;
+}
+
+- (ZDKNavBarConversationsUIType)navBarConversationsUIType {
+    
+    return ZDKNavBarConversationsUITypeLocalizedLabel;
 }
 
 /**

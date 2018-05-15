@@ -17,8 +17,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    
 }
 
 
@@ -55,5 +53,10 @@
     //[tabbarCrl removeOriginTabbarButton];
 }
 
+#pragma mark - 横屏
+- (BOOL)shouldAutorotate {
+    
+    return self.topViewController.shouldAutorotate;
+}
 
 @end

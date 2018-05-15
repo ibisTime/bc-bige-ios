@@ -86,7 +86,7 @@
     [self.totalNumLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@15);
-        make.top.equalTo(self.useNumLbl.mas_bottom).offset(15);
+        make.top.equalTo(self.useNumLbl.mas_bottom).offset(12.5);
     }];
     //卖出
     UIButton *sellBtn = [UIButton buttonWithTitle:@"卖出"
@@ -98,7 +98,7 @@
     [sellBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.equalTo(@(15));
-        make.top.equalTo(self.totalNumLbl.mas_bottom).offset(15);
+        make.top.equalTo(self.totalNumLbl.mas_bottom).offset(12.5);
         make.width.equalTo(@(self.width - 15));
         make.height.equalTo(@45);
     }];

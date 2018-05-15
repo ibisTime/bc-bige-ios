@@ -15,6 +15,7 @@
 //M
 #import "SimulationTradeInfoModel.h"
 #import "TradeManager.h"
+#import "BannerModel.h"
 //V
 #import "SimulationTradeView.h"
 #import "TLBannerView.h"
@@ -33,6 +34,7 @@
 @property (nonatomic, strong) SimulationTradeInfoModel *infoModel;
 //
 @property (nonatomic, strong) TLBannerView *bannerView;
+@property (nonatomic,strong) NSMutableArray <BannerModel *>*bannerRoom;
 //
 @property (nonatomic, strong) UIView *bottomView;
 
@@ -43,6 +45,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    
+    //zendesk
+    [self zendeskUIConfig];
     
     if ([TLUser user].userId) {
         
@@ -61,6 +66,8 @@
     [self initBannerView];
     //底部按钮
     [self initBottomView];
+    //获取banner链接
+    [self requestBannerList];
 }
 
 #pragma mark - Init
@@ -95,8 +102,8 @@
     TLBannerView *bannerView = [[TLBannerView alloc] initWithFrame:CGRectMake(0, self.tradeView.yy + 10, kScreenWidth, kWidth(85))];
     
     bannerView.backgroundColor = kWhiteColor;
-    bannerView.imgUrls = @[@"快讯分析"];
-    
+    bannerView.defaultImage = @"模拟大赛banner";
+
     [self.bgSV addSubview:bannerView];
     
     self.bannerView = bannerView;
@@ -195,8 +202,6 @@
            
         case 1:
         {
-            //zendesk
-            [self zendeskUIConfig];
             
             ZDKHelpCenterOverviewContentModel *contentModel = [ZDKHelpCenterOverviewContentModel defaultContent];
             
@@ -296,11 +301,44 @@
     }];
 }
 
+- (void)requestBannerList {
+    
+    TLNetworking *http = [TLNetworking new];
+    
+    http.code = @"805806";
+    
+    http.parameters[@"location"] = @"trade";
+    
+    [http postWithSuccess:^(id responseObject) {
+        
+        self.bannerRoom = [BannerModel mj_objectArrayWithKeyValuesArray:responseObject[@"data"]];
+        
+        NSMutableArray *imgUrls = [NSMutableArray array];
+        
+        [self.bannerRoom enumerateObjectsUsingBlock:^(BannerModel * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if (obj.pic) {
+                
+                [imgUrls addObject:obj.pic];
+            }
+        }];
+        self.bannerView.imgUrls = imgUrls;
+        
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
 #pragma mark - ZDKHelpCenterConversationsUIDelegate
 
 - (ZDKContactUsVisibility)active {
 
     return ZDKContactUsVisibilityOff;
+}
+
+- (ZDKNavBarConversationsUIType)navBarConversationsUIType {
+    
+    return ZDKNavBarConversationsUITypeNone;
 }
 
 - (void)didReceiveMemoryWarning {

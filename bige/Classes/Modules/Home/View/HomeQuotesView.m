@@ -51,7 +51,7 @@
     
     BaseWeakSelf;
     
-    _headView = [[SortBar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeadBarHeight) sortNames:_itemTitles sortBlock:^(NSInteger index) {
+    _headView = [[HomeQuotesSortBar alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, kHeadBarHeight) sortNames:_itemTitles sortBlock:^(NSInteger index) {
         
         weakSelf.selectIndex = index;
         

@@ -180,14 +180,14 @@
     
     _platform = platform;
     //总市值
-    NSString *marketVolume = [NSString stringWithFormat:@"总市值  %@", [platform getNumWithVolume:platform.maxMarketCapCny]];
+    NSString *marketVolume = [NSString stringWithFormat:@"总市值  %@", [platform getNumWithVolume:platform.totalMarketCapCny]];
     
     [self.marketVolumeLbl labelWithString:marketVolume
-                                    title:[platform getNumWithVolume:platform.maxMarketCapCny]
+                                    title:[platform getNumWithVolume:platform.totalMarketCapCny]
                                      font:Font(13.0)
                                     color:kTextColor];
     //额
-    NSString *volumeStr = platform.tradeVolume;
+    NSString *volumeStr = [platform getNumWithVolume:@([platform.coin.totalSupply doubleValue])];
     
     [self.tradeVolumeLbl labelWithString:[NSString stringWithFormat:@"总流通  %@", volumeStr]
                                    title:volumeStr

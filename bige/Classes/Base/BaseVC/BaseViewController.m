@@ -50,7 +50,9 @@
     [self.navigationController.navigationBar setBackgroundImage:[kAppCustomMainColor convertToImage] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
     
     [self.navigationController setNavigationBarHidden:NO animated:animated];
-    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    [UIApplication sharedApplication].statusBarHidden = NO;
+    
+ self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
 
 - (UIScrollView *)bgSV {
@@ -113,6 +115,12 @@
         
         event();
     }
+}
+
+#pragma mark - 横屏
+- (BOOL)shouldAutorotate {
+    
+    return NO;
 }
 
 #pragma mark - Setting

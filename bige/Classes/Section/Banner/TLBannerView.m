@@ -126,9 +126,6 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
             tmpPageControl.pageIndicatorTintColor = [UIColor colorWithHexString:@"#cccccc"];
 //            tmpPageControl.currentPageIndicatorTintColor = [UIColor colorWithHexString:@"#fe4332"];
             tmpPageControl.currentPageIndicatorTintColor = kAppCustomMainColor;
-            
-            
-            
             //
             if (self.urls.count - 2 >= 2) {
                 
@@ -137,14 +134,11 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
             } else {
                 
                 tmpPageControl.numberOfPages = 1;
-                
             }
             
             //添加指示
             [self addSubview:tmpPageControl];
             self.pageControl = tmpPageControl;
-            
-            
         }
         
         _currentPage = 1;
@@ -164,11 +158,8 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
             
         }
         
-        
         [self.bannerCollectionView reloadData];
-        
     }
-    
 }
 
 //- (void)setIsAuto:(BOOL)isAuto
@@ -279,6 +270,10 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
 #pragma  mark - DataSource
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
+    if (self.urls.count == 0) {
+        
+        return 1;
+    }
     return self.urls.count;
     
 }
@@ -288,10 +283,24 @@ static NSString * const XNBannerCellID = @"XNBannerCellID ";
     BannerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:XNBannerCellID forIndexPath:indexPath];
     //    cell.backgroundColor = [UIColor grayColor];
     
+    if (self.urls.count == 0) {
+        
+        [cell.imageIV setImage:kImage(self.defaultImage)];
+        
+        return cell;
+    }
+
     cell.urlString = self.urls[indexPath.row];
     
     return cell;
 }
 
+#pragma mark - Setting
+- (void)setDefaultImage:(NSString *)defaultImage {
+    
+    _defaultImage = defaultImage;
+    
+    [self.bannerCollectionView reloadData];
+}
 
 @end

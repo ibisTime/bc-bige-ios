@@ -12,4 +12,6 @@
 
 @property (nonatomic,copy) NSString *urlString;
 
+@property (nonatomic,weak) UIImageView *imageIV;
+
 @end

@@ -26,6 +26,8 @@
     
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
+    [UIApplication sharedApplication].statusBarHidden = YES;
+    [self rightAction];
 }
 
 - (void)viewDidLoad {
@@ -59,14 +61,17 @@
 - (void)initSubviews {
     
     //返回
+    CGFloat rightMargin = -kBottomInsetHeight - kHeight(20);
+    CGFloat topMargin = 10;
+    
     UIButton *backBtn = [UIButton buttonWithImageName:@""];
     
     [backBtn addTarget:self action:@selector(clickBack) forControlEvents:UIControlEventTouchUpInside];
     [self.kLineView addSubview:backBtn];
     [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
-        make.top.equalTo(@10);
-        make.right.equalTo(@(-(kHeight(40)+10)));
+        make.top.equalTo(@(topMargin));
+        make.right.equalTo(@(rightMargin));
         make.width.equalTo(@(kHeight(40)));
         make.height.equalTo(@(kHeight(40)));
     }];
@@ -84,21 +89,27 @@
     
     [self.kLineView loadRequestWithString:html];
     //
-    [self rightAction];
+//    [self rightAction];
 }
 
 #pragma mark - Events
 - (void)clickBack {
     
+    [self leftAction];
+
     [self.navigationController popViewControllerAnimated:YES];
     
-    [self leftAction];
+}
+
+- (BOOL)prefersHomeIndicatorAutoHidden{
+    
+    return YES;
 }
 
 #pragma mark - 横屏
 - (BOOL)shouldAutorotate
 {
-    return NO;
+    return YES;
 }
 
 - (void)leftAction
@@ -114,14 +125,9 @@
 - (void)interfaceOrientation:(UIInterfaceOrientation)orientation
 {
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        SEL selector             = NSSelectorFromString(@"setOrientation:");
-        NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDevice instanceMethodSignatureForSelector:selector]];
-        [invocation setSelector:selector];
-        [invocation setTarget:[UIDevice currentDevice]];
-        int val                  = orientation;
-        // 从2开始是因为0 1 两个参数已经被selector和target占用
-        [invocation setArgument:&val atIndex:2];
-        [invocation invoke];
+        
+        NSNumber *orientationTarget = [NSNumber numberWithInt:orientation];
+        [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
     }
 }
 

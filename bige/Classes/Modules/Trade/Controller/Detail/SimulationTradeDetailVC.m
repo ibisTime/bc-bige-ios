@@ -321,7 +321,7 @@
     
     NSArray *titles = @[@"买入", @"卖出"];
     
-    self.tradeSelectSV = [[TradeSelectScrollView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth/2.0, 305) itemTitles:titles];
+    self.tradeSelectSV = [[TradeSelectScrollView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth/2.0, 295) itemTitles:titles];
     
     self.tradeSelectSV.currentIndex = [self.direction integerValue];
     

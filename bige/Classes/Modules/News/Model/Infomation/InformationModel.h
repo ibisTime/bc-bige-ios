@@ -23,10 +23,14 @@
 @property (nonatomic, assign) NSInteger commentCount;
 //缩略图
 @property (nonatomic, copy) NSString *advPic;
+//缩略图类型(1:正常 2:大图)
+@property (nonatomic, copy) NSString *advPicType;
 //
 @property (nonatomic, strong) NSArray <NSString *>*pics;
 //作者
 @property (nonatomic, copy) NSString *auther;
+//作者头像
+@property (nonatomic, copy) NSString *autherPic;
 //来源
 @property (nonatomic, copy) NSString *source;
 //内容

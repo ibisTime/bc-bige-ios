@@ -17,7 +17,8 @@
 @property (nonatomic,assign) BOOL isAuto;
 
 @property (nonatomic,copy) NSArray *imgUrls;
-
+//
+@property (nonatomic, copy) NSString *defaultImage;
 //点击选中
 @property (nonatomic,copy) void(^selected) (NSInteger index);
 

@@ -12,8 +12,6 @@
 
 @interface BannerCell ()
 
-@property (nonatomic,weak) UIImageView *imageIV;
-
 @end
 
 @implementation BannerCell

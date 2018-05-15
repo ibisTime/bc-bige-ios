@@ -60,6 +60,8 @@
 @property (nonatomic, strong) NSNumber *close;
 //市值
 @property (nonatomic, strong) NSNumber *maxMarketCapCny;
+//总市值
+@property (nonatomic, strong) NSNumber *totalMarketCapCny;
 //关注人数
 @property (nonatomic, assign) NSInteger choiceCount;
 //交易成交数量

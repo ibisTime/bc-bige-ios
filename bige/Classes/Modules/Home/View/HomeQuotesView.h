@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 //V
-#import "SortBar.h"
+#import "HomeQuotesSortBar.h"
 
 typedef void(^SelectBlock)(NSInteger index);
 
@@ -16,7 +16,7 @@ typedef void(^SelectBlock)(NSInteger index);
 
 @property (nonatomic, strong) UIScrollView *scrollView;
 //头部
-@property (nonatomic, strong) SortBar *headView;
+@property (nonatomic, strong) HomeQuotesSortBar *headView;
 //设置当前索引
 @property (nonatomic, assign) NSInteger currentIndex;
 //当前索引

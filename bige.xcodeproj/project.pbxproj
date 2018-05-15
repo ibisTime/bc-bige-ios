@@ -119,6 +119,7 @@
 		2126902A2092BC48005B6B46 /* CurrencyKLineVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 212690292092BC48005B6B46 /* CurrencyKLineVC.m */; };
 		2126902D2092BF08005B6B46 /* CurrencyKLineMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126902C2092BF08005B6B46 /* CurrencyKLineMapView.m */; };
 		212690302092CED8005B6B46 /* CurrencyKLineHScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2126902F2092CED8005B6B46 /* CurrencyKLineHScreenVC.m */; };
+		2127B02820A9242F00B71837 /* InformationListCell3.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127B02720A9242F00B71837 /* InformationListCell3.m */; };
 		2127DAC720A53D51004C3D1B /* PositionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127DAC620A53D51004C3D1B /* PositionVC.m */; };
 		2127DACE20A54287004C3D1B /* PositionTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127DACD20A54287004C3D1B /* PositionTableView.m */; };
 		2127DAD120A5487C004C3D1B /* PositionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2127DAD020A5487C004C3D1B /* PositionModel.m */; };
@@ -584,6 +585,8 @@
 		2126902C2092BF08005B6B46 /* CurrencyKLineMapView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyKLineMapView.m; sourceTree = "<group>"; };
 		2126902E2092CED8005B6B46 /* CurrencyKLineHScreenVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrencyKLineHScreenVC.h; sourceTree = "<group>"; };
 		2126902F2092CED8005B6B46 /* CurrencyKLineHScreenVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrencyKLineHScreenVC.m; sourceTree = "<group>"; };
+		2127B02620A9242F00B71837 /* InformationListCell3.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationListCell3.h; sourceTree = "<group>"; };
+		2127B02720A9242F00B71837 /* InformationListCell3.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationListCell3.m; sourceTree = "<group>"; };
 		2127DAC520A53D51004C3D1B /* PositionVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PositionVC.h; sourceTree = "<group>"; };
 		2127DAC620A53D51004C3D1B /* PositionVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PositionVC.m; sourceTree = "<group>"; };
 		2127DACC20A54287004C3D1B /* PositionTableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PositionTableView.h; sourceTree = "<group>"; };
@@ -2791,6 +2794,8 @@
 				21CFFB1620566B7800D245ED /* InformationListCell.m */,
 				2124BE08205FB57E00CB79E8 /* InformationListCell2.h */,
 				2124BE09205FB57E00CB79E8 /* InformationListCell2.m */,
+				2127B02620A9242F00B71837 /* InformationListCell3.h */,
+				2127B02720A9242F00B71837 /* InformationListCell3.m */,
 				21268FEE208EFFEA005B6B46 /* ImageLabel.h */,
 				21268FEF208EFFEA005B6B46 /* ImageLabel.m */,
 			);
@@ -3464,6 +3469,7 @@
 				21288247205776F000A57A5A /* OptionalTableView.m in Sources */,
 				21111BCF1F8B5F2C0021B3FE /* DetailWebView.m in Sources */,
 				21111BD01F8B5F2C0021B3FE /* ZipImg.m in Sources */,
+				2127B02820A9242F00B71837 /* InformationListCell3.m in Sources */,
 				2124BEEE2063B61B00CB79E8 /* ThirdLoginModel.m in Sources */,
 				21EF0B452064CEE2008EA865 /* ForumInfoChildVC.m in Sources */,
 				21AC59431FDE7A1B00F19DE8 /* HourPickerView.m in Sources */,

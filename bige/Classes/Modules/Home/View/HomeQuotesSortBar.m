@@ -7,9 +7,11 @@
 //
 
 #import "HomeQuotesSortBar.h"
+//Category
 #import "NSString+CGSize.h"
 #import <UIScrollView+TLAdd.h>
-
+#import "UIButton+EnLargeEdge.h"
+//Macro
 #import "TLUIHeader.h"
 #import "AppColorMacro.h"
 
@@ -25,13 +27,15 @@ static const float kAnimationdDuration = 0.3;
 
 @property (nonatomic, strong) NSArray *sortNames;
 
-@property (nonatomic, strong) UIView *selectLine;
+@property (nonatomic, strong) UIImageView *selectIV;
 
 @property (nonatomic, assign) NSInteger selectIndex;
 
 @property (nonatomic, assign) CGFloat btnW;
 //
 @property (nonatomic, assign) CGFloat allBtnWidth;
+//
+@property (nonatomic, strong) NSMutableArray *btnArr;
 
 @end
 
@@ -43,6 +47,7 @@ static const float kAnimationdDuration = 0.3;
         _sortBlock = [sortBlock copy];
         
         _sortNames = [NSArray arrayWithArray:sortNames];
+        _btnArr = [NSMutableArray array];
         
         self.backgroundColor = [UIColor whiteColor];
         self.showsHorizontalScrollIndicator = NO;
@@ -64,26 +69,7 @@ static const float kAnimationdDuration = 0.3;
     
     [self changeItemTitleColorWithIndex:0];
     
-    CGFloat lineW = [NSString getWidthWithString:self.sortNames[0] font:MIN(kWidth(16.0), 16)];
-    CGFloat lineH = 3;
-    
-    CGFloat leftM = self.allBtnWidth > kScreenWidth ? 10: (widthItem - lineW)/2.0;
-    
-    _selectLine = [[UIView alloc] init];
-    
-    _selectLine.backgroundColor = kAppCustomMainColor;
-    _selectLine.layer.cornerRadius = lineH/2.0;
-    _selectLine.clipsToBounds = YES;
-    
-    [self addSubview:_selectLine];
-    
-    [_selectLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.equalTo(@(leftM));
-        make.bottom.equalTo(@(self.frame.size.height -1));
-        make.width.equalTo(@(lineW));
-        make.height.equalTo(@(lineH));
-    }];
+    [self createSelectLine];
 }
 
 - (void)createItems {
@@ -103,18 +89,28 @@ static const float kAnimationdDuration = 0.3;
         self.allBtnWidth += widthMargin;
     }
     
+    NSArray *normolImgArr = @[@"涨幅榜未点击", @"跌幅榜未点击"];
+    NSArray *selectImgArr = @[@"涨幅榜", @"跌幅榜"];
     
     for (NSInteger i = 0; i < _sortNames.count; i++) {
         
         NSString *title = _sortNames[i];
         
-        CGFloat widthMargin = [NSString getWidthWithString:title font:MIN(kWidth(16.0), 16)] + 20;
+        CGFloat widthMargin = [NSString getWidthWithString:title
+                                                      font:MIN(kWidth(16.0), 16)] + 20;
         
         CGFloat btnW = self.allBtnWidth > kScreenWidth ? widthMargin: widthItem;
         
-        UIButton *button = [UIButton buttonWithTitle:_sortNames[i] titleColor:[UIColor textColor] backgroundColor:kWhiteColor titleFont:btnFont];
+        UIButton *button = [UIButton buttonWithTitle:_sortNames[i]
+                                          titleColor:kTextColor
+                                     backgroundColor:kWhiteColor
+                                           titleFont:btnFont];
         
+        button.selected = i == 0 ? YES: NO;
         [button setTitleColor:[UIColor textColor] forState:UIControlStateNormal];
+        [button setImage:kImage(normolImgArr[i]) forState:UIControlStateNormal];
+        [button setImage:kImage(selectImgArr[i]) forState:UIControlStateSelected];
+        
         [self addSubview:button];
         button.tag = 100 +i;
         
@@ -128,6 +124,10 @@ static const float kAnimationdDuration = 0.3;
             make.left.mas_equalTo(w);
         }];
         
+        [button setImageEdgeInsets:UIEdgeInsetsMake(0, -15, 0, 0)];
+        
+        [self.btnArr addObject:button];
+        
         w += btnW;
     }
     
@@ -135,6 +135,19 @@ static const float kAnimationdDuration = 0.3;
     
     // 强制刷新界面
     [self layoutIfNeeded];
+}
+
+- (void)createSelectLine {
+    
+    _selectIV = [[UIImageView alloc] initWithImage:kImage(@"选中")];
+    
+    [self addSubview:_selectIV];
+    
+    [_selectIV mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.centerX.equalTo(@(-kScreenWidth/4.0));
+        make.bottom.equalTo(@(self.frame.size.height -1));
+    }];
 }
 
 #pragma mark - Private
@@ -164,22 +177,21 @@ static const float kAnimationdDuration = 0.3;
     
     UIButton *button = [self viewWithTag:100+index];
     
+    for (UIButton *btn in self.btnArr) {
+        
+        btn.selected = button == btn ? YES: NO;
+    }
     CGFloat length = button.centerX - kScreenWidth/2;
     
     [self scrollRectToVisible:CGRectMake(length, 0, self.width, self.height) animated:YES];
     
-    NSString *title = _sortNames[index];
-    
-    CGFloat widthMargin = [NSString getWidthWithString:title font:MIN(kWidth(16.0), 16)] + 20;
-    
-    CGFloat leftMargin = button.left + (button.width - widthMargin)/2.0 + 10;
+    CGFloat centerX = (2*index - 1)*kScreenWidth/4.0;
     
     [UIView animateWithDuration:kAnimationdDuration animations:^{
         
-        [_selectLine mas_updateConstraints:^(MASConstraintMaker *make) {
+        [_selectIV mas_updateConstraints:^(MASConstraintMaker *make) {
             
-            make.left.mas_equalTo(leftMargin);
-            make.width.mas_equalTo(widthMargin - 20);
+            make.centerX.mas_equalTo(centerX);
         }];
         
         [self changeItemTitleColorWithIndex:button.tag - 100];
