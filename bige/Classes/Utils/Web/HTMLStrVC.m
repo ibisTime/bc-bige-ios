@@ -44,7 +44,12 @@
             name = @"关于我们";
             
         } break;
-            
+          
+        case HTMLTypeRegProtocol:
+        {
+            ckey = @"reg_protocol";
+            name = @"注册协议";
+        }
     }
 
     self.navigationItem.titleView = [UILabel labelWithTitle:name frame:CGRectMake(0, 0, 200, 44)];
