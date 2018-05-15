@@ -12,5 +12,7 @@
  卖
  */
 @interface TradeSellChildVC : BaseViewController
+//刷新委托单
+@property (nonatomic, copy) void(^refreshDivision)();
 
 @end

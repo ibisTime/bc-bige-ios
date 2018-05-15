@@ -76,5 +76,9 @@
  截取指定字数的字符串
  */
 - (NSString *)subStringWithNum:(NSInteger)num;
+/*
+ 截取特殊字符后面的string
+ */
+- (NSString *)subStringWithSpecialString:(NSString *)specialString;
 
 @end

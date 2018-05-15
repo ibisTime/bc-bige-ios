@@ -35,7 +35,7 @@
     
     self.priceLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                     textColor:kTextColor2
-                                                         font:10.0];
+                                                         font:12.0];
     self.priceLbl.text = @"--";
     [self addSubview:self.priceLbl];
     [self.priceLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,7 +46,7 @@
     
     self.numLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                   textColor:kTextColor2
-                                                       font:10.0];
+                                                       font:12.0];
     self.numLbl.text = @"--";
     [self addSubview:self.numLbl];
     [self.numLbl mas_makeConstraints:^(MASConstraintMaker *make) {

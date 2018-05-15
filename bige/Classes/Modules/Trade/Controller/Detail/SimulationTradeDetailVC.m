@@ -15,6 +15,7 @@
 #import "PlatformModel.h"
 #import "TradeManager.h"
 #import "TradeListModel.h"
+#import "PlatformTitleModel.h"
 //V
 #import "BaseView.h"
 #import "SimulationTradeSliderView.h"
@@ -58,11 +59,21 @@
 //委托列表
 @property (nonatomic, strong) TradeListTableView *tradeTableView;
 @property (nonatomic, strong) TradeListModel *tradeList;
+//
+@property (nonatomic, assign) BOOL isSetTradePrice;
 //当前委托列表
 @property (nonatomic, strong) DivisionListTableView *divisionTableView;
 @property (nonatomic, strong) NSMutableArray <DivisionModel *>*divisionList;
 //定时器
 @property (nonatomic, strong) NSTimer *timer;
+//平台
+@property (nonatomic, strong) NSArray <PlatformTitleModel *>*platformTitleList;
+//当前选择的平台
+@property (nonatomic, assign) NSInteger exchangeIndex;
+//向左
+@property (nonatomic, strong) UIButton *leftBtn;
+//向右
+@property (nonatomic, strong) UIButton *rightBtn;
 
 @end
 
@@ -86,6 +97,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"模拟交易";
+    
+    self.isSetTradePrice = NO;
+    
     //初始化买卖管理
     [self initTradeManager];
     //头部
@@ -100,8 +114,8 @@
     [self initDivisionTableView];
     //获取我当前委托列表
     [self requestDivisionList];
-    //获取币种信息
-    [self requestQuotesList];
+    //获取交易所列表
+    [self requestExchangeList];
 }
 
 #pragma mark - 定时器
@@ -144,7 +158,7 @@
 
 - (void)initHeaderView {
     
-    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 361)];
+    self.headerView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 375)];
     //顶部
     [self initTopView];
     
@@ -152,7 +166,7 @@
 
 - (void)initTopView {
     
-    self.topView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 44)];
+    self.topView = [[BaseView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 45)];
     
     self.topView.backgroundColor = kWhiteColor;
     
@@ -177,7 +191,6 @@
     self.symbolLbl = [UILabel labelWithBackgroundColor:kClearColor
                                              textColor:kTextColor
                                                   font:16.0];
-    self.symbolLbl.text = @"火币";
     [self.topView addSubview:self.symbolLbl];
     [self.symbolLbl mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -189,6 +202,7 @@
     
     leftBtn.contentMode = UIViewContentModeScaleAspectFit;
     
+    [leftBtn addTarget:self action:@selector(clickLeft:) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:leftBtn];
     [leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -196,11 +210,15 @@
         make.centerY.equalTo(@0);
         make.width.height.equalTo(@30);
     }];
+    
+    self.leftBtn = leftBtn;
     //向右
     UIButton *rightBtn = [UIButton buttonWithImageName:@"右"];
     
     rightBtn.contentMode = UIViewContentModeScaleAspectFit;
-    
+    rightBtn.tag = 3201;
+    [rightBtn addTarget:self action:@selector(clickRight:) forControlEvents:UIControlEventTouchUpInside];
+
     [self.topView addSubview:rightBtn];
     [rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -208,6 +226,9 @@
         make.centerY.equalTo(@0);
         make.width.height.equalTo(@30);
     }];
+    
+    self.rightBtn = rightBtn;
+    
     //详情
     UIButton *detailBtn = [UIButton buttonWithImageName:@"k线图分析"];
     
@@ -242,7 +263,7 @@
     UIView *bottomLine = [[UIView alloc] init];
     
     bottomLine.backgroundColor = kLineColor;
-    
+
     [self.topView addSubview:bottomLine];
     [bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
         
@@ -280,8 +301,11 @@
                 weakSelf.manager.symbol = infoModel.symbol;
                 weakSelf.manager.toSymbol = infoModel.toSymbol;
                 weakSelf.manager.ID = infoModel.marketGlobal.ID;
+                
                 //刷新关注状态
                 [weakSelf requestQuotesInfo];
+                //刷新价格
+                weakSelf.isSetTradePrice = NO;
                 //刷新买卖五档
                 [weakSelf requestTradeList];
                 //刷新可用余额
@@ -301,8 +325,11 @@
                 weakSelf.manager.symbol = quotes.symbol;
                 weakSelf.manager.toSymbol = quotes.toSymbol;
                 weakSelf.manager.ID = quotes.ID;
+                
                 //刷新关注状态
                 [weakSelf requestQuotesInfo];
+                //刷新价格
+                weakSelf.isSetTradePrice = NO;
                 //刷新买卖五档
                 [weakSelf requestTradeList];
                 //刷新可用余额
@@ -321,7 +348,7 @@
     
     NSArray *titles = @[@"买入", @"卖出"];
     
-    self.tradeSelectSV = [[TradeSelectScrollView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth/2.0, 295) itemTitles:titles];
+    self.tradeSelectSV = [[TradeSelectScrollView alloc] initWithFrame:CGRectMake(0, self.topView.yy, kScreenWidth/2.0, 315) itemTitles:titles];
     
     self.tradeSelectSV.currentIndex = [self.direction integerValue];
     
@@ -342,6 +369,11 @@
             
             childVC.view.frame = CGRectMake(kScreenWidth/2.0*i, 1, kScreenWidth/2.0, self.tradeSelectSV.height - 40);
             
+            childVC.refreshDivision = ^{
+                
+                [weakSelf.divisionTableView beginRefreshing];
+            };
+            
             [self addChildViewController:childVC];
             
             [self.tradeSelectSV.scrollView addSubview:childVC.view];
@@ -351,6 +383,11 @@
             TradeSellChildVC *childVC = [TradeSellChildVC new];
             
             childVC.view.frame = CGRectMake(kScreenWidth/2.0*i, 1, kScreenWidth/2.0, self.tradeSelectSV.height - 40);
+            
+            childVC.refreshDivision = ^{
+                
+                [weakSelf.divisionTableView beginRefreshing];
+            };
             
             [self addChildViewController:childVC];
             
@@ -381,7 +418,7 @@
 
 - (void)initTradeTableView {
     
-    self.tradeTableView = [[TradeListTableView alloc] initWithFrame:CGRectMake(kScreenWidth/2.0, self.topView.yy, kScreenWidth/2.0, 305) style:UITableViewStylePlain];
+    self.tradeTableView = [[TradeListTableView alloc] initWithFrame:CGRectMake(kScreenWidth/2.0, self.topView.yy, kScreenWidth/2.0, 325) style:UITableViewStylePlain];
     
     [self.headerView addSubview:self.tradeTableView];
 
@@ -498,6 +535,45 @@
     }];
 }
 
+/**
+ 向左
+ */
+- (void)clickLeft:(UIButton *)sender {
+    
+    self.exchangeIndex -= 1;
+    
+    PlatformTitleModel *title = self.platformTitleList[self.exchangeIndex];
+    self.symbolLbl.text = title.cname;
+    self.manager.exchange = title.ename;
+    //刷新所有数据
+    [self requestQuotesList];
+    //
+    self.rightBtn.hidden = self.exchangeIndex == self.platformTitleList.count - 1 ? YES: NO;
+    
+    self.leftBtn.hidden = self.exchangeIndex == 0 ? YES: NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeExchange" object:nil];
+}
+
+/**
+ 向右
+ */
+- (void)clickRight:(UIButton *)sender {
+    
+    self.exchangeIndex += 1;
+    
+    PlatformTitleModel *title = self.platformTitleList[self.exchangeIndex];
+    self.symbolLbl.text = title.cname;
+    self.manager.exchange = title.ename;
+    //刷新所有数据
+    [self requestQuotesList];
+    //
+    self.rightBtn.hidden = self.exchangeIndex == self.platformTitleList.count - 1 ? YES: NO;
+    
+    self.leftBtn.hidden = self.exchangeIndex == 0 ? YES: NO;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidChangeExchange" object:nil];
+
+}
+
 #pragma mark - Data
 
 /**
@@ -510,7 +586,7 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"628350";
-    helper.parameters[@"exchangeEname"] = @"huobiPro";
+    helper.parameters[@"exchangeEname"] = [TradeManager manager].exchange;
     helper.parameters[@"percentPeriod"] = @"24h";
     helper.parameters[@"toSymbol"] = @"USDT";
     
@@ -572,9 +648,42 @@
         
         [self getRmbAmount];
         
+        if (!self.isSetTradePrice) {
+            
+            //赋值给买卖价格
+            [self setTradePrice];
+        }
+        
     } failure:^(NSError *error) {
         
     }];
+}
+//赋值给买卖价格
+- (void)setTradePrice {
+    
+    if ([[TradeManager manager].direction isEqualToString:@"0"]) {
+        
+        if (self.tradeList.bids.count > 0) {
+            
+            TradeInfoModel *tradeInfo = self.tradeList.asks[0];
+            
+            [TradeManager manager].price = tradeInfo.price;
+        }
+        
+    } else {
+        
+        if (self.tradeList.asks.count > 0) {
+            
+            TradeInfoModel *tradeInfo = self.tradeList.bids[0];
+            
+            [TradeManager manager].price = tradeInfo.price;
+
+        }
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSetTradePrice" object:nil];
+    
+    self.isSetTradePrice = YES;
 }
 
 /**
@@ -611,9 +720,6 @@
     
     helper.code = @"628508";
     helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"exchange"] = self.manager.exchange;
-    helper.parameters[@"symbol"] = self.manager.symbol;
-    helper.parameters[@"toSymbol"] = self.manager.toSymbol;
     
     helper.parameters[@"statusList"] = @[@"0", @"1"];
     
@@ -622,6 +728,10 @@
     [helper modelClass:[DivisionModel class]];
     
     [self.divisionTableView addRefreshAction:^{
+        
+        helper.parameters[@"exchange"] = weakSelf.manager.exchange;
+        helper.parameters[@"symbol"] = weakSelf.manager.symbol;
+        helper.parameters[@"toSymbol"] = weakSelf.manager.toSymbol;
         
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
@@ -676,6 +786,53 @@
         NSString *imgName = [self.platform.isChoice isEqualToString:@"0"] ? @"币种未关注": @"币种关注";
         [self.followBtn setImage:kImage(imgName) forState:UIControlStateNormal];
         
+    } failure:^(NSError *error) {
+        
+    }];
+}
+
+/**
+ 查询交易所列表
+ */
+- (void)requestExchangeList {
+    
+    BaseWeakSelf;
+    
+    TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
+    
+    helper.code = @"628317";
+    helper.isList = YES;
+    helper.showView = self.view;
+
+    [helper modelClass:[PlatformTitleModel class]];
+    
+    [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
+        
+        //去除综合加权
+        [objs enumerateObjectsUsingBlock:^(PlatformTitleModel *  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            
+            if ([obj.ename isEqualToString:@"marketGlobal"]) {
+                
+                [objs removeObject:obj];
+            }
+        }];
+        
+        weakSelf.platformTitleList = objs;
+
+        if (objs.count > 0) {
+            
+            PlatformTitleModel *title = objs[0];
+            weakSelf.symbolLbl.text = title.cname;
+            weakSelf.manager.exchange = title.ename;
+            weakSelf.exchangeIndex = 0;
+            //获取币种信息
+            [weakSelf requestQuotesList];
+            //隐藏左边按钮
+            weakSelf.leftBtn.hidden = YES;
+            weakSelf.rightBtn.hidden = objs.count > 1 ? NO: YES;
+            
+        }
+
     } failure:^(NSError *error) {
         
     }];

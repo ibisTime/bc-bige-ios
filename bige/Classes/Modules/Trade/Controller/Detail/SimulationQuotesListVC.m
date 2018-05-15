@@ -8,6 +8,8 @@
 
 #import "SimulationQuotesListVC.h"
 
+//Manager
+#import "TradeManager.h"
 //V
 #import "SimulationQuotesTableView.h"
 
@@ -41,6 +43,21 @@
     
     //刷新行情列表
     [self.tableView beginRefreshing];
+    //添加通知
+    [self addNotification];
+}
+
+#pragma mark - Notification
+- (void)addNotification {
+    
+    //改变交易所
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeExchange) name:@"DidChangeExchange" object:nil];
+}
+
+- (void)changeExchange {
+    
+    //刷新行情列表
+    [self.tableView beginRefreshing];
 }
 
 #pragma mark - Init
@@ -71,7 +88,6 @@
     
     helper.code = @"628336";
     helper.parameters[@"userId"] = [TLUser user].userId;
-    helper.parameters[@"exchangeEname"] = @"huobiPro";
     
     helper.tableView = self.tableView;
     
@@ -79,6 +95,8 @@
     
     [self.tableView addRefreshAction:^{
         
+        helper.parameters[@"exchangeEname"] = [TradeManager manager].exchange;
+
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.options = objs;
@@ -119,7 +137,6 @@
     TLPageDataHelper *helper = [[TLPageDataHelper alloc] init];
     
     helper.code = @"628350";
-    helper.parameters[@"exchangeEname"] = @"huobiPro";
     helper.parameters[@"percentPeriod"] = @"24h";
     helper.parameters[@"toSymbol"] = toSymbolArr[self.currentIndex - 1];
     
@@ -129,6 +146,8 @@
     
     [self.tableView addRefreshAction:^{
         
+        helper.parameters[@"exchangeEname"] = [TradeManager manager].exchange;
+
         [helper refresh:^(NSMutableArray *objs, BOOL stillHave) {
             
             weakSelf.quotesList = objs;
@@ -180,6 +199,11 @@
         
         self.didSelectQuotes(quotes);
     }
+}
+
+- (void)dealloc {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)didReceiveMemoryWarning {

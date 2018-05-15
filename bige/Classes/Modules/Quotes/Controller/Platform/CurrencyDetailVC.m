@@ -26,6 +26,7 @@
 #import "CurrencyExchangeChildVC.h"
 #import "CurrencyInfoChildVC.h"
 #import "CurrencyKLineVC.h"
+#import "SimulationTradeDetailVC.h"
 
 #define kBottomHeight 50
 
@@ -403,15 +404,22 @@
             
         case BottomEventTypeBuy:
         {
+            SimulationTradeDetailVC *detailVC = [SimulationTradeDetailVC new];
             
+            detailVC.direction = @"0";
             
+            [self.navigationController pushViewController:detailVC animated:YES];
         }break;
             
         case BottomEventTypeSell:
         {
+            SimulationTradeDetailVC *detailVC = [SimulationTradeDetailVC new];
             
+            detailVC.direction = @"1";
             
+            [self.navigationController pushViewController:detailVC animated:YES];
         }break;
+            
         default:
             break;
     }

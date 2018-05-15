@@ -32,5 +32,12 @@
  两个数相除，可以指定小数位数
  */
 + (NSString *)div1:(NSString *)div1 div2:(NSString *)div2 scale:(NSUInteger)scale;
-
+/**
+ 两个数相加，可以指定小数位数
+ */
++ (NSString *)add1:(NSString *)add1 add2:(NSString *)add2 scale:(NSUInteger)scale;
+/**
+ 两个数相减，可以指定小数位数
+ */
++ (NSString *)sub1:(NSString *)sub1 sub2:(NSString *)sub2 scale:(NSUInteger)scale;
 @end

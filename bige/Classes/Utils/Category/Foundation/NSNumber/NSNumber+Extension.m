@@ -80,7 +80,7 @@
         return nil;
     }
     
-    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundDown scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumberHandler *handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundBankers scale:num raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
     
     NSDecimalNumber *price = [NSDecimalNumber decimalNumberWithString:[self stringValue]];
     
@@ -172,6 +172,38 @@
     
     return [[result decimalNumberByRoundingAccordingToBehavior:roundUp] stringValue];
     
+}
+
++ (NSString *)add1:(NSString *)add1 add2:(NSString *)add2 scale:(NSUInteger)scale {
+    
+    NSDecimalNumber *add1Num = [[NSDecimalNumber alloc] initWithString:add1];
+    NSDecimalNumber *add2Num = [[NSDecimalNumber alloc] initWithString:add2];
+    NSDecimalNumber *result = [add1Num decimalNumberByAdding:add2Num];
+    NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                       decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                       scale:scale
+                                       raiseOnExactness:NO
+                                       raiseOnOverflow:NO
+                                       raiseOnUnderflow:NO
+                                       raiseOnDivideByZero:YES];
+    
+    return [[result decimalNumberByRoundingAccordingToBehavior:roundUp] stringValue];
+}
+
++ (NSString *)sub1:(NSString *)sub1 sub2:(NSString *)sub2 scale:(NSUInteger)scale {
+    
+    NSDecimalNumber *sub1Num = [[NSDecimalNumber alloc] initWithString:sub1];
+    NSDecimalNumber *sub2Num = [[NSDecimalNumber alloc] initWithString:sub2];
+    NSDecimalNumber *result = [sub1Num decimalNumberBySubtracting:sub2Num];
+    NSDecimalNumberHandler *roundUp = [NSDecimalNumberHandler
+                                       decimalNumberHandlerWithRoundingMode:NSRoundDown
+                                       scale:scale
+                                       raiseOnExactness:NO
+                                       raiseOnOverflow:NO
+                                       raiseOnUnderflow:NO
+                                       raiseOnDivideByZero:YES];
+    
+    return [[result decimalNumberByRoundingAccordingToBehavior:roundUp] stringValue];
 }
 
 @end

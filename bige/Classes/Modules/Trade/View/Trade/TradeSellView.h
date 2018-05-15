@@ -17,5 +17,9 @@
 @property (nonatomic, strong) UILabel *useNumLbl;
 //对应币种名称
 @property (nonatomic, strong) UILabel *symbolLbl;
+//价格
+@property (nonatomic, copy) NSString *price;
+//下单成功
+@property (nonatomic, copy) void (^sellSuccess)();
 
 @end

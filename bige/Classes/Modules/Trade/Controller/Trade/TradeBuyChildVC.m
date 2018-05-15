@@ -45,6 +45,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(limitDidChange) name:@"DidChangeLimitPrice" object:nil];
     //币种信息已获取
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(quotesDidLoad) name:@"QotesDidLoad" object:nil];
+    //设置价格
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTradePrice) name:@"DidSetTradePrice" object:nil];
     
 }
 
@@ -59,17 +61,33 @@
     self.buyView.symbolLbl.text = [self.manager.symbol uppercaseString];
     //详情模拟资产账户
     [self getAccountDetail];
-    
+}
+
+- (void)setTradePrice {
+
+    self.buyView.price = [[TradeManager manager].price convertToRealMoneyWithNum:8];
 }
 
 #pragma mark - Init
 - (void)initBuyView {
     
-    self.buyView = [[TradeBuyView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.0, 265)];
+    BaseWeakSelf;
+    
+    self.buyView = [[TradeBuyView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.0, 275)];
     
     self.buyView.limitPriceView.hidden = [self.manager.type isEqualToString:@"0"] ? NO: YES;
     self.buyView.marketPriceView.hidden = [self.manager.type isEqualToString:@"1"] ? NO: YES;
-
+    self.buyView.buySuccess = ^{
+        
+        //详情模拟资产账户
+        [weakSelf getAccountDetail];
+        //刷新委托单
+        if (weakSelf.refreshDivision) {
+            
+            weakSelf.refreshDivision();
+        }
+    };
+    
     [self.view addSubview:self.buyView];
     
 }

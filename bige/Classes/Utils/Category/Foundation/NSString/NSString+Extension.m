@@ -487,4 +487,17 @@
     return self;
 }
 
+- (NSString *)subStringWithSpecialString:(NSString *)specialString {
+    
+    NSArray *arr = [self componentsSeparatedByString:specialString];
+    
+    if (arr.count == 2) {
+        
+        NSString *subtring = [self componentsSeparatedByString:specialString][1];
+
+        return subtring;
+    }
+    return @"";
+}
+
 @end

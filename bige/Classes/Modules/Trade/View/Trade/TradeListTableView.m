@@ -10,13 +10,9 @@
 
 //Manager
 #import "TradeManager.h"
-//Macro
-//Framework
 //Category
 #import "NSNumber+Extension.h"
 #import "NSString+Check.h"
-//Extension
-//M
 //V
 #import "TradeListCell.h"
 
@@ -57,7 +53,10 @@ static NSString *identifierCell = @"TradeListCell";
     
     TradeListCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCell forIndexPath:indexPath];
     
-    cell.tradeInfo = indexPath.section == 0 ? self.tradeList.asks[(self.tradeList.asks.count - indexPath.row - 1)]: self.tradeList.bids[indexPath.row];
+    if (self.tradeList.asks.count > 0 && self.tradeList.bids.count > 0) {
+        
+        cell.tradeInfo = indexPath.section == 0 ? self.tradeList.asks[(self.tradeList.asks.count - indexPath.row - 1)]: self.tradeList.bids[indexPath.row];
+    }
     
     cell.priceLbl.textColor = indexPath.section == 0 ? kThemeColor: kRiseColor;
     
@@ -73,7 +72,7 @@ static NSString *identifierCell = @"TradeListCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 22;
+    return 24;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -89,13 +88,13 @@ static NSString *identifierCell = @"TradeListCell";
     
     if (section == 0) {
         
-        UIView *section1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.0, 37)];
+        UIView *section1 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.0, 40)];
         
         section1.backgroundColor = kWhiteColor;
-        
+        //kHexColor(@"#c2c2c2")
         UILabel *priceTextLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                        textColor:kHexColor(@"#c2c2c2")
-                                                             font:10.0];
+                                                        textColor:kTextColor2
+                                                             font:12.0];
         priceTextLbl.text = @"价格";
         [section1 addSubview:priceTextLbl];
         [priceTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,8 +104,8 @@ static NSString *identifierCell = @"TradeListCell";
         }];
         
         UILabel *numTextLbl = [UILabel labelWithBackgroundColor:kClearColor
-                                                      textColor:kHexColor(@"#c2c2c2")
-                                                           font:10.0];
+                                                      textColor:kTextColor2
+                                                           font:12.0];
         numTextLbl.text = @"数量";
         [section1 addSubview:numTextLbl];
         [numTextLbl mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -120,14 +119,14 @@ static NSString *identifierCell = @"TradeListCell";
     
     UIColor *priceColor = [[TradeManager manager].direction isEqualToString:@"0"] ? kRiseColor: kThemeColor;
     
-    UIView *section2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.0, 37)];
+    UIView *section2 = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth/2.0, 40)];
     
     section2.backgroundColor = kWhiteColor;
 
     //币种价格
     UILabel *lastPriceLbl = [UILabel labelWithBackgroundColor:kClearColor
                                                     textColor:priceColor
-                                                         font:14.0];
+                                                         font:16.0];
     if ([[TradeManager manager].direction isEqualToString:@"0"]) {
         
         if (self.tradeList.bids.count > 0) {
@@ -177,7 +176,25 @@ static NSString *identifierCell = @"TradeListCell";
         make.top.equalTo(lastPriceLbl.mas_bottom).offset(4);
     }];
     
+    //选择价格
+    UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    
+    [selectBtn addTarget:self action:@selector(selectPrice) forControlEvents:UIControlEventTouchUpInside];
+    
+    [section2 addSubview:selectBtn];
+    [selectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.left.top.equalTo(@0);
+        make.width.equalTo(@80);
+        make.height.equalTo(@40);
+    }];
     return section2;
+}
+
+- (void)selectPrice {
+    
+    //刷新价格
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DidSetTradePrice" object:nil];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

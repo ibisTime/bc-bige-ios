@@ -379,16 +379,27 @@
             
             CGFloat w = kScreenWidth/3.0;
             
-            OptionalInfoView *infoView = [[OptionalInfoView alloc] initWithFrame:CGRectMake(idx*w, 0, w, 100)];
+            OptionalInfoView *infoView = [[OptionalInfoView alloc] initWithFrame:CGRectMake((idx%3)*w, (idx/3)*100, w, 100)];
             
             infoView.tag = 2500 + idx;
             infoView.infoModel = obj;
             
-            [self.optionalSV addSubview:infoView];
+            [weakSelf.optionalSV addSubview:infoView];
             
             UITapGestureRecognizer *tapGR = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectOptional:)];
             [infoView addGestureRecognizer:tapGR];
         }];
+        //重新布局
+        weakSelf.optionalSV.frame = CGRectMake(0, 40, kScreenWidth, (weakSelf.platforms.count+2)/3*100);
+        
+        weakSelf.optionalView.frame = CGRectMake(0, 0, kScreenWidth, (weakSelf.platforms.count+2)/3*100 + 40);
+
+        weakSelf.newsView.y = weakSelf.optionalView.yy + 10;
+        weakSelf.quotesView.y = weakSelf.newsView.yy + 10;
+        weakSelf.infoView.y = weakSelf.quotesView.yy + 10;
+        weakSelf.headerView.height = weakSelf.infoView.yy;
+        
+        weakSelf.infoTableView.tableHeaderView = weakSelf.headerView;
         
     } failure:^(NSError *error) {
         
